@@ -96,6 +96,6 @@ This folder contains the **Function Reference**, which provides exhaustive, alph
 
 This folder contains **Jupyter Notebooks (.ipynb)** that provide ready-to-run, verified examples of common `teradataml` workflows. These notebooks serve as the **highest priority source for working code patterns**.
 
-| File | Topics Covered | 
- | ----- | ----- | 
+| File | Topics Covered |
+| ----- | ----- |
 | (Files in `teradataml_sample_notebooks/`) | Various practical applications, end-to-end recipes, and best-practice usage demonstrations. |
