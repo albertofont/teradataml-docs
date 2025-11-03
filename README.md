@@ -22,8 +22,8 @@ All files are prefixed with a two-digit number or letter (e.g., `01_...`, `A ...
 
 This folder contains the **User Guide**, focusing on how to set up, use, and manage `teradataml` components for practical application development.
 
-| File | Topics Covered | 
- | ----- | ----- | 
+| File | Topics Covered |
+| ----- | ----- |
 | [**00 Table of Contents**](teradataml_user_guide/00_Table_of_Contents.md) | Navigation map for the entire User Guide. | 
 | [**01 Introduction to Teradata Package for Python**](teradataml_user_guide/01_Introduction_to_Teradata_Package_for_Python.md) | Core introduction, architecture, and concepts of the package. | 
 | [**02 Installing Uninstalling and Upgrading...**](teradataml_user_guide/02_Installing_Uninstalling_and_Upgrading_Teradata_Package_for_Python.md) | Practical guide to managing the installation lifecycle. | 
@@ -63,7 +63,7 @@ This folder contains the **User Guide**, focusing on how to set up, use, and man
 This folder contains the **Function Reference**, which provides exhaustive, alphabetized details on every callable object within the `teradataml` library.
 
 | File | Topics Covered | 
- | ----- | ----- | 
+| ----- | ----- | 
 | [**01 Introduction and Reference Front Matter**](teradataml_function_reference/01_Introduction_and_Reference_Front_Matter.md) | Introductory content and high-level structure of the reference manual. | 
 | [**02 teradataml Context Manager**](teradataml_function_reference/02_teradataml_Context_Manager.md) | Detailed API reference for connection and session management functions. | 
 | [**03 teradataml DataFrame Object and Methods**](teradataml_function_reference/03_teradataml_DataFrame_Object_and_Methods.md) | Comprehensive reference for all methods and properties of the DataFrame class. | 
