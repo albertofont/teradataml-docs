@@ -78,11 +78,9 @@ Possible values are:
 | bool | BYTEINT |
 | float32/float64 | FLOAT |
 | datetime64/datatime64[ns] | TIMESTAMP |
-
+| datatime64[ns, time_zone | ] TIMESTAMP(time_zone=True) |
 | Any other data type | VARCHAR(configure.default_varchar_size) |
-| ------------------- | --------------------------------------- |
 
-    datatime64[ns, time_zone ] TIMESTAMP(time_zone=True)
 * primary_time_index_name: Specifies a name for the Primary Time Index (PTI) when the table to be
   created must be a PTI table.
   Note:
@@ -339,11 +337,9 @@ Note:
 | bool | BYTEINT |
 | float32/float64 | FLOAT |
 | datetime64/datatime64[ns] | TIMESTAMP |
-
+| datatime64[ns, time_zone | ] TIMESTAMP(timezone=True) |
 | Any other data type | VARCHAR(configure.default_varchar_size) |
-| ------------------- | --------------------------------------- |
 
-    datatime64[ns, time_zone ] TIMESTAMP(timezone=True)
     * This argument does not have any effect when the table specified using table_name and
     schema_name exists and if_exists = 'append'.
 * batch_size: Specifies the number of rows to be loaded in a batch. The value of batch_size must be

@@ -63,32 +63,61 @@ Updated: Jul 2025
 Maintainer: Teradata Corporation
 Depends:
 Python (>= 3.8)
-python-dotenv
-teradatamlwidges (>=20.00.00.5)
-Imports:
-teradatasql (>= 20.00.00.19)
-teradatasqlalchemy (>= 20.00.00.04)
-pandas (>= 0.22.00)
-psutil
-requests (>= 2.25.1)
-scikit-learn (>= 0.24.2)
-IPython (>= 8.10.0)
-imbalanced-learn (>= 0.8.0)
-pyjwt (>= 2.8.0)
-cryptography (>= 42.0.5)
-sqlalchemy (>= 2.0)
-lightgbm (>= 3.3.3)
-Support for Open Analytics Framework on VantageCloud Lake
-Description: This package enables users to access Teradata Vantage database objects using the Python language.
-License: ﬁle LICENSE + ﬁle LICENSE-3RD-PARTY
-Compatibility Matrix
-teradataml: Vantage 1.0 vs Vantage 1.1 or later Compatibility Matrix
-See the _teradataml: Vantage 1.0 vs Vantage 1.1 or later Compatibility Matrix. You can download this ﬁle.
-Deprecated Analytic Functions
-All the deprecated analytic functions under the teradataml.analytics module have been removed. Newer versions of the functions are available under
-the teradataml.analytics.mle and the teradataml.analytics.sqle modules.
-The removed deprecated functions are as follows:
-teradataml.analytics.Antiselect
-teradataml.analytics.Arima
-teradataml.analytics.ArimaPredictor
-teradataml.analytics.Attribution
+    python-dotenv
+    teradatamlwidges (>=20.00.00.5)
+    Imports:
+    teradatasql (>= 20.00.00.19)
+    teradatasqlalchemy (>= 20.00.00.04)
+    pandas (>= 0.22.00)
+    psutil
+    requests (>= 2.25.1)
+    scikit-learn (>= 0.24.2)
+    IPython (>= 8.10.0)
+    imbalanced-learn (>= 0.8.0)
+    pyjwt (>= 2.8.0)
+    cryptography (>= 42.0.5)
+    sqlalchemy (>= 2.0)
+    lightgbm (>= 3.3.3)
+    Support for Open Analytics Framework on VantageCloud Lake
+    Description: This package enables users to access Teradata Vantage database objects using the Python language.
+    License: ﬁle LICENSE + ﬁle LICENSE-3RD-PARTY
+    Compatibility Matrix
+    teradataml: Vantage 1.0 vs Vantage 1.1 or later Compatibility Matrix
+    See the _teradataml: Vantage 1.0 vs Vantage 1.1 or later Compatibility Matrix. You can download this ﬁle.
+    Deprecated Analytic Functions
+    All the deprecated analytic functions under the teradataml.analytics module have been removed. Newer versions of the functions are available under
+    the teradataml.analytics.mle and the teradataml.analytics.sqle modules.
+    The removed deprecated functions are as follows:
+    teradataml.analytics.Antiselect
+    teradataml.analytics.Arima
+    teradataml.analytics.ArimaPredictor
+    teradataml.analytics.Attribution
+    teradataml.analytics.ConfusionMatrix
+    teradataml.analytics.CoxHazardRatio
+    teradataml.analytics.CoxPH
+    teradataml.analytics.CoxSurvival
+    teradataml.analytics.DecisionForest
+    teradataml.analytics.DecisionForestEvaluator
+    teradataml.analytics.DecisionForestPredict
+    teradataml.analytics.DecisionTree
+    teradataml.analytics.DecisionTreePredict
+    teradataml.analytics.GLM
+    teradataml.analytics.GLMPredict
+    teradataml.analytics.KMeans
+    teradataml.analytics.NGrams
+    teradataml.analytics.NPath
+    teradataml.analytics.NaiveBayes
+    teradataml.analytics.NaiveBayesPredict
+    teradataml.analytics.NaiveBayesTextClassiﬁer
+    teradataml.analytics.NaiveBayesTextClassiﬁerPredict
+    teradataml.analytics.Pack
+    teradataml.analytics.SVMSparse
+    teradataml.analytics.SVMSparsePredict
+    teradataml.analytics.SentenceExtractor
+    teradataml.analytics.Sessionize
+    teradataml.analytics.TF
+    teradataml.analytics.TFIDF
+    teradataml.analytics.TextTagger
+    teradataml.analytics.TextTokenizer
+    teradataml.analytics.Unpack
+    teradataml.analytics.VarMax

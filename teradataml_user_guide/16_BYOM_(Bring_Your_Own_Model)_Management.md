@@ -626,44 +626,20 @@ Note:
     save_byom() take precedence and is used for function execution when saving an model.
     * If you specify schema_name, table_name has to be specified, else exception is raised.
   The following table shows the system behavior based on different input combinations.
-| In save_byom() | In set_byom_catalog() |  |
-| -------------- | --------------------- | - |
-|  |  | System Behavior |
-| table_ |  |  |
-| name |  |  |
+| In save_byom() | In set_byom_catalog() |
+| -------------- | --------------------- |
+| table_ name | System Behavior |
+| schema_ name | table_ name schema_ name |
+| Set | Set Set Set |
 
-      schema_
-      name
-              table_
-              name
-                    schema_
-                    name
-    Set
-        Set
-                Set Set
-                            schema_name and table_name
-                            in save_byom() are used for
-                            function execution.
-              Not set Not set
-                            schema_name and table_name
-                            in save_byom() is used for
-                            function execution.
-        Not set Set Set
-                            table_name from save_byom() is used
-                            and schema name associated with the
-                            current context is used.
-    Not set
-        Set Set Set Exception is raised.
-        Not set
-                Set Set
-                            table_name and schema_name from
-                            set_byom_catalog() are used for
-                            function execution.
-                Set Not set
-                            table_name from set_byom_catalog()
-                            is used and schema name associated
-                            with the current context is used.
-              Not set Not set Exception is raised.
+| Set | Set | Set | Set | schema_name in save_byom() are used for function execution. | and  table_name |
+| --- | --- | --- | --- | ----------------------------------------------------------- | --------------- |
+|  | Not set | Not set |  | schema_name in save_byom() is used for function execution. | and  table_name |
+| Not set |  | Set | Set current context is used. | table_name  from save_byom() is used and schema name associated with the |  |
+| Not set |  |  |  |  |  |
+| Set |  | Set Set | Exception is raised. |  |  |
+| Not set | Not set | Set Set Set Not set Not set | table_name set_byom_catalog() are used for function execution. table_name is used and schema name associated with the current context is used. Exception is raised. | and from set_byom_catalog() | schema_name  from |
+
 * additional_columns specifies the additional information about the model to be saved in the model table.
   Additional information about the model is passed as key value pair, where key is the name of the column
   and value is data to be stored in that column for the model being saved. Allowed types for the values
@@ -709,8 +685,6 @@ as listed in the following table and save the model in it.
 | model_id | VARCHAR(128) |
 | model | BLOB |
 | Description | VARCHAR(2000) |
-| Column Name | Column Type |
-| ----------- | ----------- |
 | UserId | NUMBER(5) |
 | ProductionReady | BYTEINT |
 | ModelEfficiency | NUMBER(11,10) |

@@ -25,125 +25,23 @@ Use of teradataml UDF versus DataFrame Methods provides a breakdown differences 
 UDF versus DataFrame methods, and when to use each.
 ## Use of teradataml UDF versus DataFrame Methods
 #### Difference between apply, map_row, map_partition, and udf
-DataFrame.apply()
-          DataFrame.map_
-          row()
-| DataFrame. |  |
-| ---------- | - |
-| map_partition() | udf() |
+| DataFrame.apply() | DataFrame.map_ row() | DataFrame. map_partition() | udf() |
+| ----------------- | -------------------- | -------------------------- | ----- |
+| Executes on every teradataml DataFrame row on VantageCloud Lake. | Executes on every teradataml DataFrame row on VantageCloud Enterprise. | Executes on group of teradataml DataFrame rows on VantageCloud Enterprise. | Executes on every teradataml DataFrame row on VantageCloud Enterprise. |
+| Returns teradataml DataFrame | Returns teradataml DataFrame | Returns teradataml DataFrame | Returns teradataml DataFrame Column |
+| Teradata recommends having the same Python interpreter version and same version of Python libraries, that are used inside the function, in the local client environment and the server-side user environment. | Teradata recommends having the same Python interpreter version and same version of Python libraries, that are used inside function, in the local client environment and VantageCloud Enterprise. | Teradata recommends having the same Python interpreter version and same version of Python libraries, that are used inside function, in the local client environment and VantageCloud Enterprise. | Teradata recommends having the same Python interpreter version and same version of Python libraries, that are used inside the function, in the local client environment and the server-side user environment. |
+| Lambda functions are supported. | Lambda functions are supported. | Lambda functions are supported. | Lambda functions are not supported. |
 
-Executes on
-every teradataml
-DataFrame row on
-VantageCloud Lake.
-          Executes on every
-          teradataml DataFrame
-          row on VantageCloud
-          Enterprise.
-                      Executes on group of
-                      teradataml DataFrame
-                      rows on VantageCloud
-                      Enterprise.
-                                  Executes on every
-                                  teradataml DataFrame
-                                  row on VantageCloud
-                                  Enterprise.
-DataFrame.apply()
-          DataFrame.map_
-          row()
-| DataFrame. |  |
-| ---------- | - |
-| map_partition() | udf() |
-
-Returns
-teradataml DataFrame
-          Returns
-          teradataml DataFrame
-                      Returns
-                      teradataml DataFrame
-                                  Returns teradataml
-                                  DataFrame Column
-Teradata recommends
-having the same Python
-interpreter version and
-same version of Python
-libraries, that are used
-inside the function, in the
-local client environment
-and the server-side
-user environment.
-          Teradata recommends
-          having the same Python
-          interpreter version and
-          same version of Python
-          libraries, that are used
-          inside function, in the
-          local client environment
-          and VantageCloud
-          Enterprise.
-                      Teradata recommends
-                      having the same Python
-                      interpreter version and
-                      same version of Python
-                      libraries, that are used
-                      inside function, in the
-                      local client environment
-                      and VantageCloud
-                      Enterprise.
-                                  Teradata recommends
-                                  having the same Python
-                                  interpreter version and
-                                  same version of Python
-                                  libraries, that are used
-                                  inside the function, in the
-                                  local client environment
-                                  and the server-side
-                                  user environment.
-Lambda functions
-are supported.
-          Lambda functions
-          are supported.
-                      Lambda functions
-                      are supported.
-                                  Lambda functions are
-                                  not supported.
 #### udf vs apply vs map_row vs map_partition: When to use what in teradataml
-UDF/Method When to use
-udf() * Use UDF for simplicity and ease of use, and use of functions over multiple sessions.
-      * You want to a run a Python function over every teradataml DataFrame row and return
-      a single value result for each row.
-      * You want to return teradataml DataFrame column instead of teradataml DataFrame.
-      You can directly access each row’s column data by specifying the column name as an
-      input to the Python function, unlike other function where you must design Python functions
-      to read the data from the Series object or iterator (TextFileReader object) and manipulate
-      it accordingly.
-      (VantageCloud Enterprise and VantageCore) With udf(), Python function can only return a
-      single values, while DataFrame.map_row() and DataFrame.map_partition() allow Python
-      functions to either print output to the standard output or return objects such as numpy 1-D
-      or 2-D arrays, pandas Series, or pandas DataFrames.
-DataFrame.
-apply()
-      * Supported on VantageCloud Lake.
-      * You want to a execute lambda function that returns numpy 1-D or 2-D arrays, pandas
-      Series, or pandas DataFrames.
-      * You want to apply a Python function to each teradataml DataFrame row and return the
-      result as a teradataml DataFrame.
-      * You want to run the function on the group or partition of data.
-DataFrame.
-map_row()
-      * Supported on VantageCloud Enterprise and VantageCore.
-      * You want to execute a lambda function that returns numpy 1-D or 2-D arrays, pandas
-      Series, or pandas DataFrames.
-      * You want to apply a Python function to each teradataml DataFrame row and return the
-      result as a teradataml DataFrame.
-DataFrame.
-map_partition()
-      * Supported on VantageCloud Enterprise and VantageCore.
-      * You want to execute a lambda function that returns numpy 1-D or 2-D arrays, pandas
-      Series, or pandas DataFrames.
-UDF/Method When to use
-      * You want to apply a Python function to a group or partition of rows in the teradataml
-      DataFrame and return the result as a teradataml DataFrame.
+| UDF/Method | When to use |
+| ---------- | ----------- |
+| udf() single values, while DataFrame.map_row() and DataFrame.map_partition() allow Python or 2-D arrays, pandas Series, or pandas DataFrames. | * Use UDF for simplicity and ease of use, and use of functions over multiple sessions. * You want to a run a Python function over every teradataml DataFrame row and return a single value result for each row. * You want to return teradataml DataFrame column instead of teradataml DataFrame. You can directly access each row’s column data by specifying the column name as an input to the Python function, unlike other function where you must design Python functions to read the data from the Series object or iterator (TextFileReader object) and manipulate it accordingly. (VantageCloud Enterprise and VantageCore) With udf(), Python function can only return a functions to either print output to the standard output or return objects such as numpy 1-D |
+| DataFrame. apply() |  |
+| * Supported on VantageCloud Lake. * You want to a execute lambda function that returns numpy 1-D or 2-D arrays, pandas * You want to apply a Python function to each teradataml DataFrame row and return the | Series, or pandas DataFrames. result as a teradataml DataFrame. * You want to run the function on the group or partition of data. |
+| DataFrame. map_row() | * Supported on VantageCloud Enterprise and VantageCore. * You want to execute a lambda function that returns numpy 1-D or 2-D arrays, pandas Series, or pandas DataFrames. * You want to apply a Python function to each teradataml DataFrame row and return the result as a teradataml DataFrame. |
+| DataFrame. map_partition() | * Supported on VantageCloud Enterprise and VantageCore. * You want to execute a lambda function that returns numpy 1-D or 2-D arrays, pandas Series, or pandas DataFrames. |
+|  | * You want to apply a Python function to a group or partition of rows in the teradataml DataFrame and return the result as a teradataml DataFrame. |
+
 ## teradataml UDF
 teradataml enables execution of user defined Python functions on Database Engine 20 with simple
 interfaces so you can write these functions and mark/register them to be used as the UDF with
@@ -260,38 +158,13 @@ Red Inc     200.0  150.0  140.0    NaN  17/01/04     RED INC
 #### Using udf Decorator with Arguments
 udf() accepts several arguments as input so you can tune a Python function and notify teradataml when
 to use the function.
-|  | Required/ |  |  |
-| - | --------- | - | - |
-| Argument |  | Type | Description |
-|  | Optional |  |  |
-
-| delimiter | Optional | One-character string | Specifies a delimiter to use when reading columns |
-| --------- | -------- | -------------------- | ------------------------------------------------- |
-|  |  |  | from a row and writing result columns. |
-|  |  |  | Default is comma (,). If data being processed |
-|  |  |  | contains a comma, use a different delimiter. |
-| quotechar | Optional | One-character string | Specifies a character that forces input of |
-|  |  |  | the user function to be quoted using this |
-|  |  |  | specified character. |
-| debug | Optional | bool | Specifies whether to remove the temporary script |
-|  |  |  | generated during execution and display the file |
-|  |  |  | path or not. This argument is useful for debugging |
-|  |  |  | if there are any failures when executing the |
-|  |  |  | function. When set to True, function displays the |
-|  |  |  | path of the script and does not remove the file from |
-|  |  |  | local file system. Otherwise, file is removed from |
-|  |  |  | the local file system. |
-
-returns Optional teradatasqlalchemy
-          types object
-                      Specifies the output column type.
-                      When not specified, default is VARCHAR(1024).
-env_name Optional string or object of
-          class UserEnv
-                      (Applicable for use with Apply table operator)
-                      Specifies the name of the remote user
-                      environment or an object of class UserEnv for
-                      VantageCloud Lake.
+| Argument | Required/ Optional | Type | Description |
+| -------- | ------------------ | ---- | ----------- |
+| returns | Optional | teradatasqlalchemy types object | Specifies the output column type. When not specified, default is VARCHAR(1024). |
+| env_name | Optional | string or object of class UserEnv | (Applicable for use with Apply table operator) Specifies the name of the remote user environment or an object of class UserEnv for VantageCloud Lake. |
+| delimiter | Optional | One-character string | Specifies a delimiter to use when reading columns from a row and writing result columns. Default is comma (,). If data being processed contains a comma, use a different delimiter. |
+| quotechar | Optional | One-character string | Specifies a character that forces input of the user function to be quoted using this specified character. |
+| debug | Optional | bool | Specifies whether to remove the temporary script generated during execution and display the file path or not. This argument is useful for debugging if there are any failures when executing the function. When set to True, function displays the path of the script and does not remove the file from local file system. Otherwise, file is removed from the local file system. |
 #### Examples: How to Use udf()
 * udf() Example Setup
 * udf() Examples
@@ -450,78 +323,39 @@ Registered UDFs are stored in the file system or user environment with the namin
 tdml_udf_name_<registered udf name>_udf_type_<return type>_register.py.
 Be careful when deleting these files directly.
 #### Arguments
-Argument
-|  | Required/ |  |  |
-| - | --------- | - | - |
-|  | Optional | Type | Description |
-| name | Required | string | Specifies the name of the user defined function |
-|  |  |  | to register. |
+| Argument | Required/ Optional | Type | Description |
+| -------- | ------------------ | ---- | ----------- |
+| name | Required | string | Specifies the name of the user defined function to register. |
+| user_ function | Required | function, teradataml udf | Specifies the user defined function to create a column for teradataml DataFrame. |
+| returns | Optional | teradatasqlalchemy types object | Specifies the output column type. When not specified, default is VARCHAR(1024). If 'user_function' is a teradataml udf, then return type of the udf is used as return type of the registered UDF. |
 
-| Required | function, teradataml udf | Specifies the user defined function to create a |
-| -------- | ------------------------ | ----------------------------------------------- |
-|  |  | column for teradataml DataFrame. |
-
-user_
-function
-returns Optional teradatasqlalchemy
-            types object
-                        Specifies the output column type.
-                        When not specified, default is
-                        VARCHAR(1024).
-                        If 'user_function' is a teradataml udf, then
-                        return type of the udf is used as return type
-                        of the registered UDF.
 ### list_udfs()
 Use the list_udfs() function to list all the UDFs registered using register() function.
 #### Arguments
-    Required/
-Argument Type Description
-    Optional
-show_files Optional bool Specifies whether to show file names or not.
-                Default value: false
-                If show_files is set to true, list_udfs() returns a Pandas
-                DataFrame containing the registered UDFs' name, return type,
-                and corresponding Python script name.
+| Argument | Required/ Optional | Type | Description |
+| -------- | ------------------ | ---- | ----------- |
+| show_files | Optional | bool | Specifies whether to show file names or not. Default value: false If show_files is set to true, list_udfs() returns a Pandas DataFrame containing the registered UDFs' name, return type, and corresponding Python script name. |
+
 ### call_udf()
 call_udf() function lets you execute the registered UDF on each teradataml DataFrame row. call_udf()
 returns a teradataml DataFrame column, meaning these functions can be passed to teradataml
 DataFrame.assign() like a regular teradataml DataFrame column.
 #### Arguments
-    Required/
-Argument Type Description
-    Optional
-udf_name Required string Specifies the name of the user-defined function.
-func_args Optional tuple Specifies the arguments to pass to the registered UDF.
-                    Default is ( ).
-Required/
-Argument Type Description
-    Optional
-delimiter Optional One-character
-            string
-                    Specifies a delimiter to use when reading columns from a
-                    row and writing result columns.
-                    Default is comma (,). If data being processed contains a
-                    comma, specify a different delimiter.
-quotechar Optional One-character
-            string
-                    Specifies a character that forces the input of the user
-                    function to be quoted using this specified character.
+| Argument | Required/ Optional | Type | Description |
+| -------- | ------------------ | ---- | ----------- |
+| udf_name | Required | string | Specifies the name of the user-defined function. |
+| func_args | Optional | tuple | Specifies the arguments to pass to the registered UDF. Default is ( ). |
+| delimiter | Optional | One-character string row and writing result columns. Default is comma (,). If data being processed contains a comma, specify a different delimiter. | Specifies a delimiter to use when reading columns from a |
+| quotechar Optional | One-character string | Specifies a character that forces the input of the user function to be quoted using this specified character. |  |
+
 ### deregister()
 Use the deregister() function to deregister a UDF.
 #### Arguments
-|  | Required/ |  |  |
-| - | --------- | - | - |
-| Argument |  | Type | Description |
-|  | Optional |  |  |
-| name | Required | string | Specifies the name of the user defined function |
-|  |  |  | to deregister. |
+| Argument | Required/ Optional | Type | Description |
+| -------- | ------------------ | ---- | ----------- |
+| name | Required | string | Specifies the name of the user defined function to deregister. |
+| returns | Optional | teradatasqlalchemy types object | Specifies the type used to deregister the user defined function. When not specified, deregister deletes all UDFs registered with the specified name. |
 
-returns Optional teradatasqlalchemy
-            types object
-                        Specifies the type used to deregister the user
-                        defined function.
-                        When not specified, deregister deletes all
-                        UDFs registered with the specified name.
 ### UDF Functions Examples
 The following topics show the example setup and how you can use the teradataml UDF functions.
 * Example Setup
@@ -674,91 +508,23 @@ supported type), then it must take care of using the delimiter and quotechar, if
 format the output printed.
 Data in the standard output is stored in a table and the table is garbage collected at the end of the session.
 #### DataFrame.apply() Arguments
-Argument
-| Required/ |  |  |
-| --------- | - | - |
-| Optional | Type | Description |
-
-| exec_mode | Optional | string | Specifies the mode of execution for the user- |
-| --------- | -------- | ------ | --------------------------------------------- |
-|  |  |  | defined function. |
-| chunk_size | Optional | integer | Specifies the number of rows to be read |
-|  |  |  | in each chunk, using an iterator to apply |
-|  |  |  | the user-defined function to each row in |
-|  |  |  | the chunk. |
-
-|  |  |  | Specifies the output column definition |  |  |
-| - | - | - | -------------------------------------- | - | - |
-|  |  |  | corresponding to the output of | user_function | . |
-| delimiter | Optional | One-character string | Specifies a delimiter to use when |  |  |
-|  |  |  | reading columns from a row and writing |  |  |
-|  |  |  | result columns. |  |  |
-| quotechar | Optional | One-character string | Specifies a character that forces all input and |  |  |
-|  |  |  | output of the user function to be quoted using |  |  |
-|  |  |  | this specified character. |  |  |
-
-| Optional | string OR list of strings | Specifies the Partition By columns for the |
-| -------- | ------------------------- | ------------------------------------------ |
-|  |  | teradataml DataFrame. |
-
-| Optional | string | Specifies the column to be used for hashing. |
-| -------- | ------ | -------------------------------------------- |
-
-| Optional | string OR list of strings | Specifies the Order By columns for the |
-| -------- | ------------------------- | -------------------------------------- |
-|  |  | teradataml DataFrame. |
-
-|  | Optional | bool | Specifies a boolean value to determine |
-| - | -------- | ---- | -------------------------------------- |
-|  |  |  | whether the input data is to be ordered locally |
-|  |  |  | or not. |
-| nulls_first | Optional | bool | Specifies a boolean value to determine |
-|  |  |  | whether NULLs are listed first or last |
-|  |  |  | during ordering. |
-
-|  | Optional | bool | Specifies a boolean value to determine if the |  |  |
-| - | -------- | ---- | --------------------------------------------- | - | - |
-|  |  |  | result set is to be sorted on the |  | data_order_ |
-|  |  |  | column | in ascending or descending order. |  |
-| style | Optional | bool | Specifies how input is passed to and output |  |  |
-|  |  |  | is generated. |  |  |
-
-user_function Required function or
-            functools.partial
-                        Specifies the user-defined function to apply
-                        to each row in the teradataml DataFrame.
-env_name Required string or object of
-            class UserEnv
-                        Specifies the name of the remote user
-                        environment or an object of class UserEnv.
-returns Optional Dictionary specifying
-            column name to
-            teradatasqlalchemy
-            type mapping
-data_
-partition_
-column
-data_hash_
-column
-data_order_
-column
-is_local_
-order
-sort_
-ascending
-Argument
-|  | Required/ |  |  |
-| - | --------- | - | - |
-|  | Optional | Type | Description |
-| debug | Optional | bool | Specifies whether to remove the temporary |
-|  |  |  | script generated during execution and |
-|  |  |  | display the file path or not. This argument is |
-|  |  |  | useful for debugging if there are any failures |
-|  |  |  | when executing the function. When set to |
-|  |  |  | True, function displays the path of the script |
-|  |  |  | and does not remove the file from local file |
-|  |  |  | system. Otherwise, file is removed from the |
-|  |  |  | local file system. |
+| Argument | Required/ Optional | Type | Description |
+| -------- | ------------------ | ---- | ----------- |
+| user_function | Required | function or functools.partial | Specifies the user-defined function to apply to each row in the teradataml DataFrame. |
+| env_name | Required | string or object of class UserEnv | Specifies the name of the remote user environment or an object of class UserEnv. |
+| exec_mode | Optional | string | Specifies the mode of execution for the user- defined function. |
+| chunk_size | Optional | integer | Specifies the number of rows to be read in each chunk, using an iterator to apply the user-defined function to each row in the chunk. |
+| returns | Optional | Dictionary specifying column name to teradatasqlalchemy type mapping | Specifies the output column definition corresponding to the output of  user_function . |
+| delimiter | Optional | One-character string | Specifies a delimiter to use when reading columns from a row and writing result columns. |
+| quotechar | Optional | One-character string | Specifies a character that forces all input and output of the user function to be quoted using this specified character. |
+| data_ partition_ column | Optional | string OR list of strings | Specifies the Partition By columns for the teradataml DataFrame. |
+| data_hash_ column | Optional | string | Specifies the column to be used for hashing. |
+| data_order_ column | Optional | string OR list of strings | Specifies the Order By columns for the teradataml DataFrame. |
+| is_local_ order | Optional | bool | Specifies a boolean value to determine whether the input data is to be ordered locally or not. |
+| nulls_first | Optional | bool | Specifies a boolean value to determine whether NULLs are listed first or last during ordering. |
+| sort_ ascending | Optional | bool | Specifies a boolean value to determine if the result set is to be sorted on the  data_order_ column  in ascending or descending order. |
+| style | Optional | bool | Specifies how input is passed to and output is generated. |
+| debug | Optional | bool | Specifies whether to remove the temporary script generated during execution and display the file path or not. This argument is useful for debugging if there are any failures when executing the function. When set to True, function displays the path of the script and does not remove the file from local file system. Otherwise, file is removed from the local file system. |
 
 #### Examples: How to use DataFrame.apply()
 #### Example setup
@@ -962,84 +728,22 @@ This function supports Python functions including lambda functions.
 * DataFrame.map_row() Arguments
 * Examples: How to use DataFrame.map_row()
 DataFrame.map_row() Arguments
-|  | Required/ |  |  |
-| - | --------- | - | - |
-| Argument |  | Type | Description |
-|  | Optional |  |  |
-
-| exec_mode | Optional | string | Specifies the mode of execution for the user- |
-| --------- | -------- | ------ | --------------------------------------------- |
-|  |  |  | defined function. |
-
-user_
-function
-      Required function or
-            functools.partial
-                        Specifies the user-defined function to apply to
-                        each row in the teradataml DataFrame.
-|  | Required/ |  |  |  |
-| - | --------- | - | - | - |
-| Argument |  | Type | Description |  |
-|  | Optional |  |  |  |
-| chunk_size | Optional | integer | Specifies the number of rows to be read |  |
-|  |  |  | in each chunk, using an iterator to apply |  |
-|  |  |  | the user-defined function to each row in |  |
-|  |  |  | the chunk. |  |
-| num_rows | Optional | integer | Specifies the maximum number of sample |  |
-|  |  |  | rows from the teradataml DataFrame to apply |  |
-|  |  |  | the user-defined function when | exec_mode |
-|  |  |  | is 'LOCAL'. |  |
-
-|  |  |  | Specifies the output column definition |  |  |  |  |
-| - | - | - | -------------------------------------- | - | - | - | - |
-|  |  |  | corresponding to the output of |  |  | user_function | . |
-| delimiter | Optional | One-character string | Specifies a delimiter to use when |  |  |  |  |
-|  |  |  | reading columns from a row and writing |  |  |  |  |
-|  |  |  | result columns. |  |  |  |  |
-| quotechar | Optional | One-character string | Specifies a character that forces all input and |  |  |  |  |
-|  |  |  | output of the user function to be quoted using |  |  |  |  |
-|  |  |  | this specified character. |  |  |  |  |
-| auth | Optional | string | Specifies the authorization to use when |  |  |  |  |
-|  |  |  | running the | user_function | . |  |  |
-| charset | Optional | string | Specifies the character encoding for data. |  |  |  |  |
-
-| Optional | string OR list of strings | Specifies the Order By columns for the |
-| -------- | ------------------------- | -------------------------------------- |
-|  |  | teradataml DataFrame. |
-
-|  | Optional | bool | Specifies a boolean value to determine |
-| - | -------- | ---- | -------------------------------------- |
-|  |  |  | whether the input data is to be ordered locally |
-|  |  |  | or not. |
-| nulls_first | Optional | bool | Specifies a boolean value to determine |
-|  |  |  | whether NULLs are listed first or last |
-|  |  |  | during ordering. |
-
-|  | Optional | bool | Specifies a boolean value to determine |  |
-| - | -------- | ---- | -------------------------------------- | - |
-|  |  |  | if the result set is to be sorted on the |  |
-|  |  |  | data_order_column | column in ascending or |
-|  |  |  | descending order. |  |
-| debug | Optional | bool | Specifies whether to remove the temporary |  |
-|  |  |  | script generated during execution and display |  |
-|  |  |  | the file path or not. This argument is useful |  |
-|  |  |  | for debugging if there are any failures when |  |
-|  |  |  | executing the function. When set to True, |  |
-|  |  |  | function displays the path of the script and |  |
-|  |  |  | does not remove the file from local file system. |  |
-|  |  |  | Otherwise, file is removed from the local |  |
-|  |  |  | file system. |  |
-
-returns Optional Dictionary specifying
-            column name to
-            teradatasqlalchemy
-            type mapping
-data_order_
-column
-is_local_
-order
-sort_
-ascending
+| Argument | Required/ Optional | Type | Description |
+| -------- | ------------------ | ---- | ----------- |
+| user_ function | Required | function or functools.partial | Specifies the user-defined function to apply to each row in the teradataml DataFrame. |
+| exec_mode | Optional | string | Specifies the mode of execution for the user- defined function. |
+| chunk_size | Optional | integer | Specifies the number of rows to be read in each chunk, using an iterator to apply the user-defined function to each row in the chunk. |
+| num_rows | Optional | integer | Specifies the maximum number of sample rows from the teradataml DataFrame to apply the user-defined function when  exec_mode is 'LOCAL'. |
+| returns | Optional | Dictionary specifying column name to teradatasqlalchemy type mapping | Specifies the output column definition corresponding to the output of  user_function . |
+| delimiter | Optional | One-character string | Specifies a delimiter to use when reading columns from a row and writing result columns. |
+| quotechar | Optional | One-character string | Specifies a character that forces all input and output of the user function to be quoted using this specified character. |
+| auth | Optional | string | Specifies the authorization to use when running the  user_function . |
+| charset | Optional | string | Specifies the character encoding for data. |
+| data_order_ column | Optional | string OR list of strings | Specifies the Order By columns for the teradataml DataFrame. |
+| is_local_ order | Optional | bool | Specifies a boolean value to determine whether the input data is to be ordered locally or not. |
+| nulls_first | Optional | bool | Specifies a boolean value to determine whether NULLs are listed first or last during ordering. |
+| sort_ ascending | Optional | bool | Specifies a boolean value to determine if the result set is to be sorted on the data_order_column  column in ascending or descending order. |
+| debug | Optional | bool | Specifies whether to remove the temporary script generated during execution and display the file path or not. This argument is useful for debugging if there are any failures when executing the function. When set to True, function displays the path of the script and does not remove the file from local file system. Otherwise, file is removed from the local file system. |
 Examples: How to use DataFrame.map_row()
 #### Example setup
 ```python
@@ -1156,94 +860,25 @@ teradataml DataFrame by leveraging the STO and returning the result as a teradat
 * Examples: How to use DataFrame.map_partition()
 * Example Workflow
 DataFrame.map_partition() Arguments
-|  | Required/ |  |  |
-| - | --------- | - | - |
-| Argument |  | Type | Description |
-|  | Optional |  |  |
+| Argument | Required/ Optional | Type | Description |
+| -------- | ------------------ | ---- | ----------- |
+| user_function | Required | function or functools.partial | Specifies the user-defined function to apply to each group in the teradataml DataFrame. |
+| exec_mode | Optional | string | Specifies the mode of execution for the user- defined function. |
+| chunk_size | Optional | integer | Specifies the number of rows to be read in each chunk, using an iterator to apply the user-defined function to each row in the chunk. |
+| num_rows | Optional | integer | Specifies the maximum number of sample rows from the teradataml DataFrame to apply the user-defined function when  exec_ mode  is 'LOCAL'. |
+| data_ partition_ column | Optional | string OR list of strings | Specifies the Partition By columns for the teradataml DataFrame. |
+| data_hash_ column | Optional | string | Specifies the column to be used for hashing. |
+| returns | Optional | Dictionary specifying column name to teradatasqlalchemy type mapping | Specifies the output column definition corresponding to the output of  user_function . |
+| delimiter | Optional | One-character string | Specifies a delimiter to use when reading columns from a row and writing result columns. |
+| quotechar | Optional | One-character string | Specifies a character that forces all input and output of the user function to be quoted using this specified character. |
+| auth | Optional | string | Specifies the authorization to use when running the  user_function . |
+| charset | Optional | string | Specifies the character encoding for data. |
+| data_order_ column | Optional | string OR list of strings | Specifies the Order By columns for the teradataml DataFrame. |
+| is_local_ order | Optional | bool | Specifies a boolean value to determine whether the input data is to be ordered locally or not. |
+| nulls_first | Optional | bool | Specifies a boolean value to determine whether NULLs are listed first or last during ordering. |
+| sort_ ascending | Optional | bool | Specifies a boolean value to determine if the result set is to be sorted on the data_order_column  column in ascending or descending order. |
+| debug | Optional | bool | Specifies whether to remove the temporary script generated during execution and display the file path or not. This argument is useful for debugging if there are any failures when executing the function. When set to True, function displays the path of the script and does not remove the file from local file system. Otherwise, file is removed from the local file system. |
 
-| exec_mode | Optional | string | Specifies the mode of execution for the user- |  |  |
-| --------- | -------- | ------ | --------------------------------------------- | - | - |
-|  |  |  | defined function. |  |  |
-| chunk_size | Optional | integer | Specifies the number of rows to be read |  |  |
-|  |  |  | in each chunk, using an iterator to apply |  |  |
-|  |  |  | the user-defined function to each row in |  |  |
-|  |  |  | the chunk. |  |  |
-| num_rows | Optional | integer | Specifies the maximum number of sample |  |  |
-|  |  |  | rows from the teradataml DataFrame to |  |  |
-|  |  |  | apply the user-defined function when |  | exec_ |
-|  |  |  | mode | is 'LOCAL'. |  |
-
-| Optional | string OR list of strings | Specifies the Partition By columns for the |
-| -------- | ------------------------- | ------------------------------------------ |
-|  |  | teradataml DataFrame. |
-
-| Optional | string | Specifies the column to be used for hashing. |
-| -------- | ------ | -------------------------------------------- |
-
-|  |  |  | Specifies the output column definition |  |  |  |  |
-| - | - | - | -------------------------------------- | - | - | - | - |
-|  |  |  | corresponding to the output of |  |  | user_function | . |
-| delimiter | Optional | One-character string | Specifies a delimiter to use when |  |  |  |  |
-|  |  |  | reading columns from a row and writing |  |  |  |  |
-|  |  |  | result columns. |  |  |  |  |
-| quotechar | Optional | One-character string | Specifies a character that forces all input and |  |  |  |  |
-|  |  |  | output of the user function to be quoted using |  |  |  |  |
-|  |  |  | this specified character. |  |  |  |  |
-| auth | Optional | string | Specifies the authorization to use when |  |  |  |  |
-|  |  |  | running the | user_function | . |  |  |
-| charset | Optional | string | Specifies the character encoding for data. |  |  |  |  |
-
-| Optional | string OR list of strings | Specifies the Order By columns for the |
-| -------- | ------------------------- | -------------------------------------- |
-|  |  | teradataml DataFrame. |
-
-|  | Optional | bool | Specifies a boolean value to determine |
-| - | -------- | ---- | -------------------------------------- |
-|  |  |  | whether the input data is to be ordered locally |
-|  |  |  | or not. |
-| nulls_first | Optional | bool | Specifies a boolean value to determine |
-|  |  |  | whether NULLs are listed first or last |
-|  |  |  | during ordering. |
-
-user_function Required function or
-            functools.partial
-                        Specifies the user-defined function to apply
-                        to each group in the teradataml DataFrame.
-data_
-partition_
-column
-data_hash_
-column
-returns Optional Dictionary specifying
-            column name to
-            teradatasqlalchemy
-            type mapping
-data_order_
-column
-is_local_
-order
-|  | Required/ |  |  |
-| - | --------- | - | - |
-| Argument |  | Type | Description |
-|  | Optional |  |  |
-
-|  | Optional | bool | Specifies a boolean value to determine |  |
-| - | -------- | ---- | -------------------------------------- | - |
-|  |  |  | if the result set is to be sorted on the |  |
-|  |  |  | data_order_column | column in ascending or |
-|  |  |  | descending order. |  |
-| debug | Optional | bool | Specifies whether to remove the temporary |  |
-|  |  |  | script generated during execution and |  |
-|  |  |  | display the file path or not. This argument is |  |
-|  |  |  | useful for debugging if there are any failures |  |
-|  |  |  | when executing the function. When set to |  |
-|  |  |  | True, function displays the path of the script |  |
-|  |  |  | and does not remove the file from local file |  |
-|  |  |  | system. Otherwise, file is removed from the |  |
-|  |  |  | local file system. |  |
-
-sort_
-ascending
 Examples: How to use DataFrame.map_partition()
 #### Example setup
 ```python

@@ -404,106 +404,39 @@ teradataml DataFrame supports following set of regular aggregate functions which
 without DataFrame.groupby().
 See the DataFrame Aggregate Functions section of Teradata Package for Python Function Reference,
 B700-4008) at https://docs.teradata.com/ for detailed description and usage examples of these functions.
-Sr.
-    Function Name Description
-No.
-1 corr() Returns the Sample Pearson product moment correlation coefficient of its
-          arguments for all non-null data point pairs.
-2 count() Returns column-wise count of the dataframe.
-3 covar_pop() Returns the column-wise population covariance of its arguments for all non-
-          null data point pairs.
-          Covariance measures whether or not two random variables vary in the same
-          way. It is the average of the products of deviations for each non-null data
-          point pair.
-4 covar_samp() Returns the column-wise sample covariance of its arguments for all non-null
-          data point pairs.
-          Covariance measures whether or not two random variables vary in the same
-          way. It is the average of the products of deviations for each non-null data
-          point pair.
-5 kurtosis() Returns column-wise kurtosis value of the dataframe.
-          Kurtosis is the fourth moment of the distribution of the standardized (z) values.
-          It is a measure of the outlier (rare, extreme observation) character of the
-          distribution as compared with the normal (or Gaussian) distribution.
-          * The normal distribution has a kurtosis of 0.
-          * Positive kurtosis indicates that the distribution is more outlier-prone than the
-            normal distribution.
-          * Negative kurtosis indicates that the distribution is less outlier-prone than the
-            normal distribution.
-6 max() Returns column-wise maximum value of the dataframe.
-7 mean() Returns column-wise mean value of the dataframe.
-8 median() Returns column-wise median value of the dataframe.
-9 min() Returns column-wise minimum value of the dataframe.
-10 percentile() Return the value which represents the desired percentile.
-11 regr_avgx() Returns the column-wise mean of the independent variable for all non-null
-          data pairs of the dependent and an independent variable arguments.
-Sr.
-    Function Name Description
-No.
-12 regr_avgy() Returns the column-wise mean of the dependent variable for all non-null data
-          pairs of the dependent and independent variable arguments.
-13 regr_count() Returns the column-wise count of all non-null data pairs of the dependent and
-          independent variable arguments.
-14 regr_intercept() Returns the column-wise intercept of the univariate linear regression
-          line through all non-null data pairs of the dependent and independent
-          variable arguments.
-          The intercept is the point at which the regression line through the non-null data
-          pairs in the sample intersects the ordinate, or y-axis, of the graph.
-15 regr_r2() Returns the column-wise coefficient of determination for all non-null data pairs
-          of the dependent and independent variable arguments.
-16 regr_slope() Returns the column-wise coefficient slope of the univariate linear regression
-          line through all non-null data pairs of the dependent and an independent
-          variable arguments.
-17 regr_sxx() Returns the column-wise sum of the squares of the independent variable
-          expression for all non-null data pairs of dependent and an independent
-          variable arguments.
-| 18 | regr_sxy() | Returns the column-wise sum of the products of the independent variable |  |  |
-| -- | ---------- | ----------------------------------------------------------------------- | - | - |
-|  |  | and the dependent variable for all non | ‑ | null data pairs of the dependent and |
-|  |  | independent variable arguments. |  |  |
+| Sr. No. | Function Name | Description |
+| ------- | ------------- | ----------- |
+| 1 | corr() | Returns the Sample Pearson product moment correlation coefficient of its arguments for all non-null data point pairs. |
+| 2 | count() | Returns column-wise count of the dataframe. |
+| 3 | covar_pop() way. It is the average of the products of deviations for each non-null data point pair. | Returns the column-wise population covariance of its arguments for all non- null data point pairs. Covariance measures whether or not two random variables vary in the same |
+| 4 covar_samp() | Returns the column-wise sample covariance of its arguments for all non-null data point pairs. Covariance measures whether or not two random variables vary in the same way. It is the average of the products of deviations for each non-null data point pair. |  |
+| 5 kurtosis() | Returns column-wise kurtosis value of the dataframe. Kurtosis is the fourth moment of the distribution of the standardized (z) values. * Negative kurtosis indicates that the distribution is less outlier-prone than the | It is a measure of the outlier (rare, extreme observation) character of the distribution as compared with the normal (or Gaussian) distribution. * The normal distribution has a kurtosis of 0. * Positive kurtosis indicates that the distribution is more outlier-prone than the normal distribution. normal distribution. |
+| 6 | max() | Returns column-wise maximum value of the dataframe. |
+| 7 | mean() | Returns column-wise mean value of the dataframe. |
+| 8 | median() | Returns column-wise median value of the dataframe. |
+| 9 | min() | Returns column-wise minimum value of the dataframe. |
+| 10 | percentile() | Return the value which represents the desired percentile. |
+| 11 | regr_avgx() | Returns the column-wise mean of the independent variable for all non-null data pairs of the dependent and an independent variable arguments. |
+| 12 | regr_avgy() pairs of the dependent and independent variable arguments. | Returns the column-wise mean of the dependent variable for all non-null data |
+| 13 regr_count() | Returns the column-wise count of all non-null data pairs of the dependent and | independent variable arguments. |
+| 14 | regr_intercept() pairs in the sample intersects the ordinate, or y-axis, of the graph. | Returns the column-wise intercept of the univariate linear regression line through all non-null data pairs of the dependent and independent variable arguments. The intercept is the point at which the regression line through the non-null data |
+| 15 regr_r2() | Returns the column-wise coefficient of determination for all non-null data pairs of the dependent and independent variable arguments. |  |
+| 16 regr_slope() | Returns the column-wise coefficient slope of the univariate linear regression line through all non-null data pairs of the dependent and an independent variable arguments. |  |
+| 17 regr_sxx() | Returns the column-wise sum of the squares of the independent variable expression for all non-null data pairs of dependent and an independent variable arguments. |  |
+| 18 regr_sxy() | Returns the column-wise sum of the products of the independent variable and the dependent variable for all non independent variable arguments. | ‑ null data pairs of the dependent and |
+| 19 regr_syy() | Returns the column-wise sum of the squares of the dependent variable expression for all non-null data pairs of dependent and an independent variable arguments. |  |
+| 20 skew() | Returns column-wise skewness of the distribution of the dataframe. Skewness is the third moment of a distribution. It is a measure of the asymmetry of the distribution about its mean compared with the normal (or Gaussian) distribution. * The normal distribution has a skewness of 0. * Positive skewness indicates a distribution having an asymmetric tail * Negative skewness indicates an asymmetric tail extending toward more | extending toward more positive values. negative values. |
+| 21 std() | Returns column-wise sample or population standard deviation value of the dataframe. The standard deviation is the second moment of a distribution. * For a sample, it is a measure of dispersion from the mean of that sample. * For a population, it is a measure of dispersion from the mean of The computation is more conservative for the population standard deviation to | that population. minimize the effect of outliers on the computed value. |
+| 22 | sum() | Returns column-wise sum value of the dataframe. |
+| 23 | var() | Returns column-wise sample or population variance of the columns in a dataframe. * The variance of a population is a measure of dispersion from the mean of that population. * The variance of a sample is a measure of dispersion from the mean of that sample. It is the square of the sample standard deviation. |
+| 24 | agg() | Perform aggregates using one or more operations. Note: You can request different percentiles while running the agg() function. |
+| teradataml special aggregate functions |  |  |
+| 25 | csum() | Returns column-wise cumulative sum value for rows in the partition of the dataframe. |
+| 26 | msum() | Computes the moving sum for the current row and the preceding "width"-1 rows in a partition, by sorting the rows according to "sort_columns". |
+| 27 | mavg() rows in a partition, by sorting the rows according to "sort_columns". | Computes the moving average for the current row and the preceding "width"-1 |
+| 28 mdiff() | Computes the moving difference for the current row and the preceding "width" | rows in a partition, by sorting the rows according to "sort_columns". |
+| 29 | mlinreg() "width"-1 rows in a partition, by sorting the rows according to "sort_columns". | Computes the moving linear regression for the current row and the preceding |
 
-19 regr_syy() Returns the column-wise sum of the squares of the dependent variable
-          expression for all non-null data pairs of dependent and an independent
-          variable arguments.
-20 skew() Returns column-wise skewness of the distribution of the dataframe.
-          Skewness is the third moment of a distribution. It is a measure of the
-          asymmetry of the distribution about its mean compared with the normal (or
-          Gaussian) distribution.
-          * The normal distribution has a skewness of 0.
-          * Positive skewness indicates a distribution having an asymmetric tail
-            extending toward more positive values.
-          * Negative skewness indicates an asymmetric tail extending toward more
-            negative values.
-21 std() Returns column-wise sample or population standard deviation value of the
-          dataframe. The standard deviation is the second moment of a distribution.
-          * For a sample, it is a measure of dispersion from the mean of that sample.
-          * For a population, it is a measure of dispersion from the mean of
-            that population.
-          The computation is more conservative for the population standard deviation to
-          minimize the effect of outliers on the computed value.
-22 sum() Returns column-wise sum value of the dataframe.
-Sr.
-    Function Name Description
-No.
-23 var() Returns column-wise sample or population variance of the columns in
-          a dataframe.
-          * The variance of a population is a measure of dispersion from the mean of
-            that population.
-          * The variance of a sample is a measure of dispersion from the mean of that
-            sample. It is the square of the sample standard deviation.
-24 agg() Perform aggregates using one or more operations.
-          Note:
-          You can request different percentiles while running the agg() function.
-teradataml special aggregate functions
-25 csum() Returns column-wise cumulative sum value for rows in the partition of
-          the dataframe.
-26 msum() Computes the moving sum for the current row and the preceding "width"-1
-          rows in a partition, by sorting the rows according to "sort_columns".
-27 mavg() Computes the moving average for the current row and the preceding "width"-1
-          rows in a partition, by sorting the rows according to "sort_columns".
-28 mdiff() Computes the moving difference for the current row and the preceding "width"
-          rows in a partition, by sorting the rows according to "sort_columns".
-29 mlinreg() Computes the moving linear regression for the current row and the preceding
-          "width"-1 rows in a partition, by sorting the rows according to "sort_columns".
 ### groupby() Method
 Use the groupby() method to group one or more columns of a DataFrame.
 The method takes a column name or a list of column names to group by.
@@ -1035,81 +968,28 @@ teradataml supports following set of time series aggregate functions which can b
 DataFrame.groupby_time() or DataFrame.resample().
 See the teradataml: Time Series Functions section of Teradata Package for Python Function Reference,
 B700-4008) at https://docs.teradata.com/ for detailed description and usage examples of these functions.
-Sr.
-No.
-    Function
-          Description
-    Name
-1 bottom() Returns the smallest number of values in the columns for each group, with or
-          without ties.
-2 count() Returns column-wise count for each group.
-3 describe() Generates statistics for numeric columns. It computes max, mean, min, std,
-          median, mode, and percentiles for numeric columns.
-          Default statistics include: 'max', 'mean', 'min', 'std'.
-Sr.
-No.
-    Function
-          Description
-    Name
-4 delta_t() Calculates the time difference, or DELTA_T, between a starting and an
-          ending event. The calculation is performed against a time-ordered time series
-          data set.
-5 first() Returns the oldest value, determined by the timecode, for each group.
-6 kurtosis() Returns column-wise kurtosis value for each group.
-          Kurtosis is the fourth moment of the distribution of the standardized (z) values.
-          It is a measure of the outlier (rare, extreme observation) character of the
-          distribution as compared with the normal (or Gaussian) distribution.
-          * The normal distribution has a kurtosis of 0.
-          * Positive kurtosis indicates that the distribution is more outlier-prone than the
-          normal distribution.
-          * Negative kurtosis indicates that the distribution is less outlier-prone than the
-          normal distribution.
-7 last() Returns the newest value, determined by the timecode, for each group.
-8 mad() Median Absolute Deviation (MAD) returns the median of the set of values
-          defined as the absolute value of the difference between each value and the
-          median of all values in each group.
-9 max() Returns column-wise maximum value for each group.
-10 mean() Returns column-wise mean value for each group.
-11 median() Returns column-wise median value for each group.
-12 min() Returns column-wise minimum value for each group.
-13 mode() Returns the column-wise mode of all values in each group.
-14 percentile() Return the value which represents the desired percentile from each group.
-          The result value is determined by the desired index (di) in an ordered list of
-          values. The following equation is for the di:
-          di = (number of values in group - 1) * percentile/100
-          When di is a whole number, that value is the returned result. The di can
-          also be between two data points, i and j, where i<j. In that case, the result is
-          interpolated according to the value specified in interpolation argument.
-15 skew() Returns column-wise skewness of the distribution for each group.
-          Skewness is the third moment of a distribution. It is a measure of the
-          asymmetry of the distribution about its mean compared with the normal (or
-          Gaussian) distribution.
-          * The normal distribution has a skewness of 0.
-          * Positive skewness indicates a distribution having an asymmetric tail
-          extending toward more positive values.
-          * Negative skewness indicates an asymmetric tail extending toward more
-          negative values.
-Sr.
-No.
-    Function
-          Description
-    Name
-16 std() Returns column-wise sample or population standard deviation value for each
-          group. The standard deviation is the second moment of a distribution.
-          * For a sample, it is a measure of dispersion from the mean of that sample.
-          * For a population, it is a measure of dispersion from the mean of
-          that population.
-          The computation is more conservative for the population standard deviation
-          to minimize the effect of outliers on the computed value.
-17 sum() Returns column-wise sum value for each group.
-18 var() Returns column-wise sample or population variance of the columns for
-          each group.
-          * The variance of a population is a measure of dispersion from the mean of
-          that population.
-          * The variance of a sample is a measure of dispersion from the mean of that
-          sample. It is the square of the sample standard deviation.
-19 top() Returns the largest number of values in the columns for each group, with or
-          without ties.
+| Sr. No. | Function Name | Description |
+| ------- | ------------- | ----------- |
+| 1 | bottom() | Returns the smallest number of values in the columns for each group, with or without ties. |
+| 2 | count() | Returns column-wise count for each group. |
+| 3 | describe() | Generates statistics for numeric columns. It computes max, mean, min, std, median, mode, and percentiles for numeric columns. Default statistics include: 'max', 'mean', 'min', 'std'. |
+| 4 | delta_t() | Calculates the time difference, or DELTA_T, between a starting and an ending event. The calculation is performed against a time-ordered time series data set. |
+| 5 | first() | Returns the oldest value, determined by the timecode, for each group. |
+| 6 | kurtosis() | Returns column-wise kurtosis value for each group. Kurtosis is the fourth moment of the distribution of the standardized (z) values. It is a measure of the outlier (rare, extreme observation) character of the distribution as compared with the normal (or Gaussian) distribution. * The normal distribution has a kurtosis of 0. * Positive kurtosis indicates that the distribution is more outlier-prone than the normal distribution. * Negative kurtosis indicates that the distribution is less outlier-prone than the normal distribution. |
+| 7 last() | Returns the newest value, determined by the timecode, for each group. |  |
+| 8 mad() | Median Absolute Deviation (MAD) returns the median of the set of values defined as the absolute value of the difference between each value and the median of all values in each group. |  |
+| 9 max() | Returns column-wise maximum value for each group. |  |
+| 10 mean() | Returns column-wise mean value for each group. |  |
+| 11 median() | Returns column-wise median value for each group. |  |
+| 12 min() | Returns column-wise minimum value for each group. |  |
+| 13 mode() | Returns the column-wise mode of all values in each group. |  |
+| 14 percentile() | Return the value which represents the desired percentile from each group. The result value is determined by the desired index (di) in an ordered list of values. The following equation is for the di: di = (number of values in group - 1) * percentile/100 When di is a whole number, that value is the returned result. The di can also be between two data points, i and j, where i<j. In that case, the result is interpolated according to the value specified in interpolation argument. |  |
+| 15 skew() | Returns column-wise skewness of the distribution for each group. Skewness is the third moment of a distribution. It is a measure of the asymmetry of the distribution about its mean compared with the normal (or Gaussian) distribution. * The normal distribution has a skewness of 0. * Positive skewness indicates a distribution having an asymmetric tail * Negative skewness indicates an asymmetric tail extending toward more | extending toward more positive values. negative values. |
+| 16 | std() | Returns column-wise sample or population standard deviation value for each group. The standard deviation is the second moment of a distribution. * For a sample, it is a measure of dispersion from the mean of that sample. * For a population, it is a measure of dispersion from the mean of that population. The computation is more conservative for the population standard deviation to minimize the effect of outliers on the computed value. |
+| 17 | sum() | Returns column-wise sum value for each group. |
+| 18 | var() | Returns column-wise sample or population variance of the columns for each group. * The variance of a population is a measure of dispersion from the mean of that population. * The variance of a sample is a measure of dispersion from the mean of that sample. It is the square of the sample standard deviation. |
+| 19 | top() | Returns the largest number of values in the columns for each group, with or without ties. |
+
 ### concat() Method
 Use the concat() method to concatenate two teradataml DataFrame objects along the index axis. The
 operation is performed by carrying out a database-style union or union all operation.
@@ -1383,8 +1263,6 @@ ATTRIBUTE StatName StatValue
 | Apr | COUNT | 4.0 |
 | Apr | MINIMUM | 101.0 |
 | Apr | MAXIMUM | 250.0 |
-| ATTRIBUTE | StatName | StatValue |
-| --------- | -------- | --------- |
 | Apr | MEAN | 195.25 |
 | Apr | STANDARD DEVIATION | 70.97123830585646 |
 | Apr | PERCENTILES(25) | 160.25 |

@@ -27,8 +27,6 @@ and Python.
 | INTERVAL SECOND(p,q) | str | str |
 | INTERVAL YEAR(n) | str | str |
 | NUMBER(p,q) | decimal.decimal | decimal |
-| Database Engine 20 Data Type | teradataml DataFrame dtypes | Python |
-| ---------------------------- | --------------------------- | ------ |
 | PERIOD(DATE) | str | str |
 | PERIOD(TIME(n)) | str | str |
 | PERIOD(TIME(n) WITH TIME ZONE) | str | str |

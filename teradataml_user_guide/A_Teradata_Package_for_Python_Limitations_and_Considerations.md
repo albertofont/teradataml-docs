@@ -148,21 +148,14 @@ To invoke and use teradataml analytic functions available on the ML Engine, your
 consist of both Database Engine 20 and ML Engine.
 #### Using Function with New Arguments on Vantage1.0
 Following functions are updated by adding new arguments.
-|  | Newly added arguments |
-| - | --------------------- |
-| Analytic Functions |  |
-|  | (Only supported on Vantage 1.1 or later) |
+| Analytic Functions | Newly added arguments (Only supported on Vantage 1.1 or later) |
+| ------------------ | -------------------------------------------------------------- |
 | AdaBoost | categorical_encoding |
 | DecisionForest | categorical_encoding |
 | DecisionTree | categorical_encoding |
 | KNN | 'accumulate' and 'output_prob' |
 | RandomSample | setid_as_first_column |
-|  | Newly added arguments |
-| - | --------------------- |
-| Analytic Functions |  |
-|  | (Only supported on Vantage 1.1 or later) |
-| VarMax | 'order_p', 'order_d', 'order_q', 'seasonal_order_p', 'seasonal_order_d', 'seasonal_ |
-|  | order_q' |
+| VarMax | 'order_p', 'order_d', 'order_q', 'seasonal_order_p', 'seasonal_order_d', 'seasonal_ order_q' |
 
 Note:
 These arguments are supported only on Vantage 1.1 or later. If used with Vantage 1.0, the following
@@ -324,25 +317,10 @@ returned by create_context(), get_context() and get_connection() APIs of teradat
 Teradata recommends using execute_sql() function provided by teradataml version 17.20.00.04 and later.
 | teradataml 17.20.00.03 and earlier | teradataml 17.20.00.04 and later |
 | ---------------------------------- | -------------------------------- |
+| create_context(<parameters>). execute(<sql_query>) | create_context(<parameters>) Note: Required only once. execute_sql(<sql_query>) |
+| get_context().execute(<sql_query>) | execute_sql(<sql_query>) Note: Assumption is that connection is already established with Vantage database. |
+| get_connection().execute(<sql_query>) | execute_sql(<sql_query>) Note: Assumption is that connection is already established with Vantage database. |
 
-| get_context().execute(<sql_query>) | execute_sql(<sql_query>) |
-| ---------------------------------- | ------------------------ |
-
-| get_connection().execute(<sql_query>) | execute_sql(<sql_query>) |
-| ------------------------------------- | ------------------------ |
-
-create_context(<parameters>).
-execute(<sql_query>)
-                  create_context(<parameters>)
-                  Note:
-                  Required only once.
-                  execute_sql(<sql_query>)
-                  Note:
-                  Assumption is that connection is already established with
-                  Vantage database.
-                  Note:
-                  Assumption is that connection is already established with
-                  Vantage database.
 ### User Permissions in Vantage
 To operate and interact with Vantage with the Teradata Package for Python, the user must have a series
 of permissions granted.

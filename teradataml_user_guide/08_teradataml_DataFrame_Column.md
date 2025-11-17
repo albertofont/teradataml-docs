@@ -874,243 +874,94 @@ See the DataFrameColumn Aggregate Functions section of Teradata Package for Pyth
 Reference, B700-4008) at https://docs.teradata.com/ for detailed description and usage examples of
 these functions.
 Regular Aggregate Functions supported by DataFrame Column
-Sr.
-No.
-    Function
-          Description
-    Name
-1 corr() Returns the Sample Pearson product moment correlation coefficient of its
-          arguments for all non-null data point pairs.
-2 count() Returns column-wise count of the ColumnExpression, also known as,
-          teradataml DataFrameColumn.
-3 covar_pop() Returns the column-wise population covariance of its arguments for all non-
-          null data point pairs.
-          Covariance measures whether or not two random variables vary in the same
-          way. It is the average of the products of deviations for each non-null data
-          point pair.
-4 covar_samp() Returns the column-wise sample covariance of its arguments for all non-null
-          data point pairs.
-          Covariance measures whether or not two random variables vary in the same
-          way. It is the average of the products of deviations for each non-null data
-          point pair.
-5 kurtosis() Returns column-wise kurtosis value of the ColumnExpression, also known as,
-          teradataml DataFrameColumn.
-          Kurtosis is the fourth moment of the distribution of the standardized (z) values.
-          It is a measure of the outlier (rare, extreme observation) character of the
-          distribution as compared with the normal (or Gaussian) distribution.
-          * The normal distribution has a kurtosis of 0.
-          * Positive kurtosis indicates that the distribution is more outlier-prone than the
-          normal distribution.
-          * Negative kurtosis indicates that the distribution is less outlier-prone than the
-          normal distribution.
-6 max() Returns column-wise maximum value of the ColumnExpression, also known
-          as, teradataml DataFrameColumn.
-Sr.
-No.
-    Function
-          Description
-    Name
-7 mean() Returns column-wise mean value of the ColumnExpression, also known as,
-          teradataml DataFrameColumn.
-8 median() Returns column-wise median value of the ColumnExpression, also known as,
-          teradataml DataFrameColumn.
-9 min() Returns column-wise minimum value of the ColumnExpression, also known
-          as, teradataml DataFrameColumn.
-10 percentile() Return the value which represents the desired percentile for the
-          ColumnExpression, also known as, teradataml DataFrameColumn.
-11 regr_avgx() Returns the column-wise mean of the independent variable for all non-null data
-          pairs of the dependent and an independent variable arguments.
-12 regr_avgy() Returns the column-wise mean of the dependent variable for all non-null data
-          pairs of the dependent and independent variable arguments.
-13 regr_count() Returns the column-wise count of all non-null data pairs of the dependent and
-          independent variable arguments.
-14 regr_intercept() Returns the column-wise intercept of the univariate linear regression
-          line through all non-null data pairs of the dependent and independent
-          variable arguments.
-          The intercept is the point at which the regression line through the non-null data
-          pairs in the sample intersects the ordinate, or y-axis, of the graph.
-15 regr_r2() Returns the column-wise coefficient of determination for all non-null data pairs
-          of the dependent and independent variable arguments.
-16 regr_slope() Returns the column-wise coefficient slope of the univariate linear regression
-          line through all non-null data pairs of the dependent and an independent
-          variable arguments.
-17 regr_sxx() Returns the column-wise sum of the squares of the independent variable
-          expression for all non-null data pairs of dependent and an independent
-          variable arguments.
-| 18 | regr_sxy() | Returns the column-wise sum of the products of the independent variable |  |
-| -- | ---------- | ----------------------------------------------------------------------- | - |
-|  |  | and the dependent variable for all non | ‑null data pairs of the dependent and |
-|  |  | independent variable arguments. |  |
+| Sr. No. | Function Name | Description |
+| ------- | ------------- | ----------- |
+| 1 | corr() | Returns the Sample Pearson product moment correlation coefficient of its arguments for all non-null data point pairs. |
+| 2 | count() | Returns column-wise count of the ColumnExpression, also known as, teradataml DataFrameColumn. |
+| 3 | covar_pop() | Returns the column-wise population covariance of its arguments for all non- null data point pairs. Covariance measures whether or not two random variables vary in the same way. It is the average of the products of deviations for each non-null data point pair. |
+| 4 | covar_samp() | Returns the column-wise sample covariance of its arguments for all non-null data point pairs. Covariance measures whether or not two random variables vary in the same way. It is the average of the products of deviations for each non-null data point pair. |
+| 5 | kurtosis() | Returns column-wise kurtosis value of the ColumnExpression, also known as, teradataml DataFrameColumn. Kurtosis is the fourth moment of the distribution of the standardized (z) values. It is a measure of the outlier (rare, extreme observation) character of the distribution as compared with the normal (or Gaussian) distribution. * The normal distribution has a kurtosis of 0. * Positive kurtosis indicates that the distribution is more outlier-prone than the normal distribution. * Negative kurtosis indicates that the distribution is less outlier-prone than the normal distribution. |
+| 6 | max() | Returns column-wise maximum value of the ColumnExpression, also known as, teradataml DataFrameColumn. |
+| 7 | mean() | Returns column-wise mean value of the ColumnExpression, also known as, teradataml DataFrameColumn. |
+| 8 | median() teradataml DataFrameColumn. | Returns column-wise median value of the ColumnExpression, also known as, |
+| 9 min() | Returns column-wise minimum value of the ColumnExpression, also known as, teradataml DataFrameColumn. |  |
+| 10 percentile() | Return the value which represents the desired percentile for the ColumnExpression, also known as, teradataml DataFrameColumn. |  |
+| 11 regr_avgx() | Returns the column-wise mean of the independent variable for all non-null data pairs of the dependent and an independent variable arguments. |  |
+| 12 | regr_avgy() | Returns the column-wise mean of the dependent variable for all non-null data pairs of the dependent and independent variable arguments. |
+| 13 | regr_count() | Returns the column-wise count of all non-null data pairs of the dependent and independent variable arguments. |
+| 14 | regr_intercept() | Returns the column-wise intercept of the univariate linear regression line through all non-null data pairs of the dependent and independent variable arguments. The intercept is the point at which the regression line through the non-null data pairs in the sample intersects the ordinate, or y-axis, of the graph. |
+| 15 | regr_r2() | Returns the column-wise coefficient of determination for all non-null data pairs of the dependent and independent variable arguments. |
+| 16 | regr_slope() | Returns the column-wise coefficient slope of the univariate linear regression line through all non-null data pairs of the dependent and an independent variable arguments. |
+| 17 | regr_sxx() | Returns the column-wise sum of the squares of the independent variable expression for all non-null data pairs of dependent and an independent variable arguments. |
+| 18 | regr_sxy() | Returns the column-wise sum of the products of the independent variable and the dependent variable for all non ‑ null data pairs of the dependent and independent variable arguments. |
+| 19 | regr_syy() | Returns the column-wise sum of the squares of the dependent variable expression for all non-null data pairs of dependent and an independent variable arguments. |
+| 20 | skew() | Returns column-wise skewness of the distribution of the ColumnExpression, also known as, teradataml DataFrameColumn. Skewness is the third moment of a distribution. It is a measure of the asymmetry of the distribution about its mean compared with the normal (or Gaussian) distribution. * The normal distribution has a skewness of 0. |
+|  |  | * Positive skewness indicates a distribution having an asymmetric tail extending toward more positive values. * Negative skewness indicates an asymmetric tail extending toward more negative values. |
+| 21 | std() | Returns column-wise sample or population standard deviation value of the ColumnExpression, also known as, teradataml DataFrameColumn. The standard deviation is the second moment of a distribution. * For a sample, it is a measure of dispersion from the mean of that sample. * For a population, it is a measure of dispersion from the mean of that population. The computation is more conservative for the population standard deviation to minimize the effect of outliers on the computed value. |
+| 22 | sum() | Returns column-wise sum value of the ColumnExpression, also known as, teradataml DataFrameColumn. |
+| 23 | var() | Returns column-wise sample or population variance of the columns of the ColumnExpression, also known as, teradataml DataFrameColumn. * The variance of a population is a measure of dispersion from the mean of that population. * The variance of a sample is a measure of dispersion from the mean of that sample. It is the square of the sample standard deviation. |
+| teradataml special aggregate functions |  |  |
+| 24 | csum() | Returns cumulative sum value for rows in the partition of the column. |
+| 25 | msum() | Computes the moving sum for the current row and the preceding "width"-1 rows in a partition, by sorting the rows according to "sort_columns". |
+| 26 | mavg() | Computes the moving average for the current row and the preceding "width"-1 rows in a partition, by sorting the rows according to "sort_columns". |
+| 27 | mdiff() rows in a partition, by sorting the rows according to "sort_columns". | Computes the moving difference for the current row and the preceding "width" |
+| 28 mlinreg() | Computes the moving linear regression for the current row and the preceding | "width"-1 rows in a partition, by sorting the rows according to "sort_columns". |
 
-19 regr_syy() Returns the column-wise sum of the squares of the dependent variable
-          expression for all non-null data pairs of dependent and an independent
-          variable arguments.
-20 skew() Returns column-wise skewness of the distribution of the ColumnExpression,
-          also known as, teradataml DataFrameColumn.
-          Skewness is the third moment of a distribution. It is a measure of the
-          asymmetry of the distribution about its mean compared with the normal (or
-          Gaussian) distribution.
-          * The normal distribution has a skewness of 0.
-Sr.
-No.
-    Function
-          Description
-    Name
-          * Positive skewness indicates a distribution having an asymmetric tail
-          extending toward more positive values.
-          * Negative skewness indicates an asymmetric tail extending toward more
-          negative values.
-21 std() Returns column-wise sample or population standard deviation value of
-          the ColumnExpression, also known as, teradataml DataFrameColumn. The
-          standard deviation is the second moment of a distribution.
-          * For a sample, it is a measure of dispersion from the mean of that sample.
-          * For a population, it is a measure of dispersion from the mean of
-          that population.
-          The computation is more conservative for the population standard deviation to
-          minimize the effect of outliers on the computed value.
-22 sum() Returns column-wise sum value of the ColumnExpression, also known as,
-          teradataml DataFrameColumn.
-23 var() Returns column-wise sample or population variance of the columns of the
-          ColumnExpression, also known as, teradataml DataFrameColumn.
-          * The variance of a population is a measure of dispersion from the mean of
-          that population.
-          * The variance of a sample is a measure of dispersion from the mean of that
-          sample. It is the square of the sample standard deviation.
-teradataml special aggregate functions
-24 csum() Returns cumulative sum value for rows in the partition of the column.
-25 msum() Computes the moving sum for the current row and the preceding "width"-1
-          rows in a partition, by sorting the rows according to "sort_columns".
-26 mavg() Computes the moving average for the current row and the preceding "width"-1
-          rows in a partition, by sorting the rows according to "sort_columns".
-27 mdiff() Computes the moving difference for the current row and the preceding "width"
-          rows in a partition, by sorting the rows according to "sort_columns".
-28 mlinreg() Computes the moving linear regression for the current row and the preceding
-          "width"-1 rows in a partition, by sorting the rows according to "sort_columns".
 ### Date Time Functions
 teradataml DataFrameColumn supports following set of date time functions.
 See the Data Time Functions section of Teradata Package for Python Function Reference, B700-4008) at
 https://docs.teradata.com/ for detailed description and usage examples of these functions.
 Data Time Functions supported by DataFrameColumn
-| Sr. |  |  |
-| --- | - | - |
-|  | Function Name | Description |
-| No. |  |  |
-| 1 | week_start() | Returns the first date or timestamp of the week that begins immediately |
-|  |  | before the specified date or timestamp value in a column as a literal. |
-| 2 | week_begin() | This is an alias for week_start() function. |
-| 3 | week_end() | Returns the last date or timestamp of the week that ends immediately |
-|  |  | after the specified date or timestamp value in a column as a literal. |
-| 4 | month_start() | Returns the first date or timestamp of the month that begins immediately |
-|  |  | before the specified date or timestamp value in a column or as a literal. |
-| 5 | month_begin() | This is an alias for month_start() function. |
-| 6 | month_end() | Returns the last date or timestamp of the month that ends immediately |
-|  |  | after the specified date or timestamp value in a column or as a literal. |
-| 7 | year_start() | Returns the first date or timestamp of the year that begins immediately |
-|  |  | before the specified date or timestamp value in a column or as a literal. |
-| 8 | year_begin() | This is an alias for year_start() function. |
-| 9 | year_end() | Returns the last date or timestamp of the year that ends immediately |
-|  |  | after the specified date or timestamp value in a column or as a literal. |
-| 10 | quarter_start() | Returns the first date or timestamp of the quarter that begins immediately |
-|  |  | before the specified date or timestamp value in a column as a literal. |
-| 11 | quarter_begin() | This is an alias for quarter_start() function. |
-| 12 | quarter_end() | Returns the last date or timestamp of the quarter that ends immediately |
-|  |  | after the specified date or timestamp value in a column as a literal. |
-| 13 | last_sunday() | Returns the date or timestamp of Sunday that falls immediately before |
-|  |  | the specified date or timestamp value in a column as a literal. |
-| 14 | last_monday() | Returns the date or timestamp of Monday that falls immediately before |
-|  |  | the specified date or timestamp value in a column as a literal. |
-| 15 | last_tuesday() | Returns the date or timestamp of Tuesday that falls immediately before |
-|  |  | the specified date or timestamp value in a column as a literal. |
-| 16 | last_wednesday() | Returns the date or timestamp of Wednesday that falls immediately |
-|  |  | before specified date or timestamp value in a column as a literal. |
-| 17 | last_thursday() | Returns the date or timestamp of Thursday that falls immediately before |
-|  |  | specified date or timestamp value in a column as a literal. |
-| 18 | last_friday() | Returns the date or timestamp of Friday that falls immediately before |
-|  |  | specified date or timestamp value in a column as a literal. |
-| 19 | last_saturday() | Returns the date or timestamp of Saturday that falls immediately before |
-|  |  | specified date or timestamp value in a column as a literal. |
-| Sr. |  |  |
-| --- | - | - |
-|  | Function Name | Description |
-| No. |  |  |
-| 20 | day_of_week() | Returns the number of days from the beginning of the week to the |
-|  |  | specified date or timestamp value in a column as a literal. |
-| 21 | day_of_month() | Returns the number of days from the beginning of the month to the |
-|  |  | specified date or timestamp value in a column as a literal. |
-| 22 | day_of_year() | Returns the number of days from the beginning of the year to the |
-|  |  | specified date or timestamp value in a column as a literal. |
-| 23 | day_of_calendar() | Returns the number of days from the beginning of the business calendar |
-|  |  | to the specified date or timestamp value in a column as a literal. |
-| 24 | week_of-month() | Returns the number of weeks from the beginning of the month to the |
-|  |  | specified date or timestamp value in a column as a literal. |
-| 25 | week_of_quarter() | Returns the number of weeks from the beginning of the quarter to the |
-|  |  | specified date or timestamp value in a column as a literal. |
-| 26 | week_of_year() | Returns the number of weeks from the beginning of the year to the |
-|  |  | specified date or timestamp value in a column as a literal. |
-| 27 | week_of_calendar() | Returns the number of weeks from the beginning of the calendar to the |
-|  |  | specified date or timestamp value in a column as a literal. |
-| 28 | month_of_year() | Returns the number of months from the beginning of the year to the |
-|  |  | specified date or timestamp value in a column as a literal. |
-| 29 | month_of_calendar() | Returns the number of months from the beginning of the calendar to the |
-|  |  | specified date or timestamp value in a column as a literal. |
-| 30 | month_of_quarter() | Returns the number of months from the beginning of the quarter to the |
-|  |  | specified date or timestamp value in a column as a literal. |
-| 31 | quarter_of_year() | Returns the number of quarters from the beginning of the year to the |
-|  |  | specified date or timestamp value in a column as a literal. |
-
-| 33 | year_of_calendar() | Returns the year of the specified date or timestamp value in a column as |
-| -- | ------------------ | ------------------------------------------------------------------------ |
-|  |  | a literal. |
-
-| 35 | year() | Returns the integer value for year in the specified date or timestamp |
-| -- | ------ | --------------------------------------------------------------------- |
-|  |  | value in a column as a literal. |
-| 36 | month() | Returns the integer value for month in the specified date or timestamp |
-|  |  | value in a column as a literal. |
-| 37 | hour() | Returns the integer value for hour in the specified timestamp value in a |
-|  |  | column as a literal. |
-
-32 quarter_
-    of_calendar()
-            Returns the number of quarters from the beginning of the calendar to the
-            specified date or timestamp value in a column as a literal.
-34 day_occurence_
-    of_month()
-            Returns the nth occurrence of the weekday in the month for the date to
-            the specified date or timestamp value in a column as a literal.
-| Sr. |  |  |
-| --- | - | - |
-|  | Function Name | Description |
-| No. |  |  |
-| 38 | minute() | Returns the integer value for minute in the specified timestamp value in |
-|  |  | a column as a literal. |
-| 39 | second() | Returns the integer value for seconds in the specified timestamp value |
-|  |  | in a column as a literal. |
-| 40 | week() | Returns the number of weeks from the beginning of the year to the |
-|  |  | specified date or timestamp value in a column as a literal. |
-| 41 | next_day() | Returns the date of the first weekday specified as 'day_value' that is later |
-|  |  | than the specified date or timestamp value in a column as a literal. |
-| 42 | months_between() | Returns the number of months between value in specified date or |
-|  |  | timestamp value in a column as a literal and date or timestamp value |
-|  |  | in argument. |
-| 43 | add_month() | Adds an integer number of months to specified date or timestamp value |
-|  |  | in a column as a literal. |
-| 44 | oadd_month() | Adds an integer number of months, date or timestamp value in specified |
-|  |  | date or timestamp value in a column as a literal. |
-| 45 | to_date() | Function converts a string to Date. |
-| 46 | to_timestamp() | Converts string or integer value to a TIMESTAMP data type or |
-|  |  | TIMESTAMP WITH TIME ZONE data type. |
-| 47 | extract() | Extracts date component to a numeric value. |
-| 48 | to_interval() | Converts a numeric value or string value into an INTERVAL_DAY_TO_ |
-|  |  | SECOND or INTERVAL_YEAR_TO_MONTH value. |
-
 | Sr. No. | Function Name | Description |
 | ------- | ------------- | ----------- |
-| 1 | concat() | Function to concatenate the columns with a separator. |
-| 2 | like() | Function to match the string pattern. String match is case sensitive. |
-| 3 | ilike() | Function to match the string pattern. String match is not case sensitive. |
-| 4 | substr() | Returns the substring from a string column. |
-| 5 | startswitch() | Function to check if the column value starts with the specified value or not. |
+| 1 | week_start() | Returns the first date or timestamp of the week that begins immediately before the specified date or timestamp value in a column as a literal. |
+| 2 | week_begin() | This is an alias for week_start() function. |
+| 3 | week_end() | Returns the last date or timestamp of the week that ends immediately after the specified date or timestamp value in a column as a literal. |
+| 4 | month_start() | Returns the first date or timestamp of the month that begins immediately before the specified date or timestamp value in a column or as a literal. |
+| 5 | month_begin() | This is an alias for month_start() function. |
+| 6 | month_end() | Returns the last date or timestamp of the month that ends immediately after the specified date or timestamp value in a column or as a literal. |
+| 7 | year_start() | Returns the first date or timestamp of the year that begins immediately before the specified date or timestamp value in a column or as a literal. |
+| 8 | year_begin() | This is an alias for year_start() function. |
+| 9 | year_end() | Returns the last date or timestamp of the year that ends immediately after the specified date or timestamp value in a column or as a literal. |
+| 10 | quarter_start() | Returns the first date or timestamp of the quarter that begins immediately before the specified date or timestamp value in a column as a literal. |
+| 11 | quarter_begin() | This is an alias for quarter_start() function. |
+| 12 | quarter_end() | Returns the last date or timestamp of the quarter that ends immediately after the specified date or timestamp value in a column as a literal. |
+| 13 | last_sunday() | Returns the date or timestamp of Sunday that falls immediately before the specified date or timestamp value in a column as a literal. |
+| 14 | last_monday() | Returns the date or timestamp of Monday that falls immediately before the specified date or timestamp value in a column as a literal. |
+| 15 | last_tuesday() | Returns the date or timestamp of Tuesday that falls immediately before the specified date or timestamp value in a column as a literal. |
+| 16 | last_wednesday() | Returns the date or timestamp of Wednesday that falls immediately before specified date or timestamp value in a column as a literal. |
+| 17 | last_thursday() | Returns the date or timestamp of Thursday that falls immediately before specified date or timestamp value in a column as a literal. |
+| 18 | last_friday() | Returns the date or timestamp of Friday that falls immediately before specified date or timestamp value in a column as a literal. |
+| 19 | last_saturday() | Returns the date or timestamp of Saturday that falls immediately before specified date or timestamp value in a column as a literal. |
+| 20 | day_of_week() | Returns the number of days from the beginning of the week to the specified date or timestamp value in a column as a literal. |
+| 21 | day_of_month() | Returns the number of days from the beginning of the month to the specified date or timestamp value in a column as a literal. |
+| 22 | day_of_year() | Returns the number of days from the beginning of the year to the specified date or timestamp value in a column as a literal. |
+| 23 | day_of_calendar() | Returns the number of days from the beginning of the business calendar to the specified date or timestamp value in a column as a literal. |
+| 24 | week_of-month() | Returns the number of weeks from the beginning of the month to the specified date or timestamp value in a column as a literal. |
+| 25 | week_of_quarter() | Returns the number of weeks from the beginning of the quarter to the specified date or timestamp value in a column as a literal. |
+| 26 | week_of_year() | Returns the number of weeks from the beginning of the year to the specified date or timestamp value in a column as a literal. |
+| 27 | week_of_calendar() | Returns the number of weeks from the beginning of the calendar to the specified date or timestamp value in a column as a literal. |
+| 28 | month_of_year() | Returns the number of months from the beginning of the year to the specified date or timestamp value in a column as a literal. |
+| 29 | month_of_calendar() | Returns the number of months from the beginning of the calendar to the specified date or timestamp value in a column as a literal. |
+| 30 | month_of_quarter() | Returns the number of months from the beginning of the quarter to the specified date or timestamp value in a column as a literal. |
+| 31 | quarter_of_year() | Returns the number of quarters from the beginning of the year to the specified date or timestamp value in a column as a literal. |
+| 32 | quarter_ of_calendar() | Returns the number of quarters from the beginning of the calendar to the specified date or timestamp value in a column as a literal. |
+| 33 | year_of_calendar() | Returns the year of the specified date or timestamp value in a column as a literal. |
+| 34 | day_occurence_ of_month() | Returns the nth occurrence of the weekday in the month for the date to the specified date or timestamp value in a column as a literal. |
+| 35 | year() | Returns the integer value for year in the specified date or timestamp value in a column as a literal. |
+| 36 | month() | Returns the integer value for month in the specified date or timestamp value in a column as a literal. |
+| 37 | hour() | Returns the integer value for hour in the specified timestamp value in a column as a literal. |
+| 38 | minute() | Returns the integer value for minute in the specified timestamp value in a column as a literal. |
+| 39 | second() | Returns the integer value for seconds in the specified timestamp value in a column as a literal. |
+| 40 | week() | Returns the number of weeks from the beginning of the year to the specified date or timestamp value in a column as a literal. |
+| 41 | next_day() | Returns the date of the first weekday specified as 'day_value' that is later than the specified date or timestamp value in a column as a literal. |
+| 42 | months_between() | Returns the number of months between value in specified date or timestamp value in a column as a literal and date or timestamp value in argument. |
+| 43 | add_month() | Adds an integer number of months to specified date or timestamp value in a column as a literal. |
+| 44 | oadd_month() | Adds an integer number of months, date or timestamp value in specified date or timestamp value in a column as a literal. |
+| 45 | to_date() | Function converts a string to Date. |
+| 46 | to_timestamp() | Converts string or integer value to a TIMESTAMP data type or TIMESTAMP WITH TIME ZONE data type. |
+| 47 | extract() | Extracts date component to a numeric value. |
+| 48 | to_interval() | Converts a numeric value or string value into an INTERVAL_DAY_TO_ SECOND or INTERVAL_YEAR_TO_MONTH value. |
 
 ### String Functions
 teradataml DataFrameColumn supports following set of string functions.
@@ -1119,71 +970,50 @@ https://docs.teradata.com/ for detailed description and usage examples of these 
 String Functions supported by DataFrameColumn
 | Sr. No. | Function Name | Description |
 | ------- | ------------- | ----------- |
+| 1 | concat() | Function to concatenate the columns with a separator. |
+| 2 | like() | Function to match the string pattern. String match is case sensitive. |
+| 3 | ilike() | Function to match the string pattern. String match is not case sensitive. |
+| 4 | substr() | Returns the substring from a string column. |
+| 5 | startswitch() | Function to check if the column value starts with the specified value or not. |
 | 6 | endswitch() | Function to check if the column value ends with the specified value or not. |
 | 7 | format() | Function to format the values in column based on formatter. |
 | 8 | to_char() | Function converts numeric type or datetype to character type. |
 | 9 | trim() | Function trims the string values in the column. |
 | 10 | ascii() | Returns the decimal representation of the first character in column. |
 | 11 | char2hexint() | Returns the hexadecimal representation for a character string in a column. |
-| 12 | chr() | Returns the Latin ASCII character of a given a numeric code value |
-|  |  | in column. |
+| 12 | chr() | Returns the Latin ASCII character of a given a numeric code value in column. |
 | 13 | char() | It is an alias for chr() function. |
 | 14 | character_length() | Returns the number of characters in the column. |
 | 15 | char_length() | It is an alias for character_length() function. |
-| 16 | edit_distance() | Returns the minimum number of edit operations required to transform |
-|  |  | string in a column into string specified in argument. |
-| 17 | index() | Returns the position of a string in a column where string specified in |
-|  |  | argument starts. |
-| 18 | initcap() | Modifies a string column and returns the string with the first character of |
-|  |  | each word in uppercase. |
-| 19 | instr() | Searches the string in a column for occurrences of search string passed |
-|  |  | as argument. |
-| 20 | lcase() | Returns a character string identical to string values in column, with all |
-|  |  | uppercase letters replaced with their lowercase equivalents. |
-| 21 | left() | Truncates string in a column to a specified number of characters desired |
-|  |  | from the left side of the string. |
+| 16 | edit_distance() | Returns the minimum number of edit operations required to transform string in a column into string specified in argument. |
+| 17 | index() | Returns the position of a string in a column where string specified in argument starts. |
+| 18 | initcap() | Modifies a string column and returns the string with the first character of each word in uppercase. |
+| 19 | instr() | Searches the string in a column for occurrences of search string passed as argument. |
+| 20 | lcase() | Returns a character string identical to string values in column, with all uppercase letters replaced with their lowercase equivalents. |
+| 21 | left() | Truncates string in a column to a specified number of characters desired from the left side of the string. |
 | 22 | length() | It is an alias for character_length() function. |
 | 23 | levenshtein() | It is an alias for edit_distance() function. |
-| 24 | locate() | Returns the position of the first occurrence of a string in a column within |
-|  |  | string in argument. |
+| 24 | locate() | Returns the position of the first occurrence of a string in a column within string in argument. |
 | 25 | lower() | It is an alias for character_lcase() function. |
-| 26 | lpad() | Returns the string in a column padded to the left with the characters |
-|  |  | specified in argument so that the resulting string has length specified |
-|  |  | in argument. |
-| 27 | ltrim() | Returns the string in a column, with its left most characters removed up to |
-|  |  | the first character that is not in the string specified in argument. |
-| 28 | ngram() | Returns the number of n gram matches between string in a column, and |
-|  |  | string specified in argument. |
-| Sr. No. | Function Name | Description |
-| ------- | ------------- | ----------- |
-| 29 | nvp() | Extracts the value of a name value pair where the name in the pair matches |
-|  |  | the name and the number of the occurrence specified. |
+| 26 | lpad() | Returns the string in a column padded to the left with the characters specified in argument so that the resulting string has length specified in argument. |
+| 27 | ltrim() | Returns the string in a column, with its left most characters removed up to the first character that is not in the string specified in argument. |
+| 28 | ngram() | Returns the number of n gram matches between string in a column, and string specified in argument. |
+| 29 | nvp() | Extracts the value of a name value pair where the name in the pair matches the name and the number of the occurrence specified. |
 | 30 | oreplace() | Replaces every occurrence of search string in the column. |
-| 31 | otranslate() | Returns string in a column with every occurrence of each character |
-|  |  | in string in argument replaced with the corresponding character in |
-|  |  | another argument. |
+| 31 | otranslate() | Returns string in a column with every occurrence of each character in string in argument replaced with the corresponding character in another argument. |
 | 32 | replace() | It is an alias for oreplace() function. |
 | 33 | reverse() | Returns the reverse of string in column. |
-| 34 | right() | Truncates input string to a specified number of characters desired from the |
-|  |  | right side of the string. |
-| 35 | rpad() | Returns the string in a column padded to the right with the characters |
-|  |  | specified in argument so the resulting string has length specified |
-|  |  | in argument. |
-| 36 | rtrim() | Returns the string in column, with its right most characters removed up to |
-|  |  | the first character that is not in the string specified in argument. |
-| 37 | soundex() | Returns a character string that represents the Soundex code for string in |
-|  |  | a column. |
-| 38 | string_cs() | Returns a heuristically derived integer value that can be used to determine |
-|  |  | which KANJI1 compatible client character set was used to encode string in |
-|  |  | a column. |
+| 34 | right() | Truncates input string to a specified number of characters desired from the right side of the string. |
+| 35 | rpad() | Returns the string in a column padded to the right with the characters specified in argument so the resulting string has length specified in argument. |
+| 36 | rtrim() | Returns the string in column, with its right most characters removed up to the first character that is not in the string specified in argument. |
+| 37 | soundex() | Returns a character string that represents the Soundex code for string in a column. |
+| 38 | string_cs() which KANJI1 compatible client character set was used to encode string in | Returns a heuristically derived integer value that can be used to determine a column. |
 | 39 | translate() | It is an alias for otranslate() function. |
-| 40 | upper() | Returns a character string with all lowercase letters in a column replaced |
-|  |  | with their uppercase equivalents. |
+| 40 | upper() | Returns a character string with all lowercase letters in a column replaced with their uppercase equivalents. |
 | 41 | parse_url() | Extracts a part from a URL. |
 | 42 | to_number() | Converts a string-like representation of a number to NUMBER type. |
 | 43 | rlike() | Returns true if str matches the posix regexp, or False otherwise. |
-| 44 | substring_index | Returns the substring from a column before a specified delimiter, up to a |
-|  |  | given occurrence count. |
+| 44 | substring_index | Returns the substring from a column before a specified delimiter, up to a given occurrence count. |
 | 45 | count_delimiters() | Counts the total number of occurrences of a specified delimiter. |
 
 ### Regular Arithmetic Functions
@@ -1191,90 +1021,78 @@ teradataml DataFrameColumn supports following set of regular arithmetic function
 See the Arithmetic Functions section of Teradata Package for Python Function Reference, B700-4008) at
 https://docs.teradata.com/ for detailed description and usage examples of these functions.
 Regular Arithmetic Functions supported by DataFrameColumn
-Sr. No. Function Name Description
-1 cbrt() Computes the cube root of values in the column.
-2 hex() Computes the Hexadecimal from decimal for the values in the column.
-3 hypot() Computes the hypotenuse for the values between two columns.
-4 unhex() Computes the decimal from Hexadecimal for the values in the column.
-5 abs() Computes the absolute value.
-6 ceil() Returns the ceiling value of the column.
-7 ceiling() It is an alias for ceil() function.
-8 degrees() Converts radians value from the column to degrees.
-9 exp() Raises e (the base of natural logarithms) to the power of the value in the
-          column, where e = 2.71828182845905.
-10 floor() Returns the largest integer equal to or less than the value in the column.
-11 ln() Computes the natural logarithm of values in column.
-12 log10() Computes the base 10 logarithm.
-13 mod() Returns the modulus of the column.
-14 pmod() It is an alias for mod() function.
-15 nullifzero() Converts data from zero to null to avoid problems with division by zero.
-16 pow() Computes the power of the column raised to expression or constant.
-17 power() It is an alias for pow() function.
-18 radians() Converts degree value from the column to radians.
-19 round() Returns the rounded off value.
-20 sign() Returns the sign.
-21 signum() It is an alias for sign() function.
-22 sqrt() Computes the square root of values in the column.
-23 trunc() Provides the truncated value of columns.
-24 width_bucket() Returns the number of the partition to which column is assigned.
-25 zeroifnull() Converts data from null to zero to avoid problems with null.
-26 log() Returns the logarithm value of the column with respect to 'base'.
-27 isnan() Evaluates expression to determine if the floating-point argument is a NaN
-          (Not-a-Number) value.
-Sr. No. Function Name Description
-28 isinf() Evaluates expression to determine if the floating-point argument is an
-          infinite number.
-29 isfinite() Evaluates expression to determine if it is a finite floating value.
+| Sr. No. | Function Name | Description |
+| ------- | ------------- | ----------- |
+| 1 | cbrt() | Computes the cube root of values in the column. |
+| 2 | hex() | Computes the Hexadecimal from decimal for the values in the column. |
+| 3 | hypot() | Computes the hypotenuse for the values between two columns. |
+| 4 | unhex() | Computes the decimal from Hexadecimal for the values in the column. |
+| 5 | abs() | Computes the absolute value. |
+| 6 | ceil() | Returns the ceiling value of the column. |
+| 7 | ceiling() | It is an alias for ceil() function. |
+| 8 | degrees() | Converts radians value from the column to degrees. |
+| 9 | exp() | Raises e (the base of natural logarithms) to the power of the value in the column, where e = 2.71828182845905. |
+| 10 | floor() | Returns the largest integer equal to or less than the value in the column. |
+| 11 | ln() | Computes the natural logarithm of values in column. |
+| 12 | log10() | Computes the base 10 logarithm. |
+| 13 | mod() | Returns the modulus of the column. |
+| 14 | pmod() | It is an alias for mod() function. |
+| 15 | nullifzero() | Converts data from zero to null to avoid problems with division by zero. |
+| 16 | pow() | Computes the power of the column raised to expression or constant. |
+| 17 | power() | It is an alias for pow() function. |
+| 18 | radians() | Converts degree value from the column to radians. |
+| 19 | round() | Returns the rounded off value. |
+| 20 | sign() | Returns the sign. |
+| 21 | signum() | It is an alias for sign() function. |
+| 22 | sqrt() | Computes the square root of values in the column. |
+| 23 | trunc() | Provides the truncated value of columns. |
+| 24 | width_bucket() | Returns the number of the partition to which column is assigned. |
+| 25 | zeroifnull() | Converts data from null to zero to avoid problems with null. |
+| 26 | log() | Returns the logarithm value of the column with respect to 'base'. |
+| 27 | isnan() | Evaluates expression to determine if the floating-point argument is a NaN (Not-a-Number) value. |
+| 28 | isinf() | Evaluates expression to determine if the floating-point argument is an infinite number. |
+| 29 | isfinite() | Evaluates expression to determine if it is a finite floating value. |
+
 ### Bit Byte Manipulation Functions
 teradataml DataFrameColumn supports following set of bit byte manipulation functions.
 See the Bit Byte Manipulation Functions section of Teradata Package for Python Function Reference,
 B700-4008) at https://docs.teradata.com/ for detailed description and usage examples of these functions.
 Bit Byte Manipulation Functions supported by DataFrameColumn
-Sr. No. Function Name Description
-1 from_byte() Encodes a sequence of bits into a sequence of characters.
-2 bit_and() Returns the logical AND operation on the bits from the column and
-          corresponding bits from the argument.
-3 bit_get() Returns the bit specified by input argument from the column and returns
-          either 0 or 1 to indicate the value of that bit.
-4 bit_or() Returns the logical OR operation on the bits from the column and
-          corresponding bits from the argument.
-5 bit_xor() Returns the bitwise XOR operation on the binary representation of the
-          column and corresponding bits from the argument.
-6 bitand() It is an alias for bit_and() function.
-7 bitnot() Returns a bitwise complement on the binary representation of the column.
-8 bitor() It is an alias for bit_or() function.
-9 bitwise_not() It is an alias for bitnot() function.
-10 bitwiseNOT() It is an alias for bitnot() function.
-11 bitxor() It is an alias for bit_xor() function.
-12 countset() Returns the count of the binary bits within the column that are either set to 1
-          or set to 0, depending on the input argument value.
-13 getbit() It is an alias for bit_get() function.
-14 rotateleft() Returns an expression rotated to the left by the specified number of bits, with
-          the most significant bits wrapping around to the right.
-15 rotateright() Returns an expression rotated to the right by the specified number of bits,
-          with the least significant bits wrapping around to the left.
-16 setbit() Sets the value of the bit specified by input argument to the value of column.
-Sr. No. Function Name Description
-17 shiftleft() Returns the expression when value in column is shifted by the specified
-          number of bits to the left.
-18 shiftright() Returns the expression when column expression is shifted by the specified
-          number of bits to the right.
-19 subbitstr() Extracts a bit substring from the column expression based on the specified
-          bit position.
-20 to_byte() Converts a numeric data type to the Vantage byte representation (byte value)
-          of the column expression value.
+| Sr. No. | Function Name | Description |
+| ------- | ------------- | ----------- |
+| 1 | from_byte() | Encodes a sequence of bits into a sequence of characters. |
+| 2 | bit_and() | Returns the logical AND operation on the bits from the column and corresponding bits from the argument. |
+| 3 | bit_get() | Returns the bit specified by input argument from the column and returns either 0 or 1 to indicate the value of that bit. |
+| 4 | bit_or() | Returns the logical OR operation on the bits from the column and corresponding bits from the argument. |
+| 5 | bit_xor() | Returns the bitwise XOR operation on the binary representation of the column and corresponding bits from the argument. |
+| 6 | bitand() | It is an alias for bit_and() function. |
+| 7 | bitnot() | Returns a bitwise complement on the binary representation of the column. |
+| 8 | bitor() | It is an alias for bit_or() function. |
+| 9 | bitwise_not() | It is an alias for bitnot() function. |
+| 10 | bitwiseNOT() | It is an alias for bitnot() function. |
+| 11 | bitxor() | It is an alias for bit_xor() function. |
+| 12 | countset() or set to 0, depending on the input argument value. | Returns the count of the binary bits within the column that are either set to 1 |
+| 13 getbit() | It is an alias for bit_get() function. |  |
+| 14 rotateleft() | Returns an expression rotated to the left by the specified number of bits, with the most significant bits wrapping around to the right. |  |
+| 15 rotateright() | Returns an expression rotated to the right by the specified number of bits, with the least significant bits wrapping around to the left. |  |
+| 16 setbit() | Sets the value of the bit specified by input argument to the value of column. |  |
+| 17 | shiftleft() | Returns the expression when value in column is shifted by the specified number of bits to the left. |
+| 18 | shiftright() | Returns the expression when column expression is shifted by the specified number of bits to the right. |
+| 19 | subbitstr() | Extracts a bit substring from the column expression based on the specified bit position. |
+| 20 | to_byte() of the column expression value. | Converts a numeric data type to the Vantage byte representation (byte value) |
+
 ### Regular Expression Functions
 teradataml DataFrameColumn supports following set of regular expression functions.
 See the Regular Expression Functions section of Teradata Package for Python Function Reference,
 B700-4008) at https://docs.teradata.com/ for detailed description and usage examples of these functions.
 Regular Expression Functions supported by DataFrame Column
-Sr. No. Function Name Description
-1 regexp_instr() Searches string value in column for a match to value specified in argument.
-2 regexp_replace() Replaces the portions of string value in a column that matches the value
-          specified regex string and replaces with the replace string.
-3 regexp_similar() Compares value in column to value in argument and returns integer value.
-4 regexp_substr() Extracts a substring from column that matches a regular expression
-          specified in the input argument.
+| Sr. No. | Function Name | Description |
+| ------- | ------------- | ----------- |
+| 1 | regexp_instr() | Searches string value in column for a match to value specified in argument. |
+| 2 | regexp_replace() | Replaces the portions of string value in a column that matches the value specified regex string and replaces with the replace string. |
+| 3 | regexp_similar() | Compares value in column to value in argument and returns integer value. |
+| 4 | regexp_substr() | Extracts a substring from column that matches a regular expression specified in the input argument. |
+
 ### Comparison Functions
 See the Comparison Functions section of Teradata Package for Python Function Reference, B700-4008)
 at https://docs.teradata.com/ for detailed description and usage examples of these functions.
@@ -1297,6 +1115,10 @@ Trigonometric Functions supported by DataFrame Column
 | 6 | sin() | Returns the sine value. |
 | 7 | tan() | Returns the tangent value. |
 
+### Hyperbolic Functions
+See the Hyperbolic Functions section of Teradata Package for Python Function Reference, B700-4008) at
+https://docs.teradata.com/ for detailed description and usage examples of these functions.
+Hyperbolic Functions supported by DataFrame Column
 | Sr. No. | Function Name | Description |
 | ------- | ------------- | ----------- |
 | 1 | acosh() | Returns the inverse hyperbolic cosine value. |
@@ -1305,8 +1127,3 @@ Trigonometric Functions supported by DataFrame Column
 | 4 | cosh() | Returns the hyperbolic cosine value. |
 | 5 | sinh() | Returns the hyperbolic sine value |
 | 6 | tanh() | Returns the hyperbolic tangent value. |
-
-### Hyperbolic Functions
-See the Hyperbolic Functions section of Teradata Package for Python Function Reference, B700-4008) at
-https://docs.teradata.com/ for detailed description and usage examples of these functions.
-Hyperbolic Functions supported by DataFrame Column

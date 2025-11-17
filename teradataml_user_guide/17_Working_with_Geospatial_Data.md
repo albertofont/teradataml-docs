@@ -12,22 +12,14 @@ Vantage supports the following types of geometry shapes, which can be stored in 
 ST_Geometry data type.
 | Type | Description |
 | ---- | ----------- |
-| ST_Point | 0-dimensional geometry that represents a single location in two-dimensional |
-|  | coordinate space. |
-| ST_LineString | 1-dimensional geometry usually stored as a sequence of points with a linear |
-|  | interpolation between points. |
-| ST_Polygon | 2-dimensional geometry consisting of one exterior boundary and zero or more interior |
-|  | boundaries, where each interior boundary defines a hole. |
+| ST_Point | 0-dimensional geometry that represents a single location in two-dimensional coordinate space. |
+| ST_LineString | 1-dimensional geometry usually stored as a sequence of points with a linear interpolation between points. |
+| ST_Polygon | 2-dimensional geometry consisting of one exterior boundary and zero or more interior boundaries, where each interior boundary defines a hole. |
 | ST_GeomCollection | Collection of zero or more ST_Geometry values. |
-| ST_MultiPoint | 0-dimensional geometry collection where the elements are restricted to ST_ |
-|  | Point values. |
-| ST_MultiLineString | 1-dimensional geometry collection where the elements are restricted to ST_ |
-|  | LineString values. |
-| ST_MultiPolygon | 2-dimensional geometry collection where the elements are restricted to ST_ |
-|  | Polygon values. |
-| GeoSequence | Extension of ST_LineString that can contain tracking information, such as time |
-|  | stamps, in addition to geospatial information.GeoSequence is a Teradata extension to |
-|  | SQL/MM Spatial. |
+| ST_MultiPoint | 0-dimensional geometry collection where the elements are restricted to ST_ Point values. |
+| ST_MultiLineString | 1-dimensional geometry collection where the elements are restricted to ST_ LineString values. |
+| ST_MultiPolygon | 2-dimensional geometry collection where the elements are restricted to ST_ Polygon values. |
+| GeoSequence | Extension of ST_LineString that can contain tracking information, such as time stamps, in addition to geospatial information.GeoSequence is a Teradata extension to SQL/MM Spatial. |
 
 teradataml provides following generic functionalities to access and process geospatial information stored
 in Vantage:
@@ -524,752 +516,65 @@ geodf.name_of_the_property
 #### Properties inherited from teradataml DataFrame
 | Property | Purpose | Return | Example |
 | -------- | ------- | ------ | ------- |
+| columns | Get the column names of GeoDataFrame. | List containing column names | >>> load_ example_data("geodataframe", "sample_streets") >>> df = GeoDataFrame.from_ table('sample_streets') >>> df.columns |
+| dtypes | Return a MetaData containing the column names and types. | MetaData containing the column names and Python types | >>> load_ example_data("geodataframe", "sample_streets") >>> df = GeoDataFrame.from_ table('sample_streets') >>> df.dtypes |
+| iloc | Access a group of rows and columns by integer values or a boolean array. | teradataml GeoDataFrame | >>> load_ example_data("geodataframe", "sample_streets") >>> geo_dataframe  = GeoDataFrame.from_ table('sample_streets') >>> geo_dataframe = |
+|  |  |  | geo_dataframe.select(['skey',  'points', 'linestrings'])>>>  geo_dataframe.iloc[1]>>> geo_ dataframe.iloc[[1, 2]]>>> geo_ dataframe.iloc[5, 1] >>> geo_dataframe.iloc[(5, 1)] >>> geo_dataframe.iloc[1:5, 2] >>> geo_dataframe.iloc[1:5, 0:2] >>> geo_dataframe.iloc[:, :] >>> geo_dataframe.iloc[[0, 1,  2], [True, False, True]] |
+| index | Return the index_label of the teradataml GeoDataFrame. | str or List of Strings (str) representing the index_label of the GeoDataFrame | >>> load_ example_data("geodataframe", "sample_cities") >>> df =  GeoDataFrame("sample_cities") >>> df.index   >>> df = df.set_index(['city_ shape', 'city_name']) >>> df |
+| loc | Access a group of rows and columns by labels or a boolean array. | teradataml GeoDataFrame | >>> load_example_ data("geodataframe", ["sample_ shapes"]) >>> geo_dataframe =  GeoDataFrame("sample_shapes") >>> geo_dataframe =  geo_dataframe.select(['skey',  'linestrings', 'polygons']) >>> geo_dataframe.loc[1004] >>> geo_dataframe.loc[[1004,  1010]] >>> geo_dataframe.loc[1004,  'linestrings'] >>> geo_dataframe.loc[(1004,  'linestrings')] >>> geo_dataframe.loc[1001:1004,  'skey':'linestrings'] >>> geo_dataframe.loc[:, :] >>> geo_dataframe.loc[geo_ dataframe['skey'] > 1005] >>> geo_dataframe.loc[geo_ dataframe['skey'] > 1005,  ['skey', 'linestrings']] >>> geo_dataframe.loc[geo_ dataframe['skey'] == 1005,  'skey':'polygons'] >>> geo_dataframe.loc[geo_ |
+|  | Get the underlying object name on which GeoDataFrame is created. | Str representing the object name of GeoDataframe. | dataframe['skey'] == 1005,  [True, False, True]] >>> load_ example_data("geodataframe", "sample_streets") >>> df =  GeoDataFrame('sample_streets') >>> df.db_object_name |
+| shape | Return a tuple representing the dimensionality of the GeoDataFrame. | Tuple representing the dimensionality of this GeoDataFrame. | >>> load_ example_data("geodataframe", "sample_streets") >>> df =  GeoDataFrame('sample_streets') >>> df.shape |
+| size | Return a value representing the number of elements in the GeoDataFrame. | Value representing the number of elements in the GeoDataFrame. | >>> load_ example_data("geodataframe", "sample_streets") >>> df =  GeoDataFrame('sample_streets') >>> df.size |
+| tdtypes | Get the teradataml GeoDataFrame metadata containing column names and corresponding teradatasqlalchemy types. | Metadata containing the column names and Teradata types | >>> load_ example_data("geodataframe", "sample_streets") >>> df =  GeoDataFrame('sample_streets') >>> df.tdtypes |
 
-| List containing |  |
-| --------------- | - |
-|  | >>> load_ |
-| column names |  |
-|  | example_data("geodataframe", |
-|  | "sample_streets") |
-|  | >>> df = GeoDataFrame.from_ |
-|  | table('sample_streets') |
-|  | >>> df.columns |
-
-| teradataml |  |
-| ---------- | - |
-|  | >>> load_ |
-| GeoDataFrame |  |
-|  | example_data("geodataframe", |
-|  | "sample_streets") |
-|  | >>> geo_dataframe |
-|  | = GeoDataFrame.from_ |
-|  | table('sample_streets') |
-|  | >>> geo_dataframe = |
-
-columns Get the column names
-    of GeoDataFrame.
-dtypes Return a MetaData
-    containing the column
-    names and types.
-              MetaData
-              containing the
-              column names and
-              Python types
-                          >>> load_
-                          example_data("geodataframe",
-                          "sample_streets")
-                          >>> df = GeoDataFrame.from_
-                          table('sample_streets')
-                          >>> df.dtypes
-iloc Access a group of
-    rows and columns by
-    integer values or a
-    boolean array.
-| Property | Purpose | Return | Example |
-| -------- | ------- | ------ | ------- |
-
-| teradataml |  |
-| ---------- | - |
-| GeoDataFrame |  |
-|  | >>> load_example_ |
-|  | data("geodataframe", ["sample_ |
-|  | shapes"]) |
-|  | >>> geo_dataframe = |
-|  | GeoDataFrame("sample_shapes") |
-|  | >>> geo_dataframe = |
-|  | geo_dataframe.select(['skey', |
-|  | 'linestrings', 'polygons']) |
-|  | >>> geo_dataframe.loc[1004] |
-|  | >>> geo_dataframe.loc[[1004, |
-|  | 1010]] |
-|  | >>> geo_dataframe.loc[1004, |
-|  | 'linestrings'] |
-|  | >>> geo_dataframe.loc[(1004, |
-|  | 'linestrings')] |
-|  | >>> geo_dataframe.loc[1001:1004, |
-|  | 'skey':'linestrings'] |
-|  | >>> geo_dataframe.loc[:, :] |
-|  | >>> geo_dataframe.loc[geo_ |
-|  | dataframe['skey'] > 1005] |
-|  | >>> geo_dataframe.loc[geo_ |
-|  | dataframe['skey'] > 1005, |
-|  | ['skey', 'linestrings']] |
-|  | >>> geo_dataframe.loc[geo_ |
-|  | dataframe['skey'] == 1005, |
-|  | 'skey':'polygons'] |
-|  | >>> geo_dataframe.loc[geo_ |
-
-                          geo_dataframe.select(['skey',
-                          'points', 'linestrings'])>>>
-                          geo_dataframe.iloc[1]>>> geo_
-                          dataframe.iloc[[1, 2]]>>> geo_
-                          dataframe.iloc[5, 1]
-                          >>> geo_dataframe.iloc[(5, 1)]
-                          >>> geo_dataframe.iloc[1:5, 2]
-                          >>> geo_dataframe.iloc[1:5, 0:2]
-                          >>> geo_dataframe.iloc[:, :]
-                          >>> geo_dataframe.iloc[[0, 1,
-                          2], [True, False, True]]
-index Return the index_label
-    of the teradataml
-    GeoDataFrame.
-              str or List of Strings
-              (str) representing
-              the index_label of
-              the
-              GeoDataFrame
-                          >>> load_
-                          example_data("geodataframe",
-                          "sample_cities")
-                          >>> df =
-                          GeoDataFrame("sample_cities")
-                          >>> df.index
-                          >>> df = df.set_index(['city_
-                          shape', 'city_name'])
-                          >>> df
-loc Access a group of rows
-    and columns by labels
-    or a boolean array.
-| Property | Purpose | Return | Example |
-| -------- | ------- | ------ | ------- |
-
-| Property | Purpose | Return | Example |
-| -------- | ------- | ------ | ------- |
-
-| teradataml |  |
-| ---------- | - |
-|  | >>> load_example_ |
-| GeoDataFrameColumn |  |
-|  | data("geodataframe", |
-|  | ["sample_cities", |
-|  | "sample_streets"]) |
-|  | >>> cities = |
-|  | GeoDataFrame("sample_ |
-|  | cities") |
-|  | >>> streets = |
-|  | GeoDataFrame("sample_ |
-|  | streets") |
-|  | >>> city_streets = |
-|  | cities.join(streets, |
-|  | how="cross", lsuffix="l", |
-
-                          dataframe['skey'] == 1005,
-                          [True, False, True]]
-    Get the underlying
-    object name on
-    which GeoDataFrame
-    is created.
-              Str representing
-              the object name
-              of GeoDataframe.
-                          >>> load_
-                          example_data("geodataframe",
-                          "sample_streets")
-                          >>> df =
-                          GeoDataFrame('sample_streets')
-                          >>> df.db_object_name
-shape Return a tuple
-    representing the
-    dimensionality of
-    the GeoDataFrame.
-              Tuple representing
-              the dimensionality
-              of this
-              GeoDataFrame.
-                          >>> load_
-                          example_data("geodataframe",
-                          "sample_streets")
-                          >>> df =
-                          GeoDataFrame('sample_streets')
-                          >>> df.shape
-size Return a value
-    representing the
-    number of elements in
-    the GeoDataFrame.
-              Value representing
-              the number of
-              elements in the
-              GeoDataFrame.
-                          >>> load_
-                          example_data("geodataframe",
-                          "sample_streets")
-                          >>> df =
-                          GeoDataFrame('sample_streets')
-                          >>> df.size
-tdtypes Get the teradataml
-    GeoDataFrame
-    metadata containing
-    column names and
-    corresponding
-    teradatasqlalchemy
-    types.
-              Metadata
-              containing the
-              column names and
-              Teradata types
-                          >>> load_
-                          example_data("geodataframe",
-                          "sample_streets")
-                          >>> df =
-                          GeoDataFrame('sample_streets')
-                          >>> df.tdtypes
 #### Properties specific to Geospatial Data (All Geometry Types)
-geometry Return a
-    GeoColumnExpression
-    for a column containing
-    geometry data.
 | Property | Purpose | Return | Example |
 | -------- | ------- | ------ | ------- |
+| geometry | Return a GeoColumnExpression for a column containing geometry data. | teradataml GeoDataFrameColumn | >>> load_example_ data("geodataframe",  ["sample_cities",  "sample_streets"]) >>> cities =  GeoDataFrame("sample_ cities") >>> streets =  GeoDataFrame("sample_ streets") >>> city_streets =  cities.join(streets,  how="cross", lsuffix="l", |
+|  | Note: This property is used to run any geospatial operation on GeoDataFrame, that is, any geospatial function ran on the geometry column referenced by this property. |  | rsuffix="r") >>> city_streets. geometry.name >>> city_streets. geometry = city_streets. street_shape >>> city_streets. geometry.name >>> geom_type = city_ streets.geometry.geom_ type >>> is_simple = city_ streets.geometry.is_ simple >>> is_valid = city_ streets.geometry.is_ valid |
+| boundary | Return the boundary of the Geometry value. | GeoDataFrame with result column containing Geometry values | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.boundary |
+| centroid | Return the mathematical centroid of an ST_Polygon or ST_ MultiPolygon value. | GeoDataFrame with result column containing Geometry values | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"])[gdf. skey.isin([1001, 1002,  1003])] >>> print(gdf.geometry. name) >>> gdf.centroid |
+| convex_ hull | Return the convex hull of the Geometry value. | GeoDataFrame with result column containing Geometry values | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. |
+|  |  |  | name) >>> gdf.convex_hull |
+| coord_dim | Return the coordinate dimension of a geometry. | GeoDataFrame Resultant column contains: * 1, if the input geometry is 1D * 2, if the input geometry is 2D * 3, if the input geometry is 3D | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.coord_dim |
+| dimension | Return the dimension of the Geometry type. | GeoDataFrame Resultant column contains: * 0, for a 0- dimensional geometry * 1, for a 1D geometry * 2, for a 2D geometry * -1, if the input geometry is empty | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.dimension |
+| geom_ type | Return the Geometry type of the Geometry value. | GeoDataFrame Resultant column contains any of the following strings: * 'ST_Point' * 'ST_LineString' * 'ST_Polygon' * 'ST_MultiPoint' * 'ST_MultiLineString' * 'ST_MultiPolygon' * 'ST_GeomCollection' * 'GeoSequence' | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.geom_type |
+| is_3D | Test if a Geometry value has Z coordinate value. | GeoDataFrame Resultant column contains: * 1, if the Geometry contains Z coordinates * 0, if the Geometry does not contain Z coordinates | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.is_3D |
+| is_empty | Test if a Geometry value corresponds to the empty set. | GeoDataFrame Resultant column contains: * 1, if the geometry is empty * 0, if the geometry is not empty | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.is_empty |
+| is_simple | Test if a Geometry value has no anomalous geometric points, such as self intersection tangency. | GeoDataFrame Resultant column contains: * 1, if the geometry is simple, with no anomalous points * 0, if the geometry is not simple | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.is_simple |
+| is_valid | Test if a Geometry value is well-formed. | GeoDataFrame Resultant column contains: * 1, if the geometry is valid * 0, if the geometry is not valid | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.is_valid |
+| max_x | Return the maximum X coordinate of a Geometry value. | GeoDataFrame Resultant column contains a NULL, if the Geometry is an empty set. | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.max_x |
+| max_y | Return the maximum Y coordinate of a Geometry value. | GeoDataFrame Resultant column contains a NULL, if the Geometry is an empty set. | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey", |
+|  |  |  | "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.max_y |
+| max_z | Return the maximum Z coordinate of a Geometry value. | GeoDataFrame Resultant column contains a NULL, if the Geometry is an empty set. | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.max_z |
+| min_x | Return the minimum X coordinate of a Geometry value. | GeoDataFrame Resultant column contains a NULL, if the Geometry is an empty set. | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.min_x |
+| min_y | Return the minimum Y coordinate of a Geometry value. | GeoDataFrame Resultant column contains a NULL, if the Geometry is an empty set. | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.min_y |
+| min_z | Return the minimum Z coordinate of a Geometry value. | GeoDataFrame Resultant column contains a NULL, if the Geometry is an empty set. | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.min_z |
+| srid | Get the spatial reference system identifier of the Geometry value. | GeoDataFrame | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf. select(["skey",  "polygons",  "linestrings"]) >>> print(gdf.geometry. name) >>> gdf.srid |
 
-| GeoDataFrame with |  |
-| ----------------- | - |
-| result column containing |  |
-|  | >>> gdf = |
-| Geometry values |  |
-|  | GeoDataFrame("sample_ |
-|  | shapes") |
-|  | >>> gdf = gdf. |
-|  | select(["skey", |
-|  | "polygons", |
-|  | "linestrings"])[gdf. |
-|  | skey.isin([1001, 1002, |
-|  | 1003])] |
-|  | >>> print(gdf.geometry. |
-|  | name) |
-|  | >>> gdf.centroid |
-
-    Note:
-      This property is
-      used to run any
-      geospatial operation on
-      GeoDataFrame, that is,
-      any geospatial function
-      ran on the geometry
-      column referenced by
-      this property.
-                              rsuffix="r")
-                              >>> city_streets.
-                              geometry.name
-                              >>> city_streets.
-                              geometry = city_streets.
-                              street_shape
-                              >>> city_streets.
-                              geometry.name
-                              >>> geom_type = city_
-                              streets.geometry.geom_
-                              type
-                              >>> is_simple = city_
-                              streets.geometry.is_
-                              simple
-                              >>> is_valid = city_
-                              streets.geometry.is_
-                              valid
-boundary Return the boundary of
-    the Geometry value.
-                GeoDataFrame with
-                result column containing
-                Geometry values
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-                              name)
-                              >>> gdf.boundary
-centroid Return the mathematical
-    centroid of an
-    ST_Polygon or ST_
-    MultiPolygon value.
-convex_
-hull
-    Return the convex hull of
-    the Geometry value.
-                GeoDataFrame with
-                result column containing
-                Geometry values
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-| Property | Purpose | Return | Example |
-| -------- | ------- | ------ | ------- |
-
-                              name)
-                              >>> gdf.convex_hull
-coord_dim Return the coordinate
-    dimension of a geometry.
-                GeoDataFrame
-                Resultant
-                column contains:
-                * 1, if the input geometry
-                is 1D
-                * 2, if the input geometry
-                is 2D
-                * 3, if the input geometry
-                is 3D
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-                              name)
-                              >>> gdf.coord_dim
-dimension Return the dimension of
-    the Geometry type.
-                GeoDataFrame
-                Resultant
-                column contains:
-                * 0, for a 0-
-                dimensional geometry
-                * 1, for a 1D geometry
-                * 2, for a 2D geometry
-                * -1, if the input geometry
-                is empty
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-                              name)
-                              >>> gdf.dimension
-geom_
-type
-    Return the Geometry
-    type of the
-    Geometry value.
-                GeoDataFrame
-                Resultant column
-                contains any of the
-                following strings:
-                * 'ST_Point'
-                * 'ST_LineString'
-                * 'ST_Polygon'
-                * 'ST_MultiPoint'
-                * 'ST_MultiLineString'
-                * 'ST_MultiPolygon'
-                * 'ST_GeomCollection'
-                * 'GeoSequence'
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-                              name)
-                              >>> gdf.geom_type
-is_3D Test if a Geometry value
-    has Z coordinate value.
-                GeoDataFrame
-                Resultant
-                column contains:
-                * 1, if the Geometry
-                contains Z coordinates
-                * 0, if the Geometry
-                does not contain
-                Z coordinates
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-                              name)
-                              >>> gdf.is_3D
-| Property | Purpose | Return | Example |
-| -------- | ------- | ------ | ------- |
-
-is_empty Test if a Geometry
-    value corresponds to the
-    empty set.
-                GeoDataFrame
-                Resultant
-                column contains:
-                * 1, if the geometry
-                is empty
-                * 0, if the geometry is
-                not empty
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-                              name)
-                              >>> gdf.is_empty
-is_simple Test if a Geometry
-    value has no
-    anomalous geometric
-    points, such as self
-    intersection tangency.
-                GeoDataFrame
-                Resultant
-                column contains:
-                * 1, if the geometry
-                is simple, with no
-                anomalous points
-                * 0, if the geometry is
-                not simple
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-                              name)
-                              >>> gdf.is_simple
-is_valid Test if a Geometry value
-    is well-formed.
-                GeoDataFrame
-                Resultant
-                column contains:
-                * 1, if the geometry
-                is valid
-                * 0, if the geometry is
-                not valid
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-                              name)
-                              >>> gdf.is_valid
-max_x Return the maximum
-    X coordinate of a
-    Geometry value.
-                GeoDataFrame
-                Resultant column
-                contains a NULL, if the
-                Geometry is an empty set.
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-                              name)
-                              >>> gdf.max_x
-max_y Return the maximum
-    Y coordinate of a
-    Geometry value.
-                GeoDataFrame
-                Resultant column
-                contains a NULL, if the
-                Geometry is an empty set.
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-| Property | Purpose | Return | Example |
-| -------- | ------- | ------ | ------- |
-
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-                              name)
-                              >>> gdf.max_y
-max_z Return the maximum
-    Z coordinate of a
-    Geometry value.
-                GeoDataFrame
-                Resultant column
-                contains a NULL, if the
-                Geometry is an empty set.
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-                              name)
-                              >>> gdf.max_z
-min_x Return the minimum
-    X coordinate of a
-    Geometry value.
-                GeoDataFrame
-                Resultant column
-                contains a NULL, if the
-                Geometry is an empty set.
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-                              name)
-                              >>> gdf.min_x
-min_y Return the minimum
-    Y coordinate of a
-    Geometry value.
-                GeoDataFrame
-                Resultant column
-                contains a NULL, if the
-                Geometry is an empty set.
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-                              name)
-                              >>> gdf.min_y
-min_z Return the minimum
-    Z coordinate of a
-    Geometry value.
-                GeoDataFrame
-                Resultant column
-                contains a NULL, if the
-                Geometry is an empty set.
-                              >>> gdf =
-                              GeoDataFrame("sample_
-                              shapes")
-                              >>> gdf = gdf.
-                              select(["skey",
-                              "polygons",
-                              "linestrings"])
-                              >>> print(gdf.geometry.
-                              name)
-                              >>> gdf.min_z
-| Property | Purpose | Return | Example |
-| -------- | ------- | ------ | ------- |
-
-| GeoDataFrame |  |
-| ------------ | - |
-|  | >>> gdf = |
-|  | GeoDataFrame("sample_ |
-|  | shapes") |
-|  | >>> gdf = gdf. |
-|  | select(["skey", |
-|  | "polygons", |
-|  | "linestrings"]) |
-|  | >>> print(gdf.geometry. |
-|  | name) |
-|  | >>> gdf.srid |
-
-| Property | Purpose | Return | Example |
-| -------- | ------- | ------ | ------- |
-
-| Property | Purpose | Return | Example |
-| -------- | ------- | ------ | ------- |
-
-srid Get the spatial reference
-    system identifier of the
-    Geometry value.
 #### Properties for Point Geometry
-x Get the X
-    coordinate of an
-    ST_Point value.
-            GeoDataFrame
-                      >>> gdf = GeoDataFrame("sample_shapes")
-                      >>> gdf = gdf.select(["skey", "points",
-                      "linestrings"])[gdf.points.geom_type
-                      == "ST_Point"]
-                      >>> print(gdf.geometry.name)
-                      >>> gdf.x
-y Get the Y
-    coordinate of an
-    ST_Point value.
-            GeoDataFrame
-                      >>> gdf = GeoDataFrame("sample_shapes")
-                      >>> gdf = gdf.select(["skey", "points",
-                      "linestrings"])[gdf.points.geom_type
-                      == "ST_Point"]
-                      >>> print(gdf.geometry.name)
-                      >>> gdf.y
-z Get the Z
-    coordinate of an
-    ST_Point value.
-            GeoDataFrame
-                      >>> gdf = GeoDataFrame("sample_shapes")
-                      >>> gdf = gdf.select(["skey", "points",
-                      "linestrings"])[gdf.points.geom_type
-                      == "ST_Point"]
-                      >>> print(gdf.geometry.name)
-                      >>> gdf.z
+| Property | Purpose | Return | Example |
+| -------- | ------- | ------ | ------- |
+| x | Get the X coordinate of an ST_Point value. | GeoDataFrame | >>> gdf = GeoDataFrame("sample_shapes") >>> gdf = gdf.select(["skey", "points",  "linestrings"])[gdf.points.geom_type  == "ST_Point"] >>> print(gdf.geometry.name) >>> gdf.x |
+| y | Get the Y coordinate of an ST_Point value. | GeoDataFrame | >>> gdf = GeoDataFrame("sample_shapes") >>> gdf = gdf.select(["skey", "points",  "linestrings"])[gdf.points.geom_type  == "ST_Point"] >>> print(gdf.geometry.name) >>> gdf.y |
+| z | Get the Z coordinate of an ST_Point value. | GeoDataFrame | >>> gdf = GeoDataFrame("sample_shapes") >>> gdf = gdf.select(["skey", "points",  "linestrings"])[gdf.points.geom_type  == "ST_Point"] >>> print(gdf.geometry.name) >>> gdf.z |
+
 #### Properties for LineString Geometry
-is_
-closed_
-3D
-    Test whether a
-    3D LineString or
-    3D MultiLineString
-    is closed, taking
-    into account the
-              GeoDataFrame
-              Resultant column contains:
-              * 1, if the 3D LineString
-              or 3D MultiLineString
-              is closed.
-                            >>> gdf =
-                            GeoDataFrame("sample_
-                            shapes")
-                            >>> gdf = gdf.select(["skey",
-                            "polygons", "linestrings"])
 | Property | Purpose | Return | Example |
 | -------- | ------- | ------ | ------- |
+| is_ closed_ 3D | Test whether a 3D LineString or 3D MultiLineString is closed, taking into account the | GeoDataFrame Resultant column contains: * 1, if the 3D LineString or 3D MultiLineString is closed. | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf.select(["skey",  "polygons", "linestrings"]) |
+|  | Z coordinates in the calculation. | * 0, if the 3D LineString or 3D MultiLineString is not closed or is empty. | [gdf.linestrings.is_3D == 1] >>> print(gdf.geometry.name) >>> gdf.geometry = gdf. linestrings >>> gdf.is_closed_3D |
+| is_closed | Test if a Geometry type that represents an ST_LineString, GeoSequence, or ST_MultiLineString value is closed. | GeoDataFrame Resultant column contains: * 1, if the ST_LineString, GeoSequence, or ST_ LineString components of an ST_MultiLineString are closed. * 0, if the ST_LineString, GeoSequence, or ST_ LineString components of an ST_MultiLineString are not closed, or if the input geometry is empty. | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf.select(["skey",  "polygons", "linestrings"]) [gdf.skey.isin([1001, 1002,  1003])] >>> print(gdf.geometry.name) >>> gdf.geometry = gdf. linestrings >>> gdf.is_closed |
+| is_ring | Test if a Geometry type that represents an ST_LineString or a GeoSequence value is a ring. | GeoDataFrame Resultant column contains: * 1, if the ST_LineString or GeoSequence value is simple (has no anomalous geometric points, such as self intersection tangency) and is closed (the start point of the ST_ LineString value is equal to the end point) * 0, in all other cases. | >>> gdf =  GeoDataFrame("sample_ shapes") >>> gdf = gdf.select(["skey",  "polygons", "linestrings"]) [~gdf.skey.isin([1009, 1008,  1010, 1007])] >>> print(gdf.geometry.name) >>> gdf.geometry = gdf. linestrings >>> gdf.is_ring |
 
-| Property | Purpose | Return | Example |
-| -------- | ------- | ------ | ------- |
-
-| GeoDataFrame |  |
-| ------------ | - |
-|  | >>> gdf = |
-|  | GeoDataFrame("sample_shapes") |
-|  | >>> gdf = gdf.select(["skey", |
-|  | "polygons", "linestrings"]) |
-|  | >>> print(gdf.geometry.name) |
-|  | >>> gdf.area |
-
-    Z coordinates in
-    the calculation.
-              * 0, if the 3D LineString or
-              3D MultiLineString is not
-              closed or is empty.
-                            [gdf.linestrings.is_3D == 1]
-                            >>> print(gdf.geometry.name)
-                            >>> gdf.geometry = gdf.
-                            linestrings
-                            >>> gdf.is_closed_3D
-is_closed Test if a
-    Geometry type
-    that represents
-    an ST_LineString,
-    GeoSequence, or
-    ST_MultiLineString
-    value is closed.
-              GeoDataFrame
-              Resultant column contains:
-              * 1, if the ST_LineString,
-              GeoSequence, or ST_
-              LineString components
-              of an ST_MultiLineString
-              are closed.
-              * 0, if the ST_LineString,
-              GeoSequence, or ST_
-              LineString components
-              of an ST_MultiLineString
-              are not closed, or if the
-              input geometry is empty.
-                            >>> gdf =
-                            GeoDataFrame("sample_
-                            shapes")
-                            >>> gdf = gdf.select(["skey",
-                            "polygons", "linestrings"])
-                            [gdf.skey.isin([1001, 1002,
-                            1003])]
-                            >>> print(gdf.geometry.name)
-                            >>> gdf.geometry = gdf.
-                            linestrings
-                            >>> gdf.is_closed
-is_ring Test if a
-    Geometry type
-    that represents an
-    ST_LineString or
-    a GeoSequence
-    value is a ring.
-              GeoDataFrame
-              Resultant column contains:
-              * 1, if the ST_LineString
-              or GeoSequence value
-              is simple (has no
-              anomalous geometric
-              points, such as self
-              intersection tangency)
-              and is closed (the
-              start point of the ST_
-              LineString value is equal
-              to the end point)
-              * 0, in all other cases.
-                            >>> gdf =
-                            GeoDataFrame("sample_
-                            shapes")
-                            >>> gdf = gdf.select(["skey",
-                            "polygons", "linestrings"])
-                            [~gdf.skey.isin([1009, 1008,
-                            1010, 1007])]
-                            >>> print(gdf.geometry.name)
-                            >>> gdf.geometry = gdf.
-                            linestrings
-                            >>> gdf.is_ring
 #### Properties for Polygon Geometry
-area Return the area
-    measurement of an
-    ST_Polygon or ST_
-    MultiPolygon. For ST_
-    MultiPolygon, returns
-    the sum of the area
-    measurements of the
-    component polygons.
-exterior Get the exterior ring
-    of a Geometry type
-    that represents an ST_
-    Polygon value.
-                GeoDataFrame
-                with result
-                column
-                containing ST_
-                          >>> gdf =
-                          GeoDataFrame("sample_shapes")
-                          >>> gdf = gdf.select(["skey",
-                          "polygons", "linestrings"])[gdf.
 | Property | Purpose | Return | Example |
 | -------- | ------- | ------ | ------- |
+| area | Return the area measurement of an ST_Polygon or ST_ MultiPolygon. For ST_ MultiPolygon, returns the sum of the area measurements of the component polygons. | GeoDataFrame | >>> gdf =  GeoDataFrame("sample_shapes") >>> gdf = gdf.select(["skey",  "polygons", "linestrings"]) >>> print(gdf.geometry.name) >>> gdf.area |
+| exterior | Get the exterior ring of a Geometry type that represents an ST_ Polygon value. | GeoDataFrame with result column containing ST_ | >>> gdf =  GeoDataFrame("sample_shapes") >>> gdf = gdf.select(["skey",  "polygons", "linestrings"])[gdf. |
+|  |  | LineString Geometry values | skey.isin([1001, 1002, 1003])] >>> print(gdf.geometry.name) >>> gdf.exterior |
+| perimeter | Return the boundary length of an ST_Polygon, or the sum of the boundary lengths of the component polygons of an ST_MultiPolygon. | GeoDataFrame | >>> gdf =  GeoDataFrame("sample_shapes") >>> gdf = gdf.select(["skey",  "polygons", "linestrings"]) >>> print(gdf.geometry.name) >>> gdf.perimeter |
 
-| GeoDataFrame |  |
-| ------------ | - |
-|  | >>> gdf = |
-|  | GeoDataFrame("sample_shapes") |
-|  | >>> gdf = gdf.select(["skey", |
-|  | "polygons", "linestrings"]) |
-|  | >>> print(gdf.geometry.name) |
-|  | >>> gdf.perimeter |
-
-| Method | Method Signature | Purpose | Return |
-| ------ | ---------------- | ------- | ------ |
-
-                LineString
-                Geometry values
-                          skey.isin([1001, 1002, 1003])]
-                          >>> print(gdf.geometry.name)
-                          >>> gdf.exterior
-perimeter Return the boundary
-    length of an ST_Polygon,
-    or the sum of the
-    boundary lengths of the
-    component polygons of
-    an ST_MultiPolygon.
 ### GeoDataFrame Methods
 The following tables list methods of teradataml GeoDataFrame. For more details and examples, see
 Teradata Package for Python Function Reference.
@@ -1290,969 +595,128 @@ the column name as is.
 geoDF.intersects("geom_col2")
 ```
 #### Methods inherited from teradataml DataFrame
-__init__ __init__(self, table_
-    name=None,
-    index=True, index_
-    label=None,
-                Constructor for
-                teradataml GeoDataFrame.
-                                teradataml
-                                GeoDataFrame
 | Method | Method Signature | Purpose | Return |
 | ------ | ---------------- | ------- | ------ |
-
-| __getattr__(self, name) | Return an attribute of |
-| ----------------------- | ---------------------- |
-|  | the GeoDataFrame. |
-
-| __getitem__(self, key) | Return a column from |  |
-| ---------------------- | -------------------- | - |
-|  | the GeoDataFrame or filter |  |
-|  | the GeoDataFrame using |  |
-|  | an expression. |  |
-|  | The following operators |  |
-|  | are supported: |  |
-|  | * comparison: ==, !=, <, <=, >, >= |  |
-|  | * boolean: & (and), | (or), ~ (not), |  |
-|  |  | ^ (xor) |
-|  | Operands can be Python |  |
-|  | literals and instances |  |
-|  | of ColumnExpressions from |  |
-|  | the GeoDataFrame. |  |
-
-| alias | alias(self, alias_name) | Method to create an aliased |
-| ----- | ----------------------- | --------------------------- |
-|  |  | teradataml GeoDataFrame. |
-
-    query=None,
-    materialize=False)
-from_
-table
-    from_table(cls, table_
-    name, index=True,
-    index_label=None)
-                Class method for creating a
-                GeoDataFrame from a table or
-                a view.
-                                teradataml
-                                GeoDataFrame
-from_
-query
-    from_query(cls, query,
-    index=True, index_
-    label=None,
-    materialize=False)
-                Class method for creating a
-                GeoDataFrame using a query.
-                                teradataml
-                                GeoDataFrame
-__
-getattr__
-                                Return the value of the
-                                named attribute of object
-                                (if found).
-__
-getitem__
-                                GeoDataFrame or
-                                ColumnExpression
-                                instance
-                Note:
-                Teradata recommends using
-                this method before performing
-                self join using GeoDataFrame's
-                join() API.
-                                teradataml
-                                GeoDataFrame
-assign assign(self, drop_
-    columns =
-    False, **kwargs)
-                Assign new columns to a
-                teradataml GeoDataFrame.
-                                teradataml
-                                GeoDataFrame
-                                A new GeoDataFrame is
-                                returned with:
-                                * New columns in
-                                  addition to all
-                                  the existing columns
-                                  if "drop_columns"
-                                  is False.
-                                * Only new columns if
-                                  "drop_columns" is True.
-                                * New columns in
-                                  addition to group
-                                  by columns, i.e.,
-| Method | Method Signature | Purpose | Return |
-| ------ | ---------------- | ------- | ------ |
-
-| Removes rows with null values. | teradataml |
-| ------------------------------ | ---------- |
-|  | GeoDataFrame |
-
-| get | get(self, key) | Retrieve required columns from |
-| --- | -------------- | ------------------------------ |
-|  |  | GeoDataFrame using column |
-|  |  | name(s) as key. |
-|  |  | Return a new teradataml |
-|  |  | GeoDataFrame with requested |
-|  |  | columns only. |
-
-                                  columns used for
-                                  grouping, if assign() is
-                                  run on GeoDataFrame.
-                                  groupby().
-concat concat(self, other,
-    join='OUTER', allow_
-    duplicates=True,
-    sort=False,
-    ignore_index=False)
-                Concatenates two teradataml
-                GeoDataFrames along the
-                index axis.
-                                teradataml
-                                GeoDataFrame
-drop drop(self, labels=None,
-    axis=0, columns=None)
-                Drop specified labels from rows
-                or columns.
-                                teradataml
-                                GeoDataFrame
-dropna dropna(self, how='any',
-    thresh=None,
-    subset=None)
-filter filter(self, items = None,
-    like = None, regex =
-    None, axis = 1, **kw)
-                Filter rows or columns of
-                GeoDataFrame according to
-                labels in the specified index.
-                The filter is applied to the columns
-                of the index when axis is set
-                to 'rows'.
-                                teradataml
-                                GeoDataFrame
-                                teradataml
-                                GeoDataFrame
-get_
-values
-    get_values(self, num_
-    rows = 99999)
-                Retrieve all values (only) present
-                in a teradataml GeoDataFrame.
-                Values are retrieved as per a
-                numpy.ndarray representation of a
-                teradataml GeoDataFrame.
-                This format is equivalent to the
-                get_values() representation of a
-                Pandas GeoDataFrame.
-                                Numpy.ndarray
-                                representation of a
-                                teradataml
-                                GeoDataFrame
-groupby groupby(self,
-    columns_expr)
-                Apply GroupBy to one
-                or more columns of a
-                teradataml GeoDataFrame.
-                The result will always behaves
-                like calling groupby with
-                as_index=False
-                in pandas.
-                                teradataml
-                                DataFrameGroupBy
-                                Object
-head head(self, n=display.
-    max_rows)
-                Print the first n rows of the sorted
-                teradataml GeoDataFrame.
-                                teradataml
-                                GeoDataFrame
-| Method | Method Signature | Purpose | Return |
-| ------ | ---------------- | ------- | ------ |
-
-| keys | keys(self) | Get the column names of |
-| ---- | ---------- | ----------------------- |
-|  |  | a GeoDataFrame. |
-
-info info(self, verbose=True,
-    buf=None, max_
-    cols=None,
-    null_counts=False)
-                Print a summary of
-                the GeoDataFrame.
-                                None
-join join(self, other, on=None,
-    how="left", lsuffix=None,
-    rsuffix=None)
-                Join two different teradataml
-                GeoDataFrames together based
-                on column comparisons specified
-                in argument 'on' and type of join is
-                specified in the argument 'how'.
-                                teradataml
-                                GeoDataFrame
-                                List containing the
-                                column names
-merge merge(self, right,
-    on=None, how="inner",
-    left_on=None, right_
-    on=None, use_
-    index=False,
-    lsuffix=None,
-    rsuffix=None)
-                Merge two teradataml
-                GeoDataFrames together.
-                                teradataml
-                                GeoDataFrame
-sample sample(self, n = None,
-    frac = None, replace
-    = False, randomize =
-    False, case_when_then
-    = None, case_else
-    = None)
-                Allow to sample few rows from
-                GeoDataFrame directly or based
-                on conditions.
-                Create a new column 'sampleid'
-                which has a unique id for each
-                sample sampled, it helps to
-                uniquely identify each sample.
-                                teradataml
-                                GeoDataFrame
-select select(self,
-    select_expression)
-                Select required columns
-                from GeoDataFrame using
-                an expression.
-                Return a new teradataml
-                GeoDataFrame with selected
-                columns only.
-                                teradataml
-                                GeoDataFrame
-                                /DataFrame
-set_index set_index(self, keys, drop
-    = True, append = False)
-                Assign one or more existing
-                columns as the new index to a
-                teradataml GeoDataFrame.
-                                teradataml
-                                GeoDataFrame
-show_
-query
-    show_query(self, full_
-    query = False)
-                Return underlying SQL for the
-                teradataml GeoDataFrame. It
-                is the same SQL that is
-                used to view the data for a
-                teradataml GeoDataFrame.
-                                String
-sort sort(self, columns,
-    ascending=True)
-                Get sorted data by one
-                or more columns in either
-                ascending or descending order for
-                a GeoDataFrame.
-                                teradataml
-                                GeoDataFrame
-sort_
-index
-    sort_index(self, axis=0,
-    ascending=True,
-    kind='quicksort')
-                Gets sorted object by labels
-                (along an axis) in either ascending
-                                teradataml
-                                GeoDataFrame
-| Method | Method Signature | Purpose | Return |
-| ------ | ---------------- | ------- | ------ |
-
+| __init__ | __init__(self, table_ name=None, index=True, index_ label=None, | Constructor for teradataml GeoDataFrame. | teradataml GeoDataFrame |
+|  | query=None, materialize=False) |  |  |
+| from_ table | from_table(cls, table_ name, index=True, index_label=None) | Class method for creating a GeoDataFrame from a table or a view. | teradataml GeoDataFrame |
+| from_ query | from_query(cls, query, index=True, index_ label=None, materialize=False) | Class method for creating a GeoDataFrame using a query. | teradataml GeoDataFrame |
+| __ getattr__ | __getattr__(self, name) | Return an attribute of the GeoDataFrame. | Return the value of the named attribute of object (if found). |
+| __ getitem__ | __getitem__(self, key) | Return a column from the GeoDataFrame or filter the GeoDataFrame using an expression. The following operators are supported: * comparison: ==, !=, <, <=, >, >= * boolean: & (and), | (or), ~ (not), ^ (xor) Operands can be Python literals and instances of ColumnExpressions from the GeoDataFrame. | GeoDataFrame or ColumnExpression instance |
+| alias | alias(self, alias_name) | Method to create an aliased teradataml GeoDataFrame. Note: Teradata recommends using this method before performing self join using GeoDataFrame's join() API. | teradataml GeoDataFrame |
+| assign | assign(self, drop_ columns = False, **kwargs) | Assign new columns to a teradataml GeoDataFrame. | teradataml GeoDataFrame A new GeoDataFrame is returned with: * New columns in addition to all the existing columns if "drop_columns" is False. * Only new columns if "drop_columns" is True. * New columns in addition to group by columns, i.e., |
+|  |  |  | columns used for grouping, if assign() is run on GeoDataFrame. groupby(). |
+| concat | concat(self, other, join='OUTER', allow_ duplicates=True, sort=False, ignore_index=False) | Concatenates two teradataml GeoDataFrames along the index axis. | teradataml GeoDataFrame |
+| drop | drop(self, labels=None, axis=0, columns=None) | Drop specified labels from rows or columns. | teradataml GeoDataFrame |
+| dropna | dropna(self, how='any', thresh=None, subset=None) | Removes rows with null values. | teradataml GeoDataFrame |
+| filter | filter(self, items = None, like = None, regex = None, axis = 1, **kw) | Filter rows or columns of GeoDataFrame according to labels in the specified index. The filter is applied to the columns of the index when axis is set to 'rows'. | teradataml GeoDataFrame |
+| get | get(self, key) | Retrieve required columns from GeoDataFrame using column name(s) as key. Return a new teradataml GeoDataFrame with requested columns only. | teradataml GeoDataFrame |
+| get_ values | get_values(self, num_ rows = 99999) | Retrieve all values (only) present in a teradataml GeoDataFrame. Values are retrieved as per a numpy.ndarray representation of a teradataml GeoDataFrame. This format is equivalent to the get_values() representation of a Pandas GeoDataFrame. | Numpy.ndarray representation of a teradataml GeoDataFrame |
+| groupby | groupby(self, columns_expr) | Apply GroupBy to one or more columns of a teradataml GeoDataFrame. The result will always behaves like calling groupby with as_index=False in pandas. | teradataml DataFrameGroupBy Object |
+| head | head(self, n=display. max_rows) | Print the first n rows of the sorted teradataml GeoDataFrame. | teradataml GeoDataFrame |
+| info | info(self, verbose=True, buf=None, max_ cols=None, null_counts=False) | Print a summary of the GeoDataFrame. | None |
+| join | join(self, other, on=None, how="left", lsuffix=None, rsuffix=None) | Join two different teradataml GeoDataFrames together based on column comparisons specified in argument 'on' and type of join is specified in the argument 'how'. | teradataml GeoDataFrame |
+| keys | keys(self) | Get the column names of a GeoDataFrame. | List containing the column names |
+| merge | merge(self, right, on=None, how="inner", left_on=None, right_ on=None, use_ index=False, lsuffix=None, rsuffix=None) | Merge two teradataml GeoDataFrames together. | teradataml GeoDataFrame |
+| sample | sample(self, n = None, frac = None, replace = False, randomize = False, case_when_then = None, case_else = None) | Allow to sample few rows from GeoDataFrame directly or based on conditions. Create a new column 'sampleid' which has a unique id for each sample sampled, it helps to uniquely identify each sample. | teradataml GeoDataFrame |
+| select | select(self, select_expression) | Select required columns from GeoDataFrame using an expression. Return a new teradataml GeoDataFrame with selected columns only. | teradataml GeoDataFrame /DataFrame |
+| set_index | set_index(self, keys, drop = True, append = False) | Assign one or more existing columns as the new index to a teradataml GeoDataFrame. | teradataml GeoDataFrame |
+| show_ query | show_query(self, full_ query = False) | Return underlying SQL for the teradataml GeoDataFrame. It is the same SQL that is used to view the data for a teradataml GeoDataFrame. | String |
+| sort | sort(self, columns, ascending=True) | Get sorted data by one or more columns in either ascending or descending order for a GeoDataFrame. | teradataml GeoDataFrame |
+| sort_ index | sort_index(self, axis=0, ascending=True, kind='quicksort') | Gets sorted object by labels (along an axis) in either ascending | teradataml GeoDataFrame |
+|  |  | or descending order for a teradataml GeoDataFrame. |  |
+| squeeze | squeeze(self, axis=None) | Squeeze one-dimensional axis objects into scalars. * teradataml GeoDataFrames with a single element are squeezed to a scalar. * teradataml GeoDataFrames with a single column are squeezed to a Series. * Otherwise the object is unchanged. | teradataml GeoDataFrame, teradataml Series, or scalar, the projection after squeezing 'axis' or all the axes. |
+| tail | tail(self, n=display. max_rows) | Print the last n rows of the sorted teradataml GeoDataFrame. | teradataml GeoDataFrame |
 | to_csv | to_csv | Get the data exported to CSV file. | None |
-| ------ | ------ | ---------------------------------- | ---- |
-
-                or descending order for a
-                teradataml GeoDataFrame.
-squeeze squeeze(self,
-    axis=None)
-                Squeeze one-dimensional axis
-                objects into scalars.
-                * teradataml GeoDataFrames
-                with a single element are
-                squeezed to a scalar.
-                * teradataml GeoDataFrames
-                with a single column are
-                squeezed to a Series.
-                * Otherwise the object
-                is unchanged.
-                                teradataml
-                                GeoDataFrame,
-                                teradataml Series,
-                                or scalar,
-                                the projection after
-                                squeezing 'axis' or all
-                                the axes.
-tail tail(self, n=display.
-    max_rows)
-                Print the last n rows of the sorted
-                teradataml GeoDataFrame.
-                                teradataml
-                                GeoDataFrame
-to_
-pandas
-    to_pandas(self, index_
-    column=None, num_
-    rows=99999, all_
-    rows=False,
-    fastexport=False, catch_
-    errors_warnings=False,
-    **kwargs)
-                Return a Pandas GeoDataFrame
-                for the corresponding teradataml
-                GeoDataFrame Object.
-                                When "catch_errors_
-                                warnings" is set to True
-                                and if protocol used for
-                                data transfer is fastexport,
-                                then the function returns a
-                                tuple containing:
-                                * Pandas
-                                  GeoDataFrame.
-                                * Errors, if any, thrown
-                                  by fastexport in a list
-                                  of strings.
-                                * Warnings, if any, thrown
-                                  by fastexport in a list
-                                  of strings.
-                                Only Pandas
-                                GeoDataFrame
-                                otherwise.
-to_sql to_sql(self, table_
-    name, if_exists='fail',
-    primary_index=None,
-    temporary=False,
-    schema_name=None,
-    types = None, primary_
-    time_index_name=None,
-    timecode_column=None,
-    timebucket_
-    duration=None,
-    timezero_date=None,
-    columns_list=None,
-    sequence_
-    column=None,
-    seq_max=None,
-    set_table=False)
-                Write records stored in a
-                teradataml GeoDataFrame to
-                Teradata Vantage.
-                                None
+| to_ pandas | to_pandas(self, index_ column=None, num_ rows=99999, all_ rows=False, fastexport=False, catch_ errors_warnings=False, **kwargs) | Return a Pandas GeoDataFrame for the corresponding teradataml GeoDataFrame Object. | When "catch_errors_ warnings" is set to True and if protocol used for data transfer is fastexport, then the function returns a tuple containing: * Pandas GeoDataFrame. * Errors, if any, thrown by fastexport in a list of strings. * Warnings, if any, thrown by fastexport in a list of strings. Only Pandas GeoDataFrame otherwise. |
+| to_sql | to_sql(self, table_ name, if_exists='fail', primary_index=None, temporary=False, schema_name=None, types = None, primary_ time_index_name=None, timecode_column=None, timebucket_ duration=None, timezero_date=None, columns_list=None, sequence_ column=None, seq_max=None, set_table=False) | Write records stored in a teradataml GeoDataFrame to Teradata Vantage. | None |
 #### Methods specific to Geospatial Data (All Geometry Types)
 | Method | Method Signature | Purpose | Return |
 | ------ | ---------------- | ------- | ------ |
-| buffer | buffer(self, distance) | Return all points whose |  |
-|  |  | distance from a Geometry |  |
-|  |  | value is less than or equal to a |  |
-|  |  | specified distance. |  |
-
-| envelope | envelope(self) | Return the bounding rectangle |
-| -------- | -------------- | ----------------------------- |
-|  |  | for the Geometry value. |
-
-                              teradataml GeoDataFrame
-contains contains(self,
-      geom_column)
-                Test if a Geometry value
-                spatially contains another
-                Geometry value.
-                              GeoDataFrame
-                              Resultant column contains:
-                              * 1, if the input geometry
-                                contains other geometry
-                              * 0, if the input geometry does
-                                not contain other geometry
-crosses crosses(self,
-      geom_column)
-                Test if a Geometry value
-                spatially crosses another
-                Geometry value.
-                              GeoDataFrame
-                              Resultant column contains:
-                              * 1, if the geometries cross
-                              * 0, if the geometries do
-                                not cross
-difference difference(self,
-      geom_column)
-                Return a Geometry value
-                that represents the point
-                set difference of two
-                Geometry values.
-                              teradataml GeoDataFrame
-disjoint disjoint(self,
-      geom_column)
-                Test if a Geometry value is
-                spatially disjoint from another
-                Geometry value.
-                              GeoDataFrame
-                              Resultant column contains:
-                              * 1, if the geometries are
-                                spatially disjoint
-                              * 0, if the geometries are not
-                                spatially disjoint
-distance distance(self,
-      geom_column)
-                Return the distance between
-                two Geometry values.
-                              teradataml GeoDataFrame
-distance_3D distance_3D(self,
-      geom_column)
-                Return the distance
-                between two Geometry
-                values. Function considers Z
-                coordinate values, if they exist
-                in the geometries passed to it.
-                              GeoDataFrame
-                              Resultant column contains:
-                              * a NULL, if the Geometry is
-                                an empty set.
-                              * 0, if the two
-                                geometries intersect.
-                              * a float in all other cases. The
-                                distance units are those of
-                                the two input geometries.
-                              GeoDataFrame with
-                              result column containing
-                              Geometry values
-geom_
-equals
-      geom_equals(self,
-      geom_column)
-                Test if a Geometry value
-                is spatially equal to another
-                Geometry value.
-                              GeoDataFrame
-                              Resultant column contains:
-| Method | Method Signature | Purpose | Return |
-| ------ | ---------------- | ------- | ------ |
-
-| mbb | mbb(self) | Return the 3D minimum |
-| --- | --------- | --------------------- |
-|  |  | bounding box (MBB) that |
-|  |  | encloses a 3D Geometry. |
-
-| mbr | mbr(self) | Return the minimum bounding |
-| --- | --------- | --------------------------- |
-|  |  | rectangle (MBR) of a |
-|  |  | Geometry value. |
-
-                              * 1, if the geometries are
-                                spatially equal
-                              * 0, if the geometries are not
-                                spatially equal
-intersection intersection(self,
-      geom_column)
-                Return a Geometry type where
-                the value represents the
-                point set intersection of two
-                Geometry values.
-                              teradataml GeoDataFrame
-intersects intersects(self,
-      geom_column)
-                Test if a Geometry value
-                spatially intersects another
-                Geometry value.
-                              GeoDataFrame
-                              Resultant column contains:
-                              * 1, if the geometries intersect
-                              * 0, if the geometries do
-                                not intersect
-make_2D make_2D(self,
-      validate=False)
-                Converts a 3D Geometry value
-                to a 2D Geometry value, and
-                optionally validates that the 2D
-                geometry is well-formed. This
-                method strips the z coordinate
-                from 3D geometries.
-                              teradataml GeoDataFrame
-                              teradataml GeoDataFrame
-                              teradataml GeoDataFrame
-overlaps overlaps(self,
-      geom_column)
-                Test if a Geometry value
-                spatially overlaps another
-                Geometry value.
-                              GeoDataFrame
-                              Resultant column contains:
-                              * 1, if the geometries overlap
-                              * 0, if the geometries do
-                                not overlap
-relates relates(self, geom_
-      column, amatrix)
-                Test if a Geometry value is
-                spatially related to another
-                Geometry value.
-                              GeoDataFrame
-                              Resultant column contains:
-                              * 1, if the spatial
-                                relationship between the
-                                geometries corresponds
-                                to one of the acceptable
-                                values represented
-                                by "amatrix"
-                              * 0, if the spatial relationship
-                                between the geometries
-                                does not correspond to one
-                                of the acceptable values
-                                represented by "amatrix"
-| Method | Method Signature | Purpose | Return |
-| ------ | ---------------- | ------- | ------ |
-| set_srid | set_srid(self, srid) | Set the spatial reference |  |
-|  |  | system identifier of the |  |
-|  |  | Geometry value. |  |
-
-| to_binary | to_binary(self) | Return the well-known binary |
-| --------- | --------------- | ---------------------------- |
-|  |  | (WKB) representation of a |
-|  |  | Geometry value. |
-
-| to_text | to_text(self) | Return the well-known text |
-| ------- | ------------- | -------------------------- |
-|  |  | (WKT) representation of a |
-|  |  | Geometry value. |
-
-                              GeoDataFrame
-                              Resultant column contains the
-                              Geometry with the spatial
-                              reference system identifier
-                              set to the specified spatial
-                              reference system.
-simplify simplify(self,
-      tolerance)
-                Simplify a geometry by
-                removing points that would
-                fall within a specified
-                distance tolerance.
-                              teradataml GeoDataFrame
-sym_
-difference
-      sym_difference(self,
-      geom_column)
-                Return a Geometry value
-                that represents the point set
-                symmetric difference of two
-                Geometry values.
-                              teradataml GeoDataFrame
-                              GeoDataFrame with
-                              result column containing
-                              BLOB value
-                              GeoDataFrame with
-                              result column containing
-                              CLOB value
-touches touches(self,
-      geom_column)
-                Test if a Geometry value
-                spatially touches another
-                Geometry value.
-                              GeoDataFrame
-                              Resultant column contains:
-                              * 1, if the geometries touch
-                              * 0, if the geometries do
-                                not touch
-transform transform(self, to_
-      wkt_srs, from_wkt_
-      srs, to_srsid=-12345)
-                Return a Geometry value
-                transformed to the specified
-                spatial reference system.
-                              teradataml GeoDataFrame
-union union(self,
-      geom_column)
-                Return a Geometry value that
-                represents the point set union
-                of two Geometry values.
-                              teradataml GeoDataFrame
-within within(self,
-      geom_column)
-                Test if a Geometry value
-                is spatially within another
-                Geometry value.
-                              GeoDataFrame
-                              Resultant column contains:
-                              * 1, if the geometry is within
-                                other geometry
-                              * 0, if the geometry is not
-                                within other geometry
-wkb_geom_
-to_sql
-      wkb_geom_to_
-      sql(self, column)
-                Return a specified
-                Geometry value.
-                              teradataml GeoDataFrame
-wkt_geom_
-to_sql
-      wkt_geom_to_
-      sql(self, column)
-                Return a specified
-                Geometry value.
-                              teradataml GeoDataFrame
+| buffer | buffer(self, distance) | Return all points whose distance from a Geometry value is less than or equal to a specified distance. | teradataml GeoDataFrame |
+| contains | contains(self, geom_column) | Test if a Geometry value spatially contains another Geometry value. | GeoDataFrame Resultant column contains: * 1, if the input geometry contains other geometry * 0, if the input geometry does not contain other geometry |
+| crosses | crosses(self, geom_column) | Test if a Geometry value spatially crosses another Geometry value. | GeoDataFrame Resultant column contains: * 1, if the geometries cross * 0, if the geometries do not cross |
+| difference | difference(self, geom_column) | Return a Geometry value that represents the point set difference of two Geometry values. | teradataml GeoDataFrame |
+| disjoint | disjoint(self, geom_column) | Test if a Geometry value is spatially disjoint from another Geometry value. | GeoDataFrame Resultant column contains: * 1, if the geometries are spatially disjoint * 0, if the geometries are not spatially disjoint |
+| distance | distance(self, geom_column) | Return the distance between two Geometry values. | teradataml GeoDataFrame |
+| distance_3D | distance_3D(self, geom_column) | Return the distance between two Geometry values. Function considers Z coordinate values, if they exist in the geometries passed to it. | GeoDataFrame Resultant column contains: * a NULL, if the Geometry is an empty set. * 0, if the two geometries intersect. * a float in all other cases. The distance units are those of the two input geometries. |
+| envelope | envelope(self) | Return the bounding rectangle for the Geometry value. | GeoDataFrame with result column containing Geometry values |
+| geom_ equals | geom_equals(self, geom_column) | Test if a Geometry value is spatially equal to another Geometry value. | GeoDataFrame Resultant column contains: |
+|  |  |  | * 1, if the geometries are spatially equal * 0, if the geometries are not spatially equal |
+| intersection | intersection(self, geom_column) | Return a Geometry type where the value represents the point set intersection of two Geometry values. | teradataml GeoDataFrame |
+| intersects | intersects(self, geom_column) | Test if a Geometry value spatially intersects another Geometry value. | GeoDataFrame Resultant column contains: * 1, if the geometries intersect * 0, if the geometries do not intersect |
+| make_2D | make_2D(self, validate=False) | Converts a 3D Geometry value to a 2D Geometry value, and optionally validates that the 2D geometry is well-formed. This method strips the z coordinate from 3D geometries. | teradataml GeoDataFrame |
+| mbb | mbb(self) | Return the 3D minimum bounding box (MBB) that encloses a 3D Geometry. | teradataml GeoDataFrame |
+| mbr | mbr(self) | Return the minimum bounding rectangle (MBR) of a Geometry value. | teradataml GeoDataFrame |
+| overlaps | overlaps(self, geom_column) | Test if a Geometry value spatially overlaps another Geometry value. | GeoDataFrame Resultant column contains: * 1, if the geometries overlap * 0, if the geometries do not overlap |
+| relates | relates(self, geom_ column, amatrix) | Test if a Geometry value is spatially related to another Geometry value. | GeoDataFrame Resultant column contains: * 1, if the spatial relationship between the geometries corresponds to one of the acceptable values represented by "amatrix" * 0, if the spatial relationship between the geometries does not correspond to one of the acceptable values represented by "amatrix" |
+| set_srid | set_srid(self, srid) | Set the spatial reference system identifier of the Geometry value. | GeoDataFrame Resultant column contains the Geometry with the spatial reference system identifier set to the specified spatial reference system. |
+| simplify | simplify(self, tolerance) | Simplify a geometry by removing points that would fall within a specified distance tolerance. | teradataml GeoDataFrame |
+| sym_ difference | sym_difference(self, geom_column) | Return a Geometry value that represents the point set symmetric difference of two Geometry values. | teradataml GeoDataFrame |
+| to_binary | to_binary(self) | Return the well-known binary (WKB) representation of a Geometry value. | GeoDataFrame with result column containing BLOB value |
+| to_text | to_text(self) | Return the well-known text (WKT) representation of a Geometry value. | GeoDataFrame with result column containing CLOB value |
+| touches | touches(self, geom_column) | Test if a Geometry value spatially touches another Geometry value. | GeoDataFrame Resultant column contains: * 1, if the geometries touch * 0, if the geometries do not touch |
+| transform | transform(self, to_ wkt_srs, from_wkt_ srs, to_srsid=-12345) | Return a Geometry value transformed to the specified spatial reference system. | teradataml GeoDataFrame |
+| union | union(self, geom_column) | Return a Geometry value that represents the point set union of two Geometry values. | teradataml GeoDataFrame |
+| within | within(self, geom_column) | Test if a Geometry value is spatially within another Geometry value. | GeoDataFrame Resultant column contains: * 1, if the geometry is within other geometry * 0, if the geometry is not within other geometry |
+| wkb_geom_ to_sql | wkb_geom_to_ sql(self, column) | Return a specified Geometry value. | teradataml GeoDataFrame |
+| wkt_geom_ to_sql | wkt_geom_to_ sql(self, column) | Return a specified Geometry value. | teradataml GeoDataFrame |
 #### Methods for Point Geometry
 | Method | Method Signature | Purpose | Return |
 | ------ | ---------------- | ------- | ------ |
+| spherical_ buffer | spherical_buffer(self, distance, radius=6371000.0) | Return an MBR that represents the minimum and maximum latitude and longitude of all points within a given distance from a point. The earth is modeled as a sphere. | teradataml GeoDataFrame |
+| spherical_ distance | spherical_distance(self, geom_column) | Return the spherical distance between two spherical coordinates on the planet using the Haversine Formula. Both coordinates must be specified as ST_Point values. | teradataml GeoDataFrame |
+| spheroidal_ buffer | spheroidal_buffer(self, distance, semimajor=6378137.0, invflattening=298. 257223563) | Return an MBR that represents the minimum and maximum latitude and longitude of all points within a given distance from the point. The earth is modeled as a spheroid. | teradataml GeoDataFrame |
+| spheroidal_ distance | spheroidal_distance(self, geom_column, semimajor=6378137.0, invflattening=298. 257223563) | Return the distance, in meters, between two spherical coordinates. | teradataml GeoDataFrame |
+| set_x | set_x(self, xcoord) | Set the X coordinate of an ST_ Point value. | teradataml GeoDataFrame |
+| set_y | set_y(self, ycoord) | Set the Y coordinate of an ST_ Point value. | teradataml GeoDataFrame |
+| set_z | set_z(self, zcoord) | Set the Z coordinate of an ST_ Point value. | teradataml GeoDataFrame |
 
-| set_x | set_x(self, xcoord) | Set the X coordinate of an ST_ |
-| ----- | ------------------- | ------------------------------ |
-|  |  | Point value. |
-
-| set_y | set_y(self, ycoord) | Set the Y coordinate of an ST_ |
-| ----- | ------------------- | ------------------------------ |
-|  |  | Point value. |
-
-| set_z | set_z(self, zcoord) | Set the Z coordinate of an ST_ |
-| ----- | ------------------- | ------------------------------ |
-|  |  | Point value. |
-
-|  | Method |  |  |
-| - | ------ | - | - |
-| Method |  | Purpose | Return |
-|  | Signature |  |  |
-
-spherical_
-buffer
-      spherical_buffer(self,
-      distance, radius=6371000.0)
-                    Return an MBR that represents the
-                    minimum and maximum latitude
-                    and longitude of all points within
-                    a given distance from a point. The
-                    earth is modeled as a sphere.
-                                    teradataml
-                                    GeoDataFrame
-spherical_
-distance
-      spherical_distance(self,
-      geom_column)
-                    Return the spherical distance
-                    between two spherical coordinates
-                    on the planet using the Haversine
-                    Formula. Both coordinates must
-                    be specified as ST_Point values.
-                                    teradataml
-                                    GeoDataFrame
-spheroidal_
-buffer
-      spheroidal_buffer(self,
-      distance,
-      semimajor=6378137.0,
-      invflattening=298.
-      257223563)
-                    Return an MBR that represents the
-                    minimum and maximum latitude
-                    and longitude of all points within a
-                    given distance from the point. The
-                    earth is modeled as a spheroid.
-                                    teradataml
-                                    GeoDataFrame
-spheroidal_
-distance
-      spheroidal_distance(self,
-      geom_column,
-      semimajor=6378137.0,
-      invflattening=298.
-      257223563)
-                    Return the distance, in
-                    meters, between two
-                    spherical coordinates.
-                                    teradataml
-                                    GeoDataFrame
-                                    teradataml
-                                    GeoDataFrame
-                                    teradataml
-                                    GeoDataFrame
-                                    teradataml
-                                    GeoDataFrame
 #### Methods for LineString Geometry
-end_point end_point(self) Return the end point of an ST_
-              LineString or GeoSequence value.
-                                GeoDataFrame
-                                Resultant column contains
-                                a NULL, if the Geometry is
-                                an empty set.
-length length(self) Return the length measurement of
-              a Geometry type that represents an
-              ST_LineString, GeoSequence, or ST_
-              MultiLineString value.
-                                teradataml
-                                GeoDataFrame
-length_3D length_3D(self) Return the length of a 3D LineString or
-              MultiLineString, taking into account the
-              Z coordinates in the calculation.
-                                GeoDataFrame
-                                Resultant column contains
-                                a 0, if the LineString
-|  | Method |  |  |
-| - | ------ | - | - |
-| Method |  | Purpose | Return |
-|  | Signature |  |  |
-
 | Method | Method Signature | Purpose | Return |
 | ------ | ---------------- | ------- | ------ |
+| end_point | end_point(self) | Return the end point of an ST_ LineString or GeoSequence value. | GeoDataFrame Resultant column contains a NULL, if the Geometry is an empty set. |
+| length | length(self) | Return the length measurement of a Geometry type that represents an ST_LineString, GeoSequence, or ST_ MultiLineString value. | teradataml GeoDataFrame |
+| length_3D | length_3D(self) | Return the length of a 3D LineString or MultiLineString, taking into account the Z coordinates in the calculation. | GeoDataFrame Resultant column contains a 0, if the LineString |
+|  |  |  | or MultiLineString is an empty set. |
+| line_ interpolate_ point | line_ interpolate_ point(self, proportion) | Return a point interpolated along a Geometry type that represents an ST_LineString or GeoSequence value, given a proportional distance along that line. | GeoDataFrame with result column containing ST_ Point Geometry values |
+| num_points | num_ points(self) | Return the number of points in a Geometry type that represents an ST_ LineString or GeoSequence value. | GeoDataFrame Resultant column contains a NULL, if the Geometry is an empty set. |
+| point | point(self, position) | Return the specified point from a Geometry type that represents an ST_ LineString or GeoSequence value. | teradataml GeoDataFrame |
+| start_point | start_point(self) | Return the start point of an ST_ LineString or GeoSequence value. Note: This method returns a point having a Z coordinate if the input geometry is three-dimensional. | teradataml GeoDataFrame |
 
-                                or MultiLineString is an
-                                empty set.
-line_
-interpolate_
-point
-      line_
-      interpolate_
-      point(self,
-      proportion)
-              Return a point interpolated along a
-              Geometry type that represents an
-              ST_LineString or GeoSequence value,
-              given a proportional distance along
-              that line.
-                                GeoDataFrame with result
-                                column containing ST_
-                                Point Geometry values
-num_points num_
-      points(self)
-              Return the number of points in a
-              Geometry type that represents an ST_
-              LineString or GeoSequence value.
-                                GeoDataFrame
-                                Resultant column contains
-                                a NULL, if the Geometry is
-                                an empty set.
-point point(self,
-      position)
-              Return the specified point from a
-              Geometry type that represents an ST_
-              LineString or GeoSequence value.
-                                teradataml
-                                GeoDataFrame
-start_point start_point(self) Return the start point of an ST_
-              LineString or GeoSequence value.
-              Note:
-              This method returns a point having
-              a Z coordinate if the input geometry
-              is three-dimensional.
-                                teradataml
-                                GeoDataFrame
 #### Methods for Polygon Geometry
-interiors interiors(self,
-      position)
-              Return the specified interior ring of a
-              Geometry type that represents an ST_
-              Polygon value.
-                                  GeoDataFrame
-                                  with result
-                                  column containing
-                                  ST_LineString
-                                  Geometry values
-num_
-interior_ring
-      num_
-      interior_ring(self)
-              Return the number of interior rings of a
-              Geometry type that represents an ST_
-              Polygon value.
-                                  teradataml
-                                  GeoDataFrame
-point_on_
-surface
-      point_
-      on_surface(self)
-              Return a point that is guaranteed to
-              spatially intersect an ST_Polygon, or at
-              least one of the component polygons of an
-              ST_MultiPolygon.
-                                  teradataml
-                                  GeoDataFrame
+| Method | Method Signature | Purpose | Return |
+| ------ | ---------------- | ------- | ------ |
+| interiors | interiors(self, position) | Return the specified interior ring of a Geometry type that represents an ST_ Polygon value. | GeoDataFrame with result column containing ST_LineString Geometry values |
+| num_ interior_ring | num_ interior_ring(self) | Return the number of interior rings of a Geometry type that represents an ST_ Polygon value. | teradataml GeoDataFrame |
+| point_on_ surface | point_ on_surface(self) | Return a point that is guaranteed to spatially intersect an ST_Polygon, or at least one of the component polygons of an ST_MultiPolygon. | teradataml GeoDataFrame |
 #### Methods for GeometryCollection Geometry
 | Method | Method Signature | Purpose | Return |
 | ------ | ---------------- | ------- | ------ |
+| geom_ component | geom_ component(self, position) | Return the geometry of one component member of a composite geometry type (ST_GeomCollection, ST_MultiPoint, ST_ MultiLineString, or ST_MultiPolygon). The element to be returned is specified by position with the collection. | teradataml GeoDataFrame |
+| num_ geometry | num_geometry(self) | Return the number of distinct geometries that constitute a composite geometry type (ST_GeomCollection, ST_MultiPoint, ST_ MultiLineString, or ST_MultiPolygon). | teradataml GeoDataFrame |
 
-| num_geometry(self) | Return the number of distinct geometries |
-| ------------------ | ---------------------------------------- |
-|  | that constitute a composite geometry type |
-|  | (ST_GeomCollection, ST_MultiPoint, ST_ |
-|  | MultiLineString, or ST_MultiPolygon). |
-
-| Method | Method Signature | Purpose | Return |
-| ------ | ---------------- | ------- | ------ |
-
-| get_link | get_link(self, index) | Get the link ID of a specified point in |
-| -------- | --------------------- | --------------------------------------- |
-|  |  | a GeoSequence. |
-
-geom_
-component
-      geom_
-      component(self,
-      position)
-                Return the geometry of one component
-                member of a composite geometry type
-                (ST_GeomCollection, ST_MultiPoint, ST_
-                MultiLineString, or ST_MultiPolygon). The
-                element to be returned is specified by
-                position with the collection.
-                                    teradataml
-                                    GeoDataFrame
-num_
-geometry
-                                    teradataml
-                                    GeoDataFrame
 #### Methods for GeoSequence Geometry
-clip clip(self, start_
-      timestamp,
-      end_timestamp)
-                Return a GeoSequence type containing
-                the subset of points and associated
-                data that lie between the two timestamp
-                input arguments.
-                                    teradataml
-                                    GeoDataFrame
-get_final_
-timestamp
-      get_
-      final_timestamp(self)
-                Return the TimeStamp of the last point of
-                a GeoSequence.
-                                    teradataml
-                                    GeoDataFrame
-get_init_
-timestamp
-      get_
-      init_timestamp(self)
-                Return the TimeStamp of the first point of
-                a GeoSequence.
-                                    teradataml
-                                    GeoDataFrame
-                                    teradataml
-                                    GeoDataFrame
-get_user_
-field
-      get_user_field(self,
-      field_index, index)
-                Return the user field specified by "field_
-                index" for the point specified by "index"
-                for a GeoSequence type.
-                                    teradataml
-                                    GeoDataFrame
-get_user_
-field_count
-      get_user_
-      field_count(self)
-                Return the number of user fields
-                associated with each point of
-                a GeoSequence.
-                                    teradataml
-                                    GeoDataFrame
-point_
-heading
-      point_
-      heading(self, index)
-                Return the heading for the specified point
-                of a GeoSequence.
-                The value is calculated as the angle (in
-                degrees) between a vertical line and the
-                line segment from the specified point to
-                the next point clockwise from the North.
-                                    teradataml
-                                    GeoDataFrame
-set_link set_link(self, index,
-      link_id)
-                Set the link ID of a specified point in
-                a GeoSequence.
-                                    teradataml
-                                    GeoDataFrame
-speed speed(self,
-      index=None, begin_
-                Return the approximate speed at a
-                specified point (speed(index INTEGER)
-                ) or between two points (speed(iBegin
-                                    teradataml
-                                    GeoDataFrame
 | Method | Method Signature | Purpose | Return |
 | ------ | ---------------- | ------- | ------ |
+| clip | clip(self, start_ timestamp, end_timestamp) | Return a GeoSequence type containing the subset of points and associated data that lie between the two timestamp input arguments. | teradataml GeoDataFrame |
+| get_final_ timestamp | get_ final_timestamp(self) | Return the TimeStamp of the last point of a GeoSequence. | teradataml GeoDataFrame |
+| get_init_ timestamp | get_ init_timestamp(self) | Return the TimeStamp of the first point of a GeoSequence. | teradataml GeoDataFrame |
+| get_link | get_link(self, index) | Get the link ID of a specified point in a GeoSequence. | teradataml GeoDataFrame |
+| get_user_ field | get_user_field(self, field_index, index) | Return the user field specified by "field_ index" for the point specified by "index" for a GeoSequence type. | teradataml GeoDataFrame |
+| get_user_ field_count | get_user_ field_count(self) | Return the number of user fields associated with each point of a GeoSequence. | teradataml GeoDataFrame |
+| point_ heading | point_ heading(self, index) | Return the heading for the specified point of a GeoSequence. The value is calculated as the angle (in degrees) between a vertical line and the line segment from the specified point to the next point clockwise from the North. | teradataml GeoDataFrame |
+| set_link | set_link(self, index, link_id) | Set the link ID of a specified point in a GeoSequence. | teradataml GeoDataFrame |
+| speed | speed(self, index=None, begin_ | Return the approximate speed at a specified point (speed(index INTEGER) ) or between two points (speed(iBegin | teradataml GeoDataFrame |
+|  | index=None, end_index=None) | INTEGER, iEnd INTEGER)) for a GeoSequence type. |  |
 
-|  | Method |  |  |
-| - | ------ | - | - |
-| Method |  | Purpose | Return |
-|  | Signature |  |  |
-
-      index=None,
-      end_index=None)
-                INTEGER, iEnd INTEGER)) for a
-                GeoSequence type.
 #### Filtering Functions and Methods
-intersects_
-mbb
-      intersects_
-      mbb(self,
-      geom_
-      column)
-            Test whether a
-            3D geometry
-            spatially intersects
-            a specified MBB.
-                      GeoDataFrame
-                      Resultant column contains:
-                      * 1, if the input 3D geometry intersects the
-                        MBB argument.
-                      * 0, if the input 3D geometry does not intersect the
-                        MBB argument.
-                      * Return an error if the input geometry is not 3D
-                        (does not have a z coordinate).
-mbb_filter mbb_
-      filter(self,
-      geom_
-      column)
-            Test whether the
-            MBBs of two
-            3D geometries
-            spatially intersect.
-                      GeoDataFrame
-                      Resultant column contains:
-                      * 1, if the MBB of the input 3D geometry intersects
-                        the MBB of the geometry passed to the method.
-                      * 0, if the MBB of the input 3D geometry does not
-                        intersect the MBB of the geometry passed to
-                        the method.
-                      * Return an error if either geometry is not 3D
-                        (does not have a z coordinate).
-mbr_filter mbr_filter(self,
-      geom_
-      column)
-            Test whether the
-            MBRs of two
-            2D geometries
-            spatially intersect.
-                      GeoDataFrame
-                      Resultant column contains:
-                      * 1, if the MBR of the input geometry intersects the
-                        MBR of the geometry passed to the method.
-                      * 0, if the MBR of the input geometry does not
-                        intersect the MBR of the geometry passed to
-                        the method.
-within_mbb within_
-      mbb(self,
-      geom_
-      column)
-            Test whether a
-            3D geometry is
-            spatially within
-            the bounds of a
-            specified MBB.
-                      GeoDataFrame
-                      Resultant column contains:
-                      * 1, if the input 3D geometry is spatially within
-                        MBB argument.
-                      * 0, if the input 3D geometry is not spatially within
-                        the MBB argument.
-                      * Return an error if the input geometry is not 3D
-                        (does not have a z coordinate).
+| Method | Method Signature | Purpose | Return |
+| ------ | ---------------- | ------- | ------ |
+| intersects_ mbb | intersects_ mbb(self, geom_ column) | Test whether a 3D geometry spatially intersects a specified MBB. | GeoDataFrame Resultant column contains: * 1, if the input 3D geometry intersects the MBB argument. * 0, if the input 3D geometry does not intersect the MBB argument. * Return an error if the input geometry is not 3D (does not have a z coordinate). |
+| mbb_filter | mbb_ filter(self, geom_ column) | Test whether the MBBs of two 3D geometries spatially intersect. * 0, if the MBB of the input 3D geometry does not * Return an error if either geometry is not 3D | GeoDataFrame Resultant column contains: * 1, if the MBB of the input 3D geometry intersects the MBB of the geometry passed to the method. intersect the MBB of the geometry passed to the method. (does not have a z coordinate). |
+| mbr_filter mbr_filter(self, geom_ column) | Test whether the MBRs of two 2D geometries spatially intersect. | GeoDataFrame Resultant column contains: * 1, if the MBR of the input geometry intersects the * 0, if the MBR of the input geometry does not | MBR of the geometry passed to the method. intersect the MBR of the geometry passed to the method. |
+| within_mbb within_ mbb(self, geom_ column) | Test whether a 3D geometry is spatially within the bounds of a specified MBB. | GeoDataFrame Resultant column contains: * 1, if the input 3D geometry is spatially within * 0, if the input 3D geometry is not spatially within * Return an error if the input geometry is not 3D | MBB argument. the MBB argument. (does not have a z coordinate). |
 ## teradataml GeoDataFrameColumn
 teradataml GeoDataFrameColumn represents a column of teradataml GeoDataFrame. User can
 manipulate, process, and analyze the data using the GeoDataFrameColumn properties and methods.
@@ -2442,818 +906,137 @@ see Teradata Package for Python Function Reference.
 | name | Get the name of the GeoDataFrameColumn. | string |
 | type | Get the Teradata type of the GeoDataFrameColumn. | teradatasqlalchemy type |
 
-| Property | Purpose | Return |
-| -------- | ------- | ------ |
-
 #### Properties specific to Geospatial Data (All Geometry Types)
-boundary Return the boundary of the
-      Geometry value.
-                    GeoDataFrameColumn with result column containing
-                    Geometry values
-centroid Return the mathematical
-      centroid of an ST_Polygon or
-      ST_MultiPolygon value.
-                    GeoDataFrameColumn with result column containing
-                    Geometry values
-convex_hull Return the convex hull of the
-      Geometry value.
-                    GeoDataFrameColumn with result column containing
-                    Geometry values
-coord_dim Return the coordinate dimension
-      of a geometry.
-                    GeoDataFrameColumn
-                    Resultant column contains:
-                    * 1, if the input geometry is 1D
-                    * 2, if the input geometry is 2D
-                    * 3, if the input geometry is 3D
-dimension Return the dimension of the
-      Geometry type.
-                    GeoDataFrameColumn
-                    Resultant column contains:
-                    * 0, for a 0-dimensional geometry
 | Property | Purpose | Return |
 | -------- | ------- | ------ |
+| boundary | Return the boundary of the Geometry value. | GeoDataFrameColumn with result column containing Geometry values |
+| centroid | Return the mathematical centroid of an ST_Polygon or ST_MultiPolygon value. | GeoDataFrameColumn with result column containing Geometry values |
+| convex_hull | Return the convex hull of the Geometry value. | GeoDataFrameColumn with result column containing Geometry values |
+| coord_dim | Return the coordinate dimension of a geometry. | GeoDataFrameColumn Resultant column contains: * 1, if the input geometry is 1D * 2, if the input geometry is 2D * 3, if the input geometry is 3D |
+| dimension | Return the dimension of the Geometry type. | GeoDataFrameColumn Resultant column contains: * 0, for a 0-dimensional geometry |
+|  |  | * 1, for a 1D geometry * 2, for a 2D geometry * -1, if the input geometry is empty |
+| geom_type | Return the Geometry type of the Geometry value. | GeoDataFrameColumn Resultant column contains any of the following strings: * 'ST_Point' * 'ST_LineString' * 'ST_Polygon' * 'ST_MultiPoint' * 'ST_MultiLineString' * 'ST_MultiPolygon' * 'ST_GeomCollection' * 'GeoSequence' |
+| is_3D | Test if a Geometry value has Z coordinate value. | GeoDataFrameColumn Resultant column contains: * 1, if the Geometry contains Z coordinates * 0, if the Geometry does not contain Z coordinates |
+| is_empty | Test if a Geometry value corresponds to the empty set. | GeoDataFrameColumn Resultant column contains: * 1, if the geometry is empty * 0, if the geometry is not empty |
+| is_simple | Test if a Geometry value has no anomalous geometric points, such as self intersection tangency. | GeoDataFrameColumn Resultant column contains: * 1, if the geometry is simple, with no anomalous points * 0, if the geometry is not simple |
+| is_valid | Test if a Geometry value is well- formed. | GeoDataFrameColumn Resultant column contains: * 1, if the geometry is valid * 0, if the geometry is not valid |
+| max_x | Return the maximum X coordinate of a Geometry value. | GeoDataFrameColumn Resultant column contains a NULL, if the Geometry is an empty set. |
+| max_y | Return the maximum Y coordinate of a Geometry value. | GeoDataFrameColumn Resultant column contains a NULL, if the Geometry is an empty set. |
+| max_z | Return the maximum Z coordinate of a Geometry value. | GeoDataFrameColumn Resultant column contains a NULL, if the Geometry is an empty set. |
+| min_x | Return the minimum X coordinate of a Geometry value. | GeoDataFrameColumn Resultant column contains a NULL, if the Geometry is an empty set. |
+| min_y | Return the minimum Y coordinate of a Geometry value. | GeoDataFrameColumn Resultant column contains a NULL, if the Geometry is an empty set. |
+| min_z | Return the minimum Z coordinate of a Geometry value. | GeoDataFrameColumn Resultant column contains a NULL, if the Geometry is an empty set. |
+| srid | Get the spatial reference system identifier of the Geometry value. | GeoDataFrameColumn |
 
-                    * 1, for a 1D geometry
-                    * 2, for a 2D geometry
-                    * -1, if the input geometry is empty
-geom_type Return the Geometry type of the
-      Geometry value.
-                    GeoDataFrameColumn
-                    Resultant column contains any of the following strings:
-                    * 'ST_Point'
-                    * 'ST_LineString'
-                    * 'ST_Polygon'
-                    * 'ST_MultiPoint'
-                    * 'ST_MultiLineString'
-                    * 'ST_MultiPolygon'
-                    * 'ST_GeomCollection'
-                    * 'GeoSequence'
-is_3D Test if a Geometry value has Z
-      coordinate value.
-                    GeoDataFrameColumn
-                    Resultant column contains:
-                    * 1, if the Geometry contains Z coordinates
-                    * 0, if the Geometry does not contain Z coordinates
-is_empty Test if a Geometry value
-      corresponds to the empty set.
-                    GeoDataFrameColumn
-                    Resultant column contains:
-                    * 1, if the geometry is empty
-                    * 0, if the geometry is not empty
-is_simple Test if a Geometry value
-      has no anomalous geometric
-      points, such as self
-      intersection tangency.
-                    GeoDataFrameColumn
-                    Resultant column contains:
-                    * 1, if the geometry is simple, with no anomalous points
-                    * 0, if the geometry is not simple
-is_valid Test if a Geometry value is well-
-      formed.
-                    GeoDataFrameColumn
-                    Resultant column contains:
-                    * 1, if the geometry is valid
-                    * 0, if the geometry is not valid
-max_x Return the maximum X
-      coordinate of a Geometry value.
-                    GeoDataFrameColumn
-                    Resultant column contains a NULL, if the Geometry is
-                    an empty set.
-max_y Return the maximum Y
-      coordinate of a Geometry value.
-                    GeoDataFrameColumn
-                    Resultant column contains a NULL, if the Geometry is
-                    an empty set.
-max_z Return the maximum Z
-      coordinate of a Geometry value.
-                    GeoDataFrameColumn
-                    Resultant column contains a NULL, if the Geometry is
-                    an empty set.
-| Property | Purpose | Return |
-| -------- | ------- | ------ |
-
+#### Properties for Point Geometry
 | Property | Purpose | Return |
 | -------- | ------- | ------ |
 | x | Get the X coordinate of an ST_Point value. | GeoDataFrameColumn |
 | y | Get the Y coordinate of an ST_Point value. | GeoDataFrameColumn |
 | z | Get the Z coordinate of an ST_Point value. | GeoDataFrameColumn |
 
-| Property | Purpose | Return |
-| -------- | ------- | ------ |
-
-min_x Return the minimum X
-      coordinate of a Geometry value.
-                    GeoDataFrameColumn
-                    Resultant column contains a NULL, if the Geometry is
-                    an empty set.
-min_y Return the minimum Y
-      coordinate of a Geometry value.
-                    GeoDataFrameColumn
-                    Resultant column contains a NULL, if the Geometry is
-                    an empty set.
-min_z Return the minimum Z
-      coordinate of a Geometry value.
-                    GeoDataFrameColumn
-                    Resultant column contains a NULL, if the Geometry is
-                    an empty set.
-srid Get the spatial reference system
-      identifier of the Geometry value.
-                    GeoDataFrameColumn
-#### Properties for Point Geometry
 #### Properties for LineString Geometry
-is_closed_
-3D
-      Tests whether a 3D LineString
-      or 3D MultiLineString is
-      closed, taking into account
-      the Z coordinates in
-      the calculation.
-                  GeoDataFrameColumn
-                  Resultant column contains:
-                  * 1, if the 3D LineString or 3D MultiLineString is closed.
-                  * 0, if the 3D LineString or 3D MultiLineString is not closed
-                    or is empty.
-is_closed Tests if a Geometry type
-      that represents an ST_
-      LineString, GeoSequence, or
-      ST_MultiLineString value
-      is closed.
-                  GeoDataFrameColumn
-                  Resultant column contains:
-                  * 1, if the ST_LineString, GeoSequence, or ST_LineString
-                    components of an ST_MultiLineString are closed.
-                  * 0, if the ST_LineString, GeoSequence, or ST_LineString
-                    components of an ST_MultiLineString are not closed, or
-                    if the input geometry is empty.
-is_ring Tests if a Geometry type that
-      represents an ST_LineString
-      or a GeoSequence value is
-      a ring.
-                  GeoDataFrameColumn
-                  Resultant column contains:
-                  * 1, if the ST_LineString or GeoSequence value is simple
-                    (has no anomalous geometric points, such as self
-                    intersection tangency) and is closed (the start point of
-                    the ST_LineString value is equal to the end point)
 | Property | Purpose | Return |
 | -------- | ------- | ------ |
+| is_closed_ 3D | Tests whether a 3D LineString or 3D MultiLineString is closed, taking into account the Z coordinates in the calculation. | GeoDataFrameColumn Resultant column contains: * 1, if the 3D LineString or 3D MultiLineString is closed. * 0, if the 3D LineString or 3D MultiLineString is not closed or is empty. |
+| is_closed | Tests if a Geometry type that represents an ST_ LineString, GeoSequence, or ST_MultiLineString value is closed. | GeoDataFrameColumn Resultant column contains: * 1, if the ST_LineString, GeoSequence, or ST_LineString components of an ST_MultiLineString are closed. * 0, if the ST_LineString, GeoSequence, or ST_LineString components of an ST_MultiLineString are not closed, or if the input geometry is empty. |
+| is_ring | Tests if a Geometry type that represents an ST_LineString or a GeoSequence value is a ring. | GeoDataFrameColumn Resultant column contains: * 1, if the ST_LineString or GeoSequence value is simple (has no anomalous geometric points, such as self intersection tangency) and is closed (the start point of the ST_LineString value is equal to the end point) |
+|  |  | * 0, in all other cases. |
 
-| Property | Purpose | Return |
-| -------- | ------- | ------ |
-
-| Method | Method Signature | Purpose | Return |
-| ------ | ---------------- | ------- | ------ |
-| buffer | buffer(self, distance) | Return all points whose |  |
-|  |  | distance from a Geometry |  |
-|  |  | value is less than or equal |  |
-|  |  | to a specified distance. |  |
-
-                  * 0, in all other cases.
 #### Properties for Polygon Geometry
-area Return the area measurement of an ST_Polygon or ST_
-    MultiPolygon. For ST_MultiPolygon, returns the sum of the
-    area measurements of the component polygons.
-                              GeoDataFrameColumn
-exterior Get the exterior ring of a Geometry type that represents an
-    ST_Polygon value.
-                              GeoDataFrameColumn with
-                              result column containing ST_
-                              LineString Geometry values
-perimeter Return the boundary length of an ST_Polygon, or the sum
-    of the boundary lengths of the component polygons of an
-    ST_MultiPolygon.
-                              GeoDataFrameColumn
+| Property | Purpose | Return |
+| -------- | ------- | ------ |
+| area | Return the area measurement of an ST_Polygon or ST_ MultiPolygon. For ST_MultiPolygon, returns the sum of the area measurements of the component polygons. | GeoDataFrameColumn |
+| exterior | Get the exterior ring of a Geometry type that represents an ST_Polygon value. | GeoDataFrameColumn with result column containing ST_ LineString Geometry values |
+| perimeter | Return the boundary length of an ST_Polygon, or the sum of the boundary lengths of the component polygons of an ST_MultiPolygon. | GeoDataFrameColumn |
+
 ### GeoDataFrameColumn Methods
 The following tables list methods of teradataml GeoDataFrameColumn. For more details and examples,
 see Teradata Package for Python Function Reference .
 #### Methods specific to Geospatial Data (All Geometry Types)
-                            teradataml GeoDataFrameColumn
-contains contains(self,
-      geom_column)
-                Test if a Geometry value
-                spatially contains another
-                Geometry value.
-                            GeoDataFrameColumn
-                            Resultant column contains:
-                            * 1, if the input geometry contains
-                              other geometry
-                            * 0, if the input geometry does not
-                              contain other geometry
-crosses crosses(self,
-      geom_column)
-                Test if a Geometry value
-                spatially crosses another
-                Geometry value.
-                            GeoDataFrameColumn
-                            Resultant column contains:
-                            * 1, if the geometries cross
-                            * 0, if the geometries do not cross
-difference difference(self,
-      geom_column)
-                Return a Geometry value
-                that represents the point
-                set difference of two
-                Geometry values.
-                            teradataml GeoDataFrameColumn
 | Method | Method Signature | Purpose | Return |
 | ------ | ---------------- | ------- | ------ |
+| buffer | buffer(self, distance) | Return all points whose distance from a Geometry value is less than or equal to a specified distance. | teradataml GeoDataFrameColumn |
+| contains | contains(self, geom_column) | Test if a Geometry value spatially contains another Geometry value. | GeoDataFrameColumn Resultant column contains: * 1, if the input geometry contains other geometry * 0, if the input geometry does not contain other geometry |
+| crosses | crosses(self, geom_column) | Test if a Geometry value spatially crosses another Geometry value. | GeoDataFrameColumn Resultant column contains: * 1, if the geometries cross * 0, if the geometries do not cross |
+| difference | difference(self, geom_column) | Return a Geometry value that represents the point set difference of two Geometry values. | teradataml GeoDataFrameColumn |
+| disjoint | disjoint(self, geom_column) | Test if a Geometry value is spatially disjoint from another Geometry value. | GeoDataFrameColumn Resultant column contains: * 1, if the geometries are spatially disjoint * 0, if the geometries are not spatially disjoint |
+| distance | distance(self, geom_column) | Return the distance between two Geometry values. | teradataml GeoDataFrameColumn |
+| distance_3D | distance_3D(self, geom_column) | Return the distance between two Geometry values. Function considers Z coordinate values, if they exist in the geometries passed to it. | GeoDataFrameColumn Resultant column contains: * a NULL, if the Geometry is an empty set. * 0, if the two geometries intersect. * a float in all other cases. The distance units are those of the two input geometries. |
+| envelope | envelope(self) | Return the bounding rectangle for the Geometry value. | GeoDataFrameColumn with result column containing Geometry values |
+| geom_ equals | geom_equals(self, geom_column) | Test if a Geometry value is spatially equal to another Geometry value. | GeoDataFrameColumn Resultant column contains: * 1, if the geometries are spatially equal * 0, if the geometries are not spatially equal |
+| intersection | intersection(self, geom_column) | Return a Geometry type where the value represents the point set intersection of two Geometry values. | teradataml GeoDataFrameColumn |
+| intersects | intersects(self, geom_column) | Test if a Geometry value spatially intersects another Geometry value. | GeoDataFrameColumn Resultant column contains: * 1, if the geometries intersect * 0, if the geometries do not intersect |
+| make_2D | make_2D(self, validate=False) | Converts a 3D Geometry value to a 2D Geometry value, and optionally validates that the 2D geometry is well-formed. This method strips the z coordinate from 3D geometries. | teradataml GeoDataFrameColumn |
+| mbb | mbb(self) | Return the 3D minimum bounding box (MBB) that encloses a 3D Geometry. | teradataml GeoDataFrameColumn |
+| mbr | mbr(self) | Return the minimum bounding rectangle (MBR) of a Geometry value. | teradataml GeoDataFrameColumn |
+| overlaps | overlaps(self, geom_column) | Test if a Geometry value spatially overlaps another Geometry value. | GeoDataFrameColumn Resultant column contains: * 1, if the geometries overlap * 0, if the geometries do not overlap |
+| relates | relates(self, geom_ column, amatrix) | Test if a Geometry value is spatially related to another Geometry value. | GeoDataFrameColumn Resultant column contains: * 1, if the spatial relationship between the geometries corresponds to one of the acceptable values represented by "amatrix" * 0, if the spatial relationship between the geometries does not correspond to one of the acceptable values represented by "amatrix" |
+| set_srid | set_srid(self, srid) | Set the spatial reference system identifier of the Geometry value. | GeoDataFrameColumn Resultant column contains the Geometry with the spatial reference system identifier set to the specified spatial reference system. |
+| simplify | simplify(self, tolerance) | Simplify a geometry by removing points that would fall within a specified distance tolerance. | teradataml GeoDataFrameColumn |
+| sym_ difference | sym_difference(self, geom_column) | Return a Geometry value that represents the point set symmetric difference of two Geometry values. | teradataml GeoDataFrameColumn |
+| to_binary | to_binary(self) | Return the well- known binary (WKB) representation of a Geometry value. | GeoDataFrameColumn with result column containing BLOB value |
+| to_text | to_text(self) | Return the well-known text (WKT) representation of a Geometry value. | GeoDataFrameColumn with result column containing CLOB value |
+| touches | touches(self, geom_column) | Test if a Geometry value spatially touches another Geometry value. | GeoDataFrameColumn Resultant column contains: * 1, if the geometries touch * 0, if the geometries do not touch |
+| transform | transform(self, to_wkt_srs, from_wkt_srs, to_srsid=-12345) | Return a Geometry value transformed to the specified spatial reference system. | teradataml GeoDataFrameColumn |
+| union | union(self, geom_column) | Return a Geometry value that represents the point set union of two Geometry values. | teradataml GeoDataFrameColumn |
+| within | within(self, geom_column) | Test if a Geometry value is spatially within another Geometry value. | GeoDataFrameColumn Resultant column contains: * 1, if the geometry is within other geometry * 0, if the geometry is not within other geometry |
+| wkb_geom_ to_sql | wkb_geom_to_ sql(self, column) | Return a specified Geometry value. | teradataml GeoDataFrameColumn |
+| wkt_geom_ to_sql | wkt_geom_to_ sql(self, column) | Return a specified Geometry value. | teradataml GeoDataFrameColumn |
 
-| envelope | envelope(self) | Return the bounding |
-| -------- | -------------- | ------------------- |
-|  |  | rectangle for the |
-|  |  | Geometry value. |
-
-disjoint disjoint(self,
-      geom_column)
-                Test if a Geometry value
-                is spatially disjoint from
-                another Geometry value.
-                            GeoDataFrameColumn
-                            Resultant column contains:
-                            * 1, if the geometries are
-                              spatially disjoint
-                            * 0, if the geometries are not
-                              spatially disjoint
-distance distance(self,
-      geom_column)
-                Return the distance
-                between two
-                Geometry values.
-                            teradataml GeoDataFrameColumn
-distance_3D distance_3D(self,
-      geom_column)
-                Return the distance
-                between two Geometry
-                values. Function considers
-                Z coordinate values, if they
-                exist in the geometries
-                passed to it.
-                            GeoDataFrameColumn
-                            Resultant column contains:
-                            * a NULL, if the Geometry is an
-                              empty set.
-                            * 0, if the two geometries intersect.
-                            * a float in all other cases. The
-                              distance units are those of the
-                              two input geometries.
-                            GeoDataFrameColumn with
-                            result column containing
-                            Geometry values
-geom_
-equals
-      geom_equals(self,
-      geom_column)
-                Test if a Geometry value is
-                spatially equal to another
-                Geometry value.
-                            GeoDataFrameColumn
-                            Resultant column contains:
-                            * 1, if the geometries are
-                              spatially equal
-                            * 0, if the geometries are not
-                              spatially equal
-intersection intersection(self,
-      geom_column)
-                Return a Geometry type
-                where the value represents
-                the point set intersection of
-                two Geometry values.
-                            teradataml GeoDataFrameColumn
-intersects intersects(self,
-      geom_column)
-                Test if a Geometry value
-                spatially intersects another
-                Geometry value.
-                            GeoDataFrameColumn
-                            Resultant column contains:
-                            * 1, if the geometries intersect
-                            * 0, if the geometries do
-                              not intersect
-make_2D make_2D(self,
-      validate=False)
-                Converts a 3D Geometry
-                value to a 2D Geometry
-                value, and optionally
-                validates that the 2D
-                geometry is well-formed.
-                This method strips
-                the z coordinate from
-                3D geometries.
-                            teradataml GeoDataFrameColumn
-| Method | Method Signature | Purpose | Return |
-| ------ | ---------------- | ------- | ------ |
-| mbb | mbb(self) | Return the 3D minimum |  |
-|  |  | bounding box (MBB) that |  |
-|  |  | encloses a 3D Geometry. |  |
-
-| mbr | mbr(self) | Return the minimum |
-| --- | --------- | ------------------ |
-|  |  | bounding rectangle (MBR) |
-|  |  | of a Geometry value. |
-
-| set_srid | set_srid(self, srid) | Set the spatial reference |
-| -------- | -------------------- | ------------------------- |
-|  |  | system identifier of the |
-|  |  | Geometry value. |
-
-| to_binary | to_binary(self) | Return the well- |
-| --------- | --------------- | ---------------- |
-|  |  | known binary (WKB) |
-|  |  | representation of a |
-|  |  | Geometry value. |
-
-| to_text | to_text(self) | Return the well-known text |
-| ------- | ------------- | -------------------------- |
-|  |  | (WKT) representation of a |
-|  |  | Geometry value. |
-
-                            teradataml GeoDataFrameColumn
-                            teradataml GeoDataFrameColumn
-overlaps overlaps(self,
-      geom_column)
-                Test if a Geometry value
-                spatially overlaps another
-                Geometry value.
-                            GeoDataFrameColumn
-                            Resultant column contains:
-                            * 1, if the geometries overlap
-                            * 0, if the geometries do
-                              not overlap
-relates relates(self, geom_
-      column, amatrix)
-                Test if a Geometry value is
-                spatially related to another
-                Geometry value.
-                            GeoDataFrameColumn
-                            Resultant column contains:
-                            * 1, if the spatial
-                              relationship between the
-                              geometries corresponds
-                              to one of the acceptable values
-                              represented by "amatrix"
-                            * 0, if the spatial relationship
-                              between the geometries does
-                              not correspond to one of the
-                              acceptable values represented
-                              by "amatrix"
-                            GeoDataFrameColumn
-                            Resultant column contains the
-                            Geometry with the spatial
-                            reference system identifier
-                            set to the specified spatial
-                            reference system.
-simplify simplify(self,
-      tolerance)
-                Simplify a geometry by
-                removing points that would
-                fall within a specified
-                distance tolerance.
-                            teradataml GeoDataFrameColumn
-sym_
-difference
-      sym_difference(self,
-      geom_column)
-                Return a Geometry value
-                that represents the point
-                set symmetric difference of
-                two Geometry values.
-                            teradataml GeoDataFrameColumn
-                            GeoDataFrameColumn with result
-                            column containing BLOB value
-                            GeoDataFrameColumn with result
-                            column containing CLOB value
-| Method | Method Signature | Purpose | Return |
-| ------ | ---------------- | ------- | ------ |
-
-| Method | Method Signature | Purpose | Return |
-| ------ | ---------------- | ------- | ------ |
-
-touches touches(self,
-      geom_column)
-                Test if a Geometry value
-                spatially touches another
-                Geometry value.
-                            GeoDataFrameColumn
-                            Resultant column contains:
-                            * 1, if the geometries touch
-                            * 0, if the geometries do not touch
-transform transform(self,
-      to_wkt_srs,
-      from_wkt_srs,
-      to_srsid=-12345)
-                Return a Geometry
-                value transformed to
-                the specified spatial
-                reference system.
-                            teradataml GeoDataFrameColumn
-union union(self,
-      geom_column)
-                Return a Geometry
-                value that represents the
-                point set union of two
-                Geometry values.
-                            teradataml GeoDataFrameColumn
-within within(self,
-      geom_column)
-                Test if a Geometry value
-                is spatially within another
-                Geometry value.
-                            GeoDataFrameColumn
-                            Resultant column contains:
-                            * 1, if the geometry is within
-                              other geometry
-                            * 0, if the geometry is not within
-                              other geometry
-wkb_geom_
-to_sql
-      wkb_geom_to_
-      sql(self, column)
-                Return a specified
-                Geometry value.
-                            teradataml GeoDataFrameColumn
-wkt_geom_
-to_sql
-      wkt_geom_to_
-      sql(self, column)
-                Return a specified
-                Geometry value.
-                            teradataml GeoDataFrameColumn
 #### Methods for Point Geometry
-spherical_
-buffer
-      spherical_
-      buffer(self, distance,
-      radius=6371000.0)
-                  Return an MBR that
-                  represents the minimum
-                  and maximum latitude and
-                  longitude of all points within
-                  a given distance from a point.
-                  The earth is modeled as
-                  a sphere.
-                                teradataml
-                                GeoDataFrameColumn
-spherical_
-distance
-      spherical_distance(self,
-      geom_column)
-                  Return the spherical distance
-                  between two spherical
-                  coordinates on the planet
-                  using the Haversine Formula.
-                  Both coordinates must be
-                  specified as ST_Point values.
-                                teradataml
-                                GeoDataFrameColumn
-spheroidal_
-buffer
-      spheroidal_buffer(self,
-      distance,
-      semimajor=6378137.0,
-      invflattening=298.
-      257223563)
-                  Return an MBR that
-                  represents the minimum
-                  and maximum latitude and
-                  longitude of all points within
-                  a given distance from the
-                                teradataml
-                                GeoDataFrameColumn
 | Method | Method Signature | Purpose | Return |
 | ------ | ---------------- | ------- | ------ |
+| spherical_ buffer | spherical_ buffer(self, distance, radius=6371000.0) | Return an MBR that represents the minimum and maximum latitude and longitude of all points within a given distance from a point. The earth is modeled as a sphere. | teradataml GeoDataFrameColumn |
+| spherical_ distance | spherical_distance(self, geom_column) | Return the spherical distance between two spherical coordinates on the planet using the Haversine Formula. Both coordinates must be specified as ST_Point values. | teradataml GeoDataFrameColumn |
+| spheroidal_ buffer | spheroidal_buffer(self, distance, semimajor=6378137.0, invflattening=298. 257223563) | Return an MBR that represents the minimum and maximum latitude and longitude of all points within a given distance from the | teradataml GeoDataFrameColumn |
+|  |  | point. The earth is modeled as a spheroid. |  |
+| spheroidal_ distance | spheroidal_distance(self, geom_column, semimajor=6378137.0, invflattening=298. 257223563) | Return the distance, in meters, between two spherical coordinates. | teradataml GeoDataFrameColumn |
+| set_x | set_x(self, xcoord) | Set the X coordinate of an ST_Point value. | teradataml GeoDataFrameColumn |
+| set_y | set_y(self, ycoord) | Set the Y coordinate of an ST_Point value. | teradataml GeoDataFrameColumn |
+| set_z | set_z(self, zcoord) | Set the Z coordinate of an ST_Point value. | teradataml GeoDataFrameColumn |
 
-| set_x | set_x(self, xcoord) | Set the X coordinate of an |
-| ----- | ------------------- | -------------------------- |
-|  |  | ST_Point value. |
-
-| set_y | set_y(self, ycoord) | Set the Y coordinate of an |
-| ----- | ------------------- | -------------------------- |
-|  |  | ST_Point value. |
-
-| set_z | set_z(self, zcoord) | Set the Z coordinate of an |
-| ----- | ------------------- | -------------------------- |
-|  |  | ST_Point value. |
-
-|  | Method |  |  |
-| - | ------ | - | - |
-| Method |  | Purpose | Return |
-|  | Signature |  |  |
-
-                  point. The earth is modeled
-                  as a spheroid.
-spheroidal_
-distance
-      spheroidal_distance(self,
-      geom_column,
-      semimajor=6378137.0,
-      invflattening=298.
-      257223563)
-                  Return the distance, in
-                  meters, between two
-                  spherical coordinates.
-                                teradataml
-                                GeoDataFrameColumn
-                                teradataml
-                                GeoDataFrameColumn
-                                teradataml
-                                GeoDataFrameColumn
-                                teradataml
-                                GeoDataFrameColumn
 #### Methods for LineString Geometry
-end_point end_point(self) Return the end point of an ST_
-              LineString or GeoSequence value.
-                              GeoDataFrameColumn
-                              Resultant column contains a
-                              NULL, if the Geometry is an
-                              empty set.
-length length(self) Return the length measurement of
-              a Geometry type that represents
-              an ST_LineString, GeoSequence,
-              or ST_MultiLineString value.
-                              teradataml
-                              GeoDataFrameColumn
-length_3D length_
-      3D(self)
-              Return the length of a
-              3D LineString or MultiLineString,
-              taking into account the Z
-              coordinates in the calculation.
-                              GeoDataFrameColumn
-                              Resultant column contains a 0, if
-                              the LineString or MultiLineString
-                              is an empty set.
-line_
-interpolate_
-point
-      line_
-      interpolate_
-      point(self,
-      proportion)
-              Return a point interpolated along a
-              Geometry type that represents an
-              ST_LineString or GeoSequence
-              value, given a proportional
-              distance along that line.
-                              GeoDataFrameColumn with
-                              result column containing ST_
-                              Point Geometry values
-num_points num_
-      points(self)
-              Return the number of points
-              in a Geometry type that
-              represents an ST_LineString or
-              GeoSequence value.
-                              GeoDataFrameColumn
-                              Resultant column contains a
-                              NULL, if the Geometry is an
-                              empty set.
-point point(self,
-      position)
-              Return the specified point
-              from a Geometry type that
-              represents an ST_LineString or
-              GeoSequence value.
-                              teradataml
-                              GeoDataFrameColumn
-|  | Method |  |  |
-| - | ------ | - | - |
-| Method |  | Purpose | Return |
-|  | Signature |  |  |
-
-|  | Method |  |  |
-| - | ------ | - | - |
-| Method |  | Purpose | Return |
-|  | Signature |  |  |
-
 | Method | Method Signature | Purpose | Return |
 | ------ | ---------------- | ------- | ------ |
+| end_point | end_point(self) | Return the end point of an ST_ LineString or GeoSequence value. | GeoDataFrameColumn Resultant column contains a NULL, if the Geometry is an empty set. |
+| length | length(self) | Return the length measurement of a Geometry type that represents an ST_LineString, GeoSequence, or ST_MultiLineString value. | teradataml GeoDataFrameColumn |
+| length_3D | length_ 3D(self) | Return the length of a 3D LineString or MultiLineString, taking into account the Z coordinates in the calculation. | GeoDataFrameColumn Resultant column contains a 0, if the LineString or MultiLineString is an empty set. |
+| line_ interpolate_ point | line_ interpolate_ point(self, proportion) | Return a point interpolated along a Geometry type that represents an ST_LineString or GeoSequence value, given a proportional distance along that line. | GeoDataFrameColumn with result column containing ST_ Point Geometry values |
+| num_points | num_ points(self) | Return the number of points in a Geometry type that represents an ST_LineString or GeoSequence value. | GeoDataFrameColumn Resultant column contains a NULL, if the Geometry is an empty set. |
+| point | point(self, position) | Return the specified point from a Geometry type that represents an ST_LineString or GeoSequence value. | teradataml GeoDataFrameColumn |
+| start_point | start_ point(self) | Return the start point of an ST_ LineString or GeoSequence value. Note: This method returns a point having a Z coordinate if the input geometry is three-dimensional. | teradataml GeoDataFrameColumn |
 
-start_point start_
-      point(self)
-              Return the start point of an ST_
-              LineString or GeoSequence value.
-              Note:
-              This method returns a point
-              having a Z coordinate if the input
-              geometry is three-dimensional.
-                              teradataml
-                              GeoDataFrameColumn
 #### Methods for Polygon Geometry
-interiors interiors(self,
-      position)
-              Return the specified interior ring of
-              a Geometry type that represents an
-              ST_Polygon value.
-                                GeoDataFrameColumn with
-                                result column containing ST_
-                                LineString Geometry values
-num_
-interior_
-ring
-      num_interior_
-      ring(self)
-              Return the number of interior rings of
-              a Geometry type that represents an
-              ST_Polygon value.
-                                teradataml
-                                GeoDataFrameColumn
-point_on_
-surface
-      point_on_
-      surface(self)
-              Return a point that is guaranteed
-              to spatially intersect an ST_Polygon,
-              or at least one of the component
-              polygons of an ST_MultiPolygon.
-                                teradataml
-                                GeoDataFrameColumn
+| Method | Method Signature | Purpose | Return |
+| ------ | ---------------- | ------- | ------ |
+| interiors | interiors(self, position) | Return the specified interior ring of a Geometry type that represents an ST_Polygon value. | GeoDataFrameColumn with result column containing ST_ LineString Geometry values |
+| num_ interior_ ring | num_interior_ ring(self) | Return the number of interior rings of a Geometry type that represents an ST_Polygon value. | teradataml GeoDataFrameColumn |
+| point_on_ surface | point_on_ surface(self) | Return a point that is guaranteed to spatially intersect an ST_Polygon, or at least one of the component polygons of an ST_MultiPolygon. | teradataml GeoDataFrameColumn |
+
 #### Methods for GeometryCollection Geometry
-geom_
-component
-      geom_
-      component(self,
-      position)
-              Return the geometry of one
-              component member of a composite
-              geometry type (ST_GeomCollection,
-              ST_MultiPoint, ST_MultiLineString, or
-              ST_MultiPolygon). The element to be
-              returned is specified by position with
-              the collection.
-                                teradataml
-                                GeoDataFrameColumn
-num_
-geometry
-      num_
-      geometry(self)
-              Return the number of distinct
-              geometries that constitute a
-              composite geometry type (ST_
-              GeomCollection, ST_MultiPoint, ST_
-              MultiLineString, or ST_MultiPolygon).
-                                teradataml
-                                GeoDataFrameColumn
+| Method | Method Signature | Purpose | Return |
+| ------ | ---------------- | ------- | ------ |
+| geom_ component | geom_ component(self, position) | Return the geometry of one component member of a composite geometry type (ST_GeomCollection, ST_MultiPoint, ST_MultiLineString, or ST_MultiPolygon). The element to be returned is specified by position with the collection. | teradataml GeoDataFrameColumn |
+| num_ geometry | num_ geometry(self) | Return the number of distinct geometries that constitute a composite geometry type (ST_ GeomCollection, ST_MultiPoint, ST_ MultiLineString, or ST_MultiPolygon). | teradataml GeoDataFrameColumn |
 #### Methods for GeoSequence Geometry
 | Method | Method Signature | Purpose | Return |
 | ------ | ---------------- | ------- | ------ |
+| clip | clip(self, start_ timestamp, end_timestamp) | Return a GeoSequence type containing the subset of points and associated data that lie between the two timestamp input arguments. | teradataml GeoDataFrameColumn |
+| get_final_ timestamp | get_ final_timestamp(self) | Return the TimeStamp of the last point of a GeoSequence. | teradataml GeoDataFrameColumn |
+| get_init_ timestamp | get_ init_timestamp(self) | Return the TimeStamp of the first point of a GeoSequence. | teradataml GeoDataFrameColumn |
+| get_link | get_link(self, index) | Get the link ID of a specified point in a GeoSequence. | teradataml GeoDataFrameColumn |
+| get_user_ field | get_user_field(self, field_index, index) | Return the user field specified by "field_index" for the point specified by "index" for a GeoSequence type. | teradataml GeoDataFrameColumn |
+| get_user_ field_count | get_user_ field_count(self) | Return the number of user fields associated with each point of a GeoSequence. | teradataml GeoDataFrameColumn |
+| point_ heading | point_ heading(self, index) | Return the heading for the specified point of a GeoSequence. The value is calculated as the angle (in degrees) between a vertical line and the line segment from the specified point to the next point clockwise from the North. | teradataml GeoDataFrameColumn |
+| set_link | set_link(self, index, link_id) | Set the link ID of a specified point in a GeoSequence. | teradataml GeoDataFrameColumn |
+| speed | speed(self, index=None, begin_ index=None, end_index=None) | Return the approximate speed at a specified point (speed(index INTEGER)) or between two points (speed(iBegin INTEGER, iEnd INTEGER)) for a GeoSequence type. | teradataml GeoDataFrameColumn |
 
-| get_link | get_link(self, index) | Get the link ID of a specified point in |
-| -------- | --------------------- | --------------------------------------- |
-|  |  | a GeoSequence. |
-
-|  | Method |  |  |
-| - | ------ | - | - |
-| Method |  | Purpose | Return |
-|  | Signature |  |  |
-
-clip clip(self, start_
-      timestamp,
-      end_timestamp)
-                Return a GeoSequence type
-                containing the subset of points and
-                associated data that lie between the
-                two timestamp input arguments.
-                                teradataml
-                                GeoDataFrameColumn
-get_final_
-timestamp
-      get_
-      final_timestamp(self)
-                Return the TimeStamp of the last
-                point of a GeoSequence.
-                                teradataml
-                                GeoDataFrameColumn
-get_init_
-timestamp
-      get_
-      init_timestamp(self)
-                Return the TimeStamp of the first
-                point of a GeoSequence.
-                                teradataml
-                                GeoDataFrameColumn
-                                teradataml
-                                GeoDataFrameColumn
-get_user_
-field
-      get_user_field(self,
-      field_index, index)
-                Return the user field specified by
-                "field_index" for the point specified
-                by "index" for a GeoSequence type.
-                                teradataml
-                                GeoDataFrameColumn
-get_user_
-field_count
-      get_user_
-      field_count(self)
-                Return the number of user fields
-                associated with each point of
-                a GeoSequence.
-                                teradataml
-                                GeoDataFrameColumn
-point_
-heading
-      point_
-      heading(self, index)
-                Return the heading for the specified
-                point of a GeoSequence.
-                The value is calculated as the angle
-                (in degrees) between a vertical
-                line and the line segment from the
-                specified point to the next point
-                clockwise from the North.
-                                teradataml
-                                GeoDataFrameColumn
-set_link set_link(self, index,
-      link_id)
-                Set the link ID of a specified point in
-                a GeoSequence.
-                                teradataml
-                                GeoDataFrameColumn
-speed speed(self,
-      index=None, begin_
-      index=None,
-      end_index=None)
-                Return the approximate speed
-                at a specified point (speed(index
-                INTEGER)) or between two
-                points (speed(iBegin INTEGER,
-                iEnd INTEGER)) for a
-                GeoSequence type.
-                                teradataml
-                                GeoDataFrameColumn
 #### Filtering Functions and Methods
-intersects_
-mbb
-      intersects_
-      mbb(self,
-      geom_
-      column)
-            Test whether a 3D
-            geometry
-            spatially
-            intersects a
-            specified MBB.
-                      GeoDataFrameColumn
-                      Resultant column contains:
-                      * 1, if the input 3D geometry intersects the
-                      MBB argument.
-|  | Method |  |  |
-| - | ------ | - | - |
-| Method |  | Purpose | Return |
-|  | Signature |  |  |
-
-                      * 0, if the input 3D geometry does not intersect the
-                      MBB argument.
-                      * Return an error if the input geometry is not 3D
-                      (does not have a z coordinate).
-mbb_filter mbb_
-      filter(self,
-      geom_
-      column)
-            Test whether the
-            MBBs of two 3D
-            geometries
-            spatially intersect.
-                      GeoDataFrameColumn
-                      Resultant column contains:
-                      * 1, if the MBB of the input 3D geometry intersects
-                      the MBB of the geometry passed to the method.
-                      * 0, if the MBB of the input 3D geometry does
-                      not intersect the MBB of the geometry passed to
-                      the method.
-                      * Return an error if either geometry is not 3D (does
-                      not have a z coordinate).
-mbr_filter mbr_
-      filter(self,
-      geom_
-      column)
-            Test whether the
-            MBRs of two 2D
-            geometries
-            spatially intersect.
-                      GeoDataFrameColumn
-                      Resultant column contains:
-                      * 1, if the MBR of the input geometry intersects the
-                      MBR of the geometry passed to the method.
-                      * 0, if the MBR of the input geometry does not
-                      intersect the MBR of the geometry passed to
-                      the method.
-within_mbb within_
-      mbb(self,
-      geom_
-      column)
-            Test whether a 3D
-            geometry is
-            spatially within
-            the bounds of a
-            specified MBB.
-                      GeoDataFrameColumn
-                      Resultant column contains:
-                      * 1, if the input 3D geometry is spatially within
-                      MBB argument.
-                      * 0, if the input 3D geometry is not spatially within
-                      the MBB argument.
-                      * Return an error if the input geometry is not 3D
-                      (does not have a z coordinate).
+| Method | Method Signature | Purpose | Return |
+| ------ | ---------------- | ------- | ------ |
+| intersects_ mbb | intersects_ mbb(self, geom_ column) | Test whether a 3D geometry spatially intersects a specified MBB. | GeoDataFrameColumn Resultant column contains: * 1, if the input 3D geometry intersects the MBB argument. |
+|  |  |  | * 0, if the input 3D geometry does not intersect the MBB argument. * Return an error if the input geometry is not 3D (does not have a z coordinate). |
+| mbb_filter | mbb_ filter(self, geom_ column) | Test whether the MBBs of two 3D geometries spatially intersect. GeoDataFrameColumn Resultant column contains: * 1, if the MBB of the input 3D geometry intersects * 0, if the MBB of the input 3D geometry does * Return an error if either geometry is not 3D (does | the MBB of the geometry passed to the method. not intersect the MBB of the geometry passed to the method. not have a z coordinate). |
+| mbr_filter mbr_ filter(self, geom_ column) | Test whether the MBRs of two 2D geometries spatially intersect. |  | GeoDataFrameColumn Resultant column contains: * 1, if the MBR of the input geometry intersects the MBR of the geometry passed to the method. * 0, if the MBR of the input geometry does not intersect the MBR of the geometry passed to the method. |
+| within_mbb | within_ mbb(self, geom_ column) geometry is spatially within the bounds of a specified MBB. | Test whether a 3D GeoDataFrameColumn Resultant column contains: * 1, if the input 3D geometry is spatially within * 0, if the input 3D geometry is not spatially within | MBB argument. the MBB argument. * Return an error if the input geometry is not 3D (does not have a z coordinate). |

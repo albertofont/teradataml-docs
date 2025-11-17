@@ -29,12 +29,9 @@ You can construct a teradataml DataFrame from either an existing Vantage table o
 result. The data source determines the DataFrame constructor function you use.
 | Vantage Data Source | DataFrame Constructor Function |
 | ------------------- | ------------------------------ |
-| Table or view | DataFrame Constructor |
-|  | DataFrame.from_table() Function |
+| Table or view | DataFrame Constructor DataFrame.from_table() Function |
 | SQL query result | DataFrame.from_query() Function |
 | pandas DataFrame | DataFrame.from_pandas Function |
-| Vantage Data Source | DataFrame Constructor Function |
-| ------------------- | ------------------------------ |
 | Dictionary | DataFrame.from_dict Function |
 | List of lists/tuples/dictionaries/numpy arrays | DataFrame.from_records Function |
 

@@ -140,49 +140,32 @@ teradataml\data\notebooks\sqlalchemy\Teradata Vantage Aggregate Functions using
 SQLAlchemy.ipynb.
 ```
 #### Supported functions
-S/N Function Name Description
-1 Avg / Average /
-    Ave
-          Returns the arithmetic average of all values in value_expression.
-2 Corr Returns the Sample Pearson product moment correlation coefficient of its
-          arguments for all non-null data point pairs.
-3 Count Returns a column value that is the total number of qualified rows in
-          value_expression.
-4 Covar_pop Returns the population covariance of its arguments for all non-null data
-          point pairs.
-5 Covar_samp Returns the sample covariance of its arguments for all non-null data
-          point pairs.
-6 Kurtosis Returns the kurtosis of the distribution of value_expression.
-7 max / maximum Returns a column value that is the maximum value for value_expression.
-8 min / minimum Returns a column value that is the minimum value for value_expression.
-9 REGR_AVGX Returns the mean of the independent_variable_expression for all non-null
-          data pairs of the dependent and independent variable arguments.
-10 REGR_AVGY Returns the mean of the dependent_variable_expression for all non-null data
-          pairs of the dependent and independent variable arguments.
-11 REGR_Count Returns the count of all non-null data pairs of the dependent and independent
-          variable arguments.
-12 REGR_Intercept Returns the intercept of the univariate linear regression line through all
-          non-null data pairs of the dependent and independent variable arguments.
-13 REGR_R2 Returns the coefficient of determination for all non-null data pairs of the
-          dependent and independent variable arguments.
-14 REGR_SLOPE Returns the slope of the univariate linear regression line through all non-null
-          data pairs of the dependent and independent variable arguments.
-15 REGR_SXX Returns the sum of the squares of the independent_variable_expression for all
-          non-null data pairs of the dependent and independent variable arguments.
-16 REGR_SXY Returns the sum of the products of the independent_variable_expression
-          and the dependent_variable_expression for all non-null data pairs of the
-          dependent and independent variable arguments.
-17 REGR_SYY Returns the sum of the squares of the dependent_variable_expression for all
-          non-null data pairs of the dependent and independent variable arguments.
-18 Skew Returns the skewness of the distribution of value_expression.
-19 stddev_pop Returns the population standard deviation for the non-null data points in
-          value_expression.
-S/N Function Name Description
-20 stddev_samp Returns the sample standard deviation for the non-null data points in
-          value_expression.
-21 sum Returns a column value that is the arithmetic sum of value_expression.
-22 var_pop Returns the population variance for the data points in value_expression.
-23 var_samp Returns the sample variance for the data points in value_expression.
+| S/N Function Name | Description |
+| ----------------- | ----------- |
+| 1 Avg / Average / Ave | Returns the arithmetic average of all values in value_expression. |
+| 2 Corr | Returns the Sample Pearson product moment correlation coefficient of its arguments for all non-null data point pairs. |
+| 3 Count | Returns a column value that is the total number of qualified rows in value_expression. |
+| 4 Covar_pop | Returns the population covariance of its arguments for all non-null data point pairs. |
+| 5 Covar_samp | Returns the sample covariance of its arguments for all non-null data point pairs. |
+| 6 Kurtosis | Returns the kurtosis of the distribution of value_expression. |
+| 7 max / maximum | Returns a column value that is the maximum value for value_expression. |
+| 8 min / minimum | Returns a column value that is the minimum value for value_expression. |
+| 9 REGR_AVGX | Returns the mean of the independent_variable_expression for all non-null data pairs of the dependent and independent variable arguments. |
+| 10 REGR_AVGY | Returns the mean of the dependent_variable_expression for all non-null data pairs of the dependent and independent variable arguments. |
+| 11 REGR_Count | Returns the count of all non-null data pairs of the dependent and independent variable arguments. |
+| 12 REGR_Intercept | Returns the intercept of the univariate linear regression line through all non-null data pairs of the dependent and independent variable arguments. |
+| 13 REGR_R2 | Returns the coefficient of determination for all non-null data pairs of the dependent and independent variable arguments. |
+| 14 REGR_SLOPE | Returns the slope of the univariate linear regression line through all non-null data pairs of the dependent and independent variable arguments. |
+| 15 REGR_SXX | Returns the sum of the squares of the independent_variable_expression for all non-null data pairs of the dependent and independent variable arguments. |
+| 16 REGR_SXY | Returns the sum of the products of the independent_variable_expression and the dependent_variable_expression for all non-null data pairs of the dependent and independent variable arguments. |
+| 17 REGR_SYY | Returns the sum of the squares of the dependent_variable_expression for all non-null data pairs of the dependent and independent variable arguments. |
+| 18 Skew | Returns the skewness of the distribution of value_expression. |
+| 19 stddev_pop | Returns the population standard deviation for the non-null data points in value_expression. |
+| 20 stddev_samp | Returns the sample standard deviation for the non-null data points in value_expression. |
+| 21 sum | Returns a column value that is the arithmetic sum of value_expression. |
+| 22 var_pop | Returns the population variance for the data points in value_expression. |
+| 23 var_samp | Returns the sample variance for the data points in value_expression. |
+
 Note:
 Grouping of columns is not allowed with DataFrame.assign() in teradataml 17.00.00.00. Always use
 'drop_column = True' in DataFrame.assign().
@@ -208,36 +191,35 @@ Arithmetic Functions
 5 RADIANS RADIANS takes a value specified in degrees and converts it to radians.
 6 EXP Raises e (the base of natural logarithms) to the power of the argument, where
           e = 2.71828182845905.
-S/N Function Name Description
-7 FLOOR Returns the largest integer equal to or less than the input argument.
-8 LN Computes the natural logarithm of the argument.
-9 LOG Computes the base 10 logarithm of an argument.
-10 MOD Returns the remainder (modulus) of expr1 divided by expr2.
-11 NULLIFZERO Converts data from zero to null to avoid problems with division by zero.
-12 POWER Returns base_value raised to the power of exponent_value.
-13 ROUND Returns numeric_value rounded places_value places to the right or left of the
-          decimal point.
-14 SIGN Returns the sign of numeric_value.
-16 SQRT Computes the square root of an argument.
-17 TRUNC Returns numeric_value truncated places_value places to the right or left of the
-          decimal point.
-18 WIDTH_BUCKET Returns the number of the partition to which value_expression is assigned.
-19 ZEROIFNULL Converts data from null to 0 to avoid cases where a null result creates an error.
-Hyperbolic Functions
-20 COSH Performs the hyperbolic or inverse hyperbolic function of an argument.
-21 ACOSH
-22 SINH
-23 ASINH
-24 TANH
-25 ATANH
-Trigonometric Functions
-26 SIN Performs the trigonometric or inverse trigonometric function of an argument.
-27 ASIN
-28 COS
-29 ACOS
-30 TAN
-31 ATAN
-32 ATAN2
+| S/N Function Name | Description |
+| ----------------- | ----------- |
+| 7 FLOOR | Returns the largest integer equal to or less than the input argument. |
+| 8 LN | Computes the natural logarithm of the argument. |
+| 9 LOG | Computes the base 10 logarithm of an argument. |
+| 10 MOD | Returns the remainder (modulus) of expr1 divided by expr2. |
+| 11 NULLIFZERO | Converts data from zero to null to avoid problems with division by zero. |
+| 12 POWER | Returns base_value raised to the power of exponent_value. |
+| 13 ROUND | Returns numeric_value rounded places_value places to the right or left of the decimal point. |
+| 14 SIGN | Returns the sign of numeric_value. |
+| 16 SQRT | Computes the square root of an argument. |
+| 17 TRUNC | Returns numeric_value truncated places_value places to the right or left of the decimal point. |
+| 18 WIDTH_BUCKET | Returns the number of the partition to which value_expression is assigned. |
+| 19 ZEROIFNULL | Converts data from null to 0 to avoid cases where a null result creates an error. |
+| Hyperbolic Functions |  |
+| 20 COSH | Performs the hyperbolic or inverse hyperbolic function of an argument. |
+| 21 ACOSH |  |
+| 22 SINH |  |
+| 23 ASINH |  |
+| 24 TANH |  |
+| 25 ATANH |  |
+| Trigonometric Functions |  |
+| 26 SIN | Performs the trigonometric or inverse trigonometric function of an argument. |
+| 27 ASIN |  |
+| 28 COS |  |
+| 29 ACOS |  |
+| 30 TAN |  |
+| 31 ATAN |  |
+| 32 ATAN2 |  |
 #### Unsupported functions
 * RANDOM
 * RANGE_N
@@ -249,36 +231,27 @@ data\notebooks\sqlalchemy\Teradata Vantage Bit-Byte Manipulation Functions
 using SQLAlchemy.ipynb.
 ```
 #### Supported functions
-S/N Function Name Description
-1 BITAND Performs the logical AND operation on the corresponding bits from the two
-          input arguments.
-2 BITNOT Performs a bitwise complement on the binary representation of the
-          input argument.
-3 BITOR Performs the logical OR operation on the corresponding bits from the two
-          input arguments.
-4 BITXOR Performs a bitwise XOR operation on the binary representation of the two
-          input arguments.
-5 COUNTSET Returns the count of the binary bits within the target_arg expression that are
-          either set to 1 or set to 0 depending on the target_value_arg value.
-6 GETBIT Returns the value of the bit specified by target_bit_arg from the target_arg
-          byte expression.
-7 ROTATELEFT Returns an expression rotated to the left by the number of bits you specify, with
-          the most significant bits wrapping around to the right.
-8 ROTATERIGHT Returns an expression rotated to the right by the number of bits you specify, with
-          the least significant bits wrapping around to the left.
-9 SETBIT Sets the value of the bit specified by target_bit_arg to the value of target_value_
-          arg in the target_arg byte expression.
-10 SHIFTLEFT Returns the expression target_arg shifted by the specified number of bits (num_
-          bits_arg) to the left. The bits in the most significant positions are lost, and the
-          bits in the least significant positions are filled with zeros.
-11 SHIFTRIGHT Returns the expression target_arg shifted by the specified number of bits (num_
-          bits_arg) to the right. The bits in the least significant positions are lost, and the
-          bits in the most significant positions are filled with zeros.
-S/N Function Name Description
-12 SUBBITSTR Extracts a bit substring from the target_arg input expression based on the
-          specified bit position.
-13 TO_BYTE Converts a numeric data type to the database server byte representation (byte
-          value) of the input value.
+| S/N Function Name | Description |
+| ----------------- | ----------- |
+| 1 BITAND | Performs the logical AND operation on the corresponding bits from the two input arguments. |
+| 2 BITNOT | Performs a bitwise complement on the binary representation of the input argument. |
+| 3 BITOR | Performs the logical OR operation on the corresponding bits from the two input arguments. |
+| 4 BITXOR | Performs a bitwise XOR operation on the binary representation of the two input arguments. |
+| 5 COUNTSET | Returns the count of the binary bits within the target_arg expression that are either set to 1 or set to 0 depending on the target_value_arg value. |
+| 6 GETBIT | Returns the value of the bit specified by target_bit_arg from the target_arg byte expression. |
+| 7 ROTATELEFT | Returns an expression rotated to the left by the number of bits you specify, with the most significant bits wrapping around to the right. |
+| 8 ROTATERIGHT | Returns an expression rotated to the right by the number of bits you specify, with the least significant bits wrapping around to the left. |
+| 9 SETBIT | Sets the value of the bit specified by target_bit_arg to the value of target_value_ arg in the target_arg byte expression. |
+| 10 SHIFTLEFT | Returns the expression target_arg shifted by the specified number of bits (num_ bits_arg) to the left. The bits in the most significant positions are lost, and the bits in the least significant positions are filled with zeros. |
+| 11 SHIFTRIGHT | Returns the expression target_arg shifted by the specified number of bits (num_ bits_arg) to the right. The bits in the least significant positions are lost, and the bits in the most significant positions are filled with zeros. |
+| 12 SUBBITSTR | Extracts a bit substring from the target_arg input expression based on the specified bit position. |
+| 13 TO_BYTE | Converts a numeric data type to the database server byte representation (byte value) of the input value. |
+
+| 1 CURRENT_DATE / CURDATE | Returns the current date. | AT LOCAL and AT TIME ZONE clauses are not supported. |
+| ------------------------ | ------------------------- | ---------------------------------------------------- |
+| 2 CURRENT_TIME / CURTIME | Returns the current time. | AT LOCAL and AT TIME ZONE clauses are not supported. |
+| 3 CURRENT_ TIMESTAMP | Returns the current timestamp. | AT LOCAL and AT TIME ZONE clauses are not supported. |
+
 #### Built-In Functions
 Note:
 Examples for all built-in functions can be found at: pkg_install_location\teradataml\
@@ -287,34 +260,12 @@ data\notebooks\sqlalchemy\Teradata Vantage Built-in functions using
 SQLAlchemy.ipynb.
 ```
 #### Supported functions
-| S/N | Function Name | Description | Comment |
-| --- | ------------- | ----------- | ------- |
-
-| Returns the current date. | AT LOCAL and AT TIME ZONE clauses |
-| ------------------------- | --------------------------------- |
-|  | are not supported. |
-
-| Returns the current time. | AT LOCAL and AT TIME ZONE clauses |
-| ------------------------- | --------------------------------- |
-|  | are not supported. |
-
-| S |  |  |  |
-| - | - | - | - |
-|  | Function Name | Description | Comment |
-| /N |  |  |  |
-
-1 CURRENT_DATE
-    / CURDATE
-2 CURRENT_TIME
-    / CURTIME
-3 CURRENT_
-    TIMESTAMP
-            Returns the
-            current timestamp.
-                          AT LOCAL and AT TIME ZONE clauses
-                          are not supported.
+S/N Function Name Description Comment
 #### Hash Related Functions
 #### Supported functions
+S
+    Function Name Description Comment
+/N
 1 HASHAMP Finds the primary AMP corresponding to
         the hash bucket number specified in the
         expression and returns the AMP ID.
@@ -334,39 +285,12 @@ SQLAlchemy.ipynb.
                               * Only expression, i.e.,
                                 column can be passed to
                                 this function.
-| S |  |  |  |
-| - | - | - | - |
-|  | Function Name | Description | Comment |
-| /N |  |  |  |
+| S /N Function Name | Description | Comment |
+| ------------------ | ----------- | ------- |
+|  | If no hash bucket is specified, HASHBAKAMP returns one less than the maximum number of fallback AMPs in the system. | * MAP and COLOCATE USING clauses of the functions are not supported. |
+| 3 HASHBUCKET | Returns the hash bucket number that corresponds to a specified row hash value. If no row hash value is specified, HASHBUCKET returns the highest hash bucket number. |  |
+| 4 HASHROW | Returns the hexadecimal row hash value for an expression or sequence of expressions. If no expression is specified, HASHROW returns the maximum hash code value. | User can execute this either by passing expression or without any expression. |
 
-| S/N | Function Name | Description |
-| --- | ------------- | ----------- |
-| 1 | REGEXP_SUBSTR | Extracts a substring from source_string that matches a regular expression |
-|  |  | specified by regexp_string. |
-| 2 | REGEXP_REPLACE | Replaces portions of source_string that match regexp_string with the |
-|  |  | replace_string. |
-| 3 | REGEXP_INSTR | Searches source_string for a match to regexp_string. |
-| 4 | REGEXP_SIMILAR | Compares source_string to regexp_string and returns integer value. |
-
-        If no hash bucket is specified, HASHBAKAMP
-        returns one less than the maximum number of
-        fallback AMPs in the system.
-                              * MAP and COLOCATE
-                                USING clauses of
-                                the functions are
-                                not supported.
-3 HASHBUCKET Returns the hash bucket number that
-        corresponds to a specified row hash value.
-        If no row hash value is specified,
-        HASHBUCKET returns the highest hash
-        bucket number.
-4 HASHROW Returns the hexadecimal row hash value for
-        an expression or sequence of expressions.
-        If no expression is specified, HASHROW
-        returns the maximum hash code value.
-                              User can execute this either
-                              by passing expression or
-                              without any expression.
 #### Regular Expression Functions
 Note:
 Examples for all regular expression functions can be found at: pkg_install_location\
@@ -377,6 +301,13 @@ SQLAlchemy.ipynb.
 Examples in notebooks will help to understand on how values can be passed and these functions
 cane be used in teradataml.
 #### Supported functions
+S/N Function Name Description
+1 REGEXP_SUBSTR Extracts a substring from source_string that matches a regular expression
+            specified by regexp_string.
+2 REGEXP_REPLACE Replaces portions of source_string that match regexp_string with the
+            replace_string.
+3 REGEXP_INSTR Searches source_string for a match to regexp_string.
+4 REGEXP_SIMILAR Compares source_string to regexp_string and returns integer value.
 Note:
 Refer to SQL Documentation for more details on these functions and their signature.
 #### Unsupported functions
@@ -388,117 +319,37 @@ Examples for all string functions can be found at: pkg_install_location\teradata
 notebooks\sqlalchemy\Teradata Vantage String Functions Using SQLAlchemy.ipynb.
 ```
 #### Supported functions
-| S/N | Function Name | Description | Comment |
-| --- | ------------- | ----------- | ------- |
-| 1 | ASCII | Returns the decimal representation of the first |  |
-|  |  | character in string_expr as a NUMBER value. The |  |
-|  |  | decimal representation will reflect the character set of |  |
-|  |  | the input string. |  |
-| 2 | CHAR2HEXINT | Returns the hexadecimal representation for a |  |
-|  |  | character string. |  |
-| 3 | CHR | Returns the Latin ASCII character given a numeric |  |
-|  |  | code value. |  |
-| 4 | CONCAT | Concatenates string expressions. |  |
-| 5 | EDITDISTANCE | Returns the minimum number of edit |  |
-|  |  | operations (insertions, deletions, substitutions |  |
-|  |  | and transpositions) required to transform string1 |  |
-|  |  | into string2. |  |
-| 6 | INDEX | Returns the position in string_expression_1 where |  |
-|  |  | string_expression_2 starts. |  |
-| 7 | INITCAP | Modifies a string argument and returns the string with |  |
-|  |  | the first character in each word in uppercase and all |  |
-|  |  | other characters in lowercase. Words are delimited by |  |
-|  |  | white space or characters that are not alphanumeric. |  |
-| 8 | INSTR | Searches the source_string argument for occurrences |  |
-|  |  | of search_string. |  |
-| 9 | LEFT | Truncates in input string to a specified number |  |
-|  |  | of characters. |  |
-|  |  | The LEFT function can be called with the 'LEFT' or |  |
-|  |  | 'TD_LEFT' alias names. |  |
-| 10 | LENGTH | Returns the number of characters in the expression. |  |
-| 11 | LOCATE | Returns the position of the first occurrence of string_ |  |
-|  |  | expr1 within string_expr2. The search for the first |  |
-| S/N | Function Name | Description | Comment |
-| --- | ------------- | ----------- | ------- |
+| S/N Function Name | Description | Comment |
+| ----------------- | ----------- | ------- |
+| 1 ASCII | Returns the decimal representation of the first character in string_expr as a NUMBER value. The decimal representation will reflect the character set of the input string. |  |
+| 2 CHAR2HEXINT | Returns the hexadecimal representation for a character string. |  |
+| 3 CHR | Returns the Latin ASCII character given a numeric code value. |  |
+| 4 CONCAT | Concatenates string expressions. |  |
+| 5 EDITDISTANCE | Returns the minimum number of edit operations (insertions, deletions, substitutions and transpositions) required to transform string1 into string2. |  |
+| 6 INDEX | Returns the position in string_expression_1 where string_expression_2 starts. |  |
+| 7 INITCAP | Modifies a string argument and returns the string with the first character in each word in uppercase and all other characters in lowercase. Words are delimited by white space or characters that are not alphanumeric. |  |
+| 8 INSTR | Searches the source_string argument for occurrences of search_string. |  |
+| 9 LEFT | Truncates in input string to a specified number of characters. The LEFT function can be called with the 'LEFT' or 'TD_LEFT' alias names. |  |
+| 10 LENGTH | Returns the number of characters in the expression. |  |
+| 11 LOCATE | Returns the position of the first occurrence of string_ expr1 within string_expr2. The search for the first |  |
+|  | occurrence of string_expr1 begins with the first character position in string_expr2 unless the optional argument, n1, is specified. |  |
+| 12 LOWER | Returns a character string identical to character_ string_expression, except that all uppercase letters are replaced with their lowercase equivalents. |  |
+| 13 LPAD | Returns the source_string padded to the left with the characters in fill_string so that the resulting string is length characters. |  |
+| 14 LTRIM | Returns the argument expr1, with its left-most characters removed up to the first character that is not in the argument expr2. |  |
+| 15 NGRAM | Returns the number of n-gram matches between string1 and string2. |  |
+| 16 NVP | Extracts the value of a name-value pair where the name in the pair matches the name and the number of the occurrence specified. |  |
+| 17 OREPLACE | Replaces every occurrence of search_string in the source_string with the replace_string. Use this function either to replace or remove portions of a string. |  |
+| 18 OTRANSLATE | Returns source_string with every occurrence of each character in from_string replaced with the corresponding character in to_string. |  |
+| 19 REVERSE | Reverses the input string. |  |
+| 20 RIGHT | Starting from the end of the input string, a substring is created with the number of characters specified by the second parameter. The RIGHT function can be called with the 'RIGHT' or 'TD_RIGHT' alias names. |  |
+| 21 RPAD | Returns the source_string padded to the right with the characters in fill_string so that the resulting string is length characters. |  |
+| 22 RTRIM | Returns the argument expr1, with its right-most characters removed up to the first character that is not in the argument expr2. |  |
+| 23 SOUNDEX | Returns a character string that represents the Soundex code for string_expression. |  |
+| 24 STRING_CS | Returns a heuristically derived integer value that you can use to help determine which KANJI1- compatible client character set was used to encode string_expression. |  |
+| 25 SUNSTRING / SUBSTR | Extracts a substring from a named string based on position. | Only Teradata Syntax is supported. ANSI syntax is not supported. In SQL, both are supported. Check SQL functions documentation. |
+| 26 TRIM | Takes a character or byte string_expression argument, trims the specified pad characters or bytes, and returns the trimmed string. | Following clauses from SQL are not supported: * BOTH * Leading * Trailing * From * character_Set |
+| 27 UPPER / UCASE | Returns a character string identical to character_ string_expression, except that all lowercase letters are replaced by their uppercase equivalents. |  |
 
-| 12 | LOWER | Returns a character string identical to character_ |
-| -- | ----- | -------------------------------------------------- |
-|  |  | string_expression, except that all uppercase letters |
-|  |  | are replaced with their lowercase equivalents. |
-| 13 | LPAD | Returns the source_string padded to the left with the |
-|  |  | characters in fill_string so that the resulting string is |
-|  |  | length characters. |
-| 14 | LTRIM | Returns the argument expr1, with its left-most |
-|  |  | characters removed up to the first character that is |
-|  |  | not in the argument expr2. |
-| 15 | NGRAM | Returns the number of n-gram matches between |
-|  |  | string1 and string2. |
-| 16 | NVP | Extracts the value of a name-value pair where the |
-|  |  | name in the pair matches the name and the number of |
-|  |  | the occurrence specified. |
-| 17 | OREPLACE | Replaces every occurrence of search_string in |
-|  |  | the source_string with the replace_string. Use this |
-|  |  | function either to replace or remove portions of |
-|  |  | a string. |
-| 18 | OTRANSLATE | Returns source_string with every occurrence of |
-|  |  | each character in from_string replaced with the |
-|  |  | corresponding character in to_string. |
-| 19 | REVERSE | Reverses the input string. |
-| 20 | RIGHT | Starting from the end of the input string, a substring is |
-|  |  | created with the number of characters specified by the |
-|  |  | second parameter. |
-|  |  | The RIGHT function can be called with the 'RIGHT' or |
-|  |  | 'TD_RIGHT' alias names. |
-| 21 | RPAD | Returns the source_string padded to the right with the |
-|  |  | characters in fill_string so that the resulting string is |
-|  |  | length characters. |
-| 22 | RTRIM | Returns the argument expr1, with its right-most |
-|  |  | characters removed up to the first character that is |
-|  |  | not in the argument expr2. |
-| 23 | SOUNDEX | Returns a character string that represents the |
-|  |  | Soundex code for string_expression. |
-| 24 | STRING_CS | Returns a heuristically derived integer value that |
-|  |  | you can use to help determine which KANJI1- |
-|  |  | compatible client character set was used to encode |
-|  |  | string_expression. |
-
-          occurrence of string_expr1 begins with the first
-          character position in string_expr2 unless the optional
-          argument, n1, is specified.
-| S/N | Function Name | Description | Comment |
-| --- | ------------- | ----------- | ------- |
-
-| 26 | TRIM | Takes a character or byte string_expression |
-| -- | ---- | ------------------------------------------- |
-|  |  | argument, trims the specified pad characters or bytes, |
-|  |  | and returns the trimmed string. |
-
-| 27 | UPPER / UCASE | Returns a character string identical to character_ |
-| -- | ------------- | -------------------------------------------------- |
-|  |  | string_expression, except that all lowercase letters |
-|  |  | are replaced by their uppercase equivalents. |
-
-25 SUNSTRING
-    / SUBSTR
-          Extracts a substring from a named string based
-          on position.
-                                    Only Teradata
-                                    Syntax is
-                                    supported. ANSI
-                                    syntax is not
-                                    supported. In
-                                    SQL, both are
-                                    supported. Check
-                                    SQL functions
-                                    documentation.
-                                    Following clauses
-                                    from SQL are
-                                    not supported:
-                                    * BOTH
-                                    * Leading
-                                    * Trailing
-                                    * From
-                                    * character_Set
 #### Unsupported functions
 * CSV
 * CSVLD
@@ -599,90 +450,27 @@ FIRST_VALUE_gpa    float
 'FIRST_VALUE_gpa' Column Type: FLOAT
 ```
 #### Supported functions
-| S/N | Function Name | Description | Comment |
-| --- | ------------- | ----------- | ------- |
-| 1 | CSUM | Returns the cumulative (or running) sum of a value |  |
-|  |  | expression for each row in a partition, assuming the rows |  |
-|  |  | in the partition are sorted by the sort_expression list. |  |
-| 2 | CUME_DIST | Calculates the cumulative distribution of a value in a |  |
-|  |  | group of values. |  |
-| 3 | DENSE_RANK | Returns an ordered ranking of rows based on the value_ |  |
-|  |  | expression in the ORDER BY clause. |  |
-| 4 | FIRST_VALUE | Returns the first value in an ordered set of values. |  |
-| 5 | LAST_VALUE | Returns the last value in an ordered set of values. |  |
-| 6 | LAG | Ordered analytic functions calculate an aggregate or |  |
-|  |  | non-aggregate value on a window of rows within a group |  |
-|  |  | of rows. The window of rows is defined by the Window |  |
-|  |  | Framing clause, also called the ROWS clause. Window |  |
-|  |  | sizes are based on the size specified in the ROWS |  |
-|  |  | clause. The group of rows is defined by the PARTITION |  |
-|  |  | BY clause of the Window function. |  |
-|  |  | The LAG function accesses data from the row preceding |  |
-|  |  | the current row at a specified offset value in a window |  |
-|  |  | group. If the offset value is outside the scope of the |  |
-|  |  | window, the user-specified default value is returned. |  |
-| 7 | LEAD | Ordered analytic functions calculate an aggregate or |  |
-|  |  | non-aggregate value on a window of rows within a group |  |
-|  |  | of rows. The window of rows is defined by the Window |  |
-|  |  | Framing clause, also called the ROWS clause. Window |  |
-|  |  | sizes are based on the size specified in the ROWS |  |
-|  |  | clause. The group of rows is defined by the PARTITION |  |
-|  |  | BY clause of the Window function. |  |
-|  |  | The LEAD function returns data from the row following |  |
-|  |  | the current row. If the offset value is outside the scope of |  |
-|  |  | the window, the user-specified default value is returned. |  |
-| S/N | Function Name | Description | Comment |
-| --- | ------------- | ----------- | ------- |
-| 8 | MAVG | Computes the moving average of a value expression |  |
-|  |  | for each row in a partition using the specified value |  |
-|  |  | expression for the current row and the preceding |  |
-|  |  | width-1 rows. |  |
-| 9 | MDIFF | Returns the moving difference between the specified |  |
-|  |  | value expression for the current row and the preceding |  |
-|  |  | width rows for each row in the partition. |  |
-| 10 | MEDIAN | For numeric values, returns the middle value or an |  |
-|  |  | interpolated value that becomes the middle value after |  |
-|  |  | the values are sorted. Nulls are ignored in the calculation. |  |
+| S/N Function Name | Description | Comment |
+| ----------------- | ----------- | ------- |
+| 1 CSUM | Returns the cumulative (or running) sum of a value expression for each row in a partition, assuming the rows in the partition are sorted by the sort_expression list. |  |
+| 2 CUME_DIST | Calculates the cumulative distribution of a value in a group of values. |  |
+| 3 DENSE_RANK | Returns an ordered ranking of rows based on the value_ expression in the ORDER BY clause. |  |
+| 4 FIRST_VALUE | Returns the first value in an ordered set of values. |  |
+| 5 LAST_VALUE | Returns the last value in an ordered set of values. |  |
+| 6 LAG | Ordered analytic functions calculate an aggregate or non-aggregate value on a window of rows within a group of rows. The window of rows is defined by the Window Framing clause, also called the ROWS clause. Window sizes are based on the size specified in the ROWS clause. The group of rows is defined by the PARTITION BY clause of the Window function. The LAG function accesses data from the row preceding the current row at a specified offset value in a window group. If the offset value is outside the scope of the window, the user-specified default value is returned. |  |
+| 7 LEAD | Ordered analytic functions calculate an aggregate or non-aggregate value on a window of rows within a group of rows. The window of rows is defined by the Window Framing clause, also called the ROWS clause. Window sizes are based on the size specified in the ROWS clause. The group of rows is defined by the PARTITION BY clause of the Window function. The LEAD function returns data from the row following the current row. If the offset value is outside the scope of the window, the user-specified default value is returned. |  |
+| 8 MAVG | Computes the moving average of a value expression for each row in a partition using the specified value expression for the current row and the preceding width-1 rows. |  |
+| 9 MDIFF | Returns the moving difference between the specified value expression for the current row and the preceding width rows for each row in the partition. |  |
+| 10 MEDIAN | For numeric values, returns the middle value or an interpolated value that becomes the middle value after the values are sorted. Nulls are ignored in the calculation. | Supported with drop_ columns=True |
+| 11 MLINREG | Returns a predicted value for an expression based on a least squares moving linear regression of the previous width -1 (based on sort_expression) column values. |  |
+| 12 MSUM | Computes the moving sum specified by a value expression for the current row and the preceding n-1 rows. This function is similar to the MAVG function. |  |
+| 13 PERCENT_RANK | Returns the relative rank of rows for a value_expression. |  |
+| 14 PERCENTILE_ CONT / PERCENTILE_ DISC | Returns an interpolated value that falls within its value_ expression with respect to its sort specification. | Supported with drop_ columns=True |
+| 15 QUANTILE | Computes the quantile scores for the values in a group. |  |
+| 16 RANK(ANSI) | Returns an ordered ranking of rows based on the value_ expression in the ORDER BY clause. | Supported without "with ties" and "RESET WHEN" |
+| 17 RANK(Teradata) | Returns the rank (1 …  n ) of all the rows in the group by the value of  sort_expression expression  values receiving the same rank. | list, with the same  sort_ |
+| 18 ROW_NUMBER | Returns the sequential row number, where the first row is number one, of the row within its window partition according to the window ordering of the window. |  |
 
-| 11 | MLINREG | Returns a predicted value for an expression based on a |
-| -- | ------- | ------------------------------------------------------ |
-|  |  | least squares moving linear regression of the previous |
-|  |  | width -1 (based on sort_expression) column values. |
-| 12 | MSUM | Computes the moving sum specified by a value |
-|  |  | expression for the current row and the preceding n-1 |
-|  |  | rows. This function is similar to the MAVG function. |
-| 13 | PERCENT_RANK | Returns the relative rank of rows for a value_expression. |
-
-| 15 | QUANTILE | Computes the quantile scores for the values in a group. |
-| -- | -------- | ------------------------------------------------------- |
-| 16 | RANK(ANSI) | Returns an ordered ranking of rows based on the value_ |
-|  |  | expression in the ORDER BY clause. |
-
-| 17 | RANK(Teradata) | Returns the rank (1 … |  |  | n) of all the rows in the group |  |  |
-| -- | -------------- | --------------------- | - | - | ------------------------------- | - | - |
-|  |  | by the value of |  | sort_expression |  | list, with the same | sort_ |
-|  |  | expression | values receiving the same rank. |  |  |  |  |
-| 18 | ROW_NUMBER | Returns the sequential row number, where the first row |  |  |  |  |  |
-|  |  | is number one, of the row within its window partition |  |  |  |  |  |
-|  |  | according to the window ordering of the window. |  |  |  |  |  |
-
-                                    Supported with
-                                    drop_
-                                    columns=True
-14 PERCENTILE_
-    CONT /
-    PERCENTILE_
-    DISC
-          Returns an interpolated value that falls within its value_
-          expression with respect to its sort specification.
-                                    Supported with
-                                    drop_
-                                    columns=True
-                                    Supported
-                                    without "with
-                                    ties" and
-                                    "RESET
-                                    WHEN"
 In addition to these functions, all 23 aggregate functions mentioned in the Aggregate Functions section
 are also supported.
 To use these aggregate functions as Window aggregates, you must add a window to the same using
